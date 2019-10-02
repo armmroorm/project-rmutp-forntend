@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import store from '@/store'
+Vue.use(Router)
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
 // Views
@@ -11,9 +12,8 @@ const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
 const Register = () => import('@/views/pages/Register')
 const Welcome = () => import('@/views/home/Welcome')
-Vue.use(Router)
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
@@ -26,6 +26,7 @@ export default new Router({
                 {
                     path: 'dashboard',
                     name: 'Dashboard',
+                    meta: { requiresAuth: true },
                     component: Dashboard
                 },
                 {
@@ -55,16 +56,30 @@ export default new Router({
                     component: Page500
                 },
                 {
-                    path: 'login',
-                    name: 'Login',
+                    path: 'signin',
+                    name: 'SignIn',
                     component: Login
                 },
                 {
-                    path: 'register',
-                    name: 'Register',
+                    path: 'signup',
+                    name: 'SignUp',
                     component: Register
                 }
             ]
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters['user/token']) {
+            next()
+            return
+        }
+        next('/pages/signin')
+    } else {
+        next()
+    }
+})
+
+export default router

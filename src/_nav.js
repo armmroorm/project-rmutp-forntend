@@ -235,13 +235,13 @@ export default {
       icon: 'icon-star',
       children: [
         {
-          name: 'Login',
-          url: '/pages/login',
+          name: 'Sign In',
+          url: '/pages/signin',
           icon: 'icon-star'
         },
         {
-          name: 'Register',
-          url: '/pages/register',
+          name: 'Sign Up',
+          url: '/pages/signup',
           icon: 'icon-star'
         },
         {

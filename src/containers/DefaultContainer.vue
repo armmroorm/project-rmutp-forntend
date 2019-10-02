@@ -36,6 +36,12 @@
           <i class="icon-location-pin"></i>
         </b-nav-item>
         <DefaultHeaderDropdownAccnt />
+        <a class="register-button" @click="logout" href="#" v-if="token">
+          <i class="nav-icon icon-logout"></i> Sign Out
+        </a>
+         <router-link class="nav-link" :to="{name : 'SignIn'}" v-else>
+          <i class="nav-icon icon-login"></i> Sign In
+         </router-link>
       </b-navbar-nav>
       <AsideToggler class="d-none d-lg-block" />
       <!--<AsideToggler class="d-lg-none" mobile />-->
@@ -91,7 +97,8 @@ import {
 } from "@coreui/vue";
 import DefaultAside from "./DefaultAside";
 import DefaultHeaderDropdownAccnt from "./DefaultHeaderDropdownAccnt";
-
+import firebase from 'firebase/firebase';
+import {mapGetters} from 'vuex';
 export default {
   name: "DefaultContainer",
   components: {
@@ -115,7 +122,22 @@ export default {
       nav: nav.items
     };
   },
+  methods:{
+      logout: function(){
+        const self = this;
+        firebase.auth().signOut().then(function(){
+          alert('Sign-out successful.')
+          self.$store.dispatch('user/logout');
+          self.$router.push("/pages/signin");
+        }).catch(function(error){
+          alert("Oops. " + error.message)
+        });
+    }
+  },
   computed: {
+    ...mapGetters({
+        token: "user/token",
+      }),
     name() {
       return this.$route.name;
     },
@@ -157,9 +179,6 @@ export default {
   color: #fff;
   font-size: 16px;
 }
-// .sidebar .nav-dropdown.open .nav-link {
-//   background: linear-gradient(40deg, #667eea 0%, #764ba2 100%)!important
-// }
 .sidebar .sidebar-minimizer {
   background: linear-gradient(40deg, #764ba2 0%, #667eea 50%)!important; //Color minimizer
 }
@@ -180,5 +199,17 @@ export default {
 }
 .app-header .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
+}
+.register-button {  // button Sign Out
+
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    padding: 5px 25px;
+}
+
+.register-button:hover { // hover button Sign Out
+    background-color: white;
+    background: linear-gradient(40deg, #667eea 10%, #667eea 100%);
+    color: #fff;
 }
 </style>

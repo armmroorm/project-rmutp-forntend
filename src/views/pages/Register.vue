@@ -5,7 +5,7 @@
         <b-col md="6" sm="8">
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
-              <b-form>
+              <b-form @submit.prevent="signUp()">
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
                 <!-- <b-input-group class="mb-3">
@@ -19,7 +19,7 @@
                   <b-input-group-prepend>
                     <b-input-group-text>@</b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="text" name="email" class="form-control" v-model="model.email" placeholder="Email" autocomplete="email" />
+                  <b-form-input type="email" name="email" class="form-control" v-model="model.email" placeholder="Email" autocomplete="email" required />
                   <!-- <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div> -->
                 </b-input-group>
 
@@ -27,30 +27,19 @@
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" name="password" v-model="model.password" class="form-control" placeholder="Password" autocomplete="new-password" />
+                  <b-form-input type="password" name="password" v-model="model.password" class="form-control" placeholder="Password" autocomplete="new-password" required />
                 </b-input-group>
 
                 <b-input-group class="mb-4">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" name="passwordConfirm" v-model="model.passwordConfirm" class="form-control" placeholder="Repeat password" autocomplete="new-password" />
+                  <b-form-input type="password" name="passwordConfirm" v-model="model.passwordConfirm" class="form-control" placeholder="Repeat password" autocomplete="new-password" required />
                 </b-input-group>
 
-                <b-button variant="success" block>Create Account</b-button>
+                <b-button type="submit" variant="success" block>Create Account</b-button>
               </b-form>
             </b-card-body>
-            <b-card-footer class="p-4">
-              <b-row>
-                <b-col cols="6">
-                  <b-button block variant="facebook" class="btn-brand"  @click="socialFacebook()"><span >Facebook</span></b-button>
-                </b-col>
-                <b-col cols="6">
-                  <b-button block variant="google-plus" @click="socialGoogleLogin()" class="btn-brand"><span >Google+</span></b-button>
-                  <b-button @click="logoutSocial()">logout</b-button>
-                </b-col>
-              </b-row>
-            </b-card-footer>
           </b-card>
         </b-col>
       </b-row>
@@ -59,8 +48,7 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-import { mapActions, mapGetters } from 'vuex';
+import firebase from 'firebase/firebase';
 export default {
   name: 'Register',
    data: function() {
@@ -73,51 +61,29 @@ export default {
       // submitted: false
     };
   },
-  computed: {
-    ...mapGetters({ token: 'user/token' })
-  },
   methods:{
-      ...mapActions({
-      getToken: 'user/getToken',
-    }),
-    socialFacebook: function(){
-      var provider = new firebase.auth.FacebookAuthProvider();
+    signUp(){
       let self = this;
-      firebase.auth().signInWithPopup(provider).then(function(result){
-        
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        self.getToken(token);
-        if (self.token){
-          self.$router.push("/");
+      firebase.auth().createUserWithEmailAndPassword(this.model.email, this.model.password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/weak-password') {
+          alert('The password is too weak')
+        }else {
+          alert(errorMessage)
         }
-      }).catch(function(error){
-         alert("Oops. " + error.message);
-      });
-    },
-    socialGoogleLogin: function() {
-      var provider = new firebase.auth.GoogleAuthProvider().addScope("email");
-      let self = this;
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-         self.getToken(token);
-        if (self.token){
-          self.$router.push("/");
+        console.log('error: ', error);
+      }).then(function(sendEmailVerify){
+        console.log('sendEmailVerify: ', sendEmailVerify);
+        if (sendEmailVerify === false) {
+          return false;
+        }else {
+          firebase.auth().currentUser.sendEmailVerification();
+          alert('Email Verification Sent! Please check email address.')
+          self.$router.push("/pages/signin");
+          return true;
         }
-      }).catch(function(error) {
-        alert("Oops. " + error.message)
-      });
-    },
-    logoutSocial: function(){
-      const self = this;
-      firebase.auth().signOut().then(function(){
-        alert('Sign-out successful.')
-        self.$store.dispatch('user/logout');
-        self.$router.push("/pages/login");
-      }).catch(function(error){
-        alert("Oops. " + error.message)
-      });
+      })
     }
   }
 }
