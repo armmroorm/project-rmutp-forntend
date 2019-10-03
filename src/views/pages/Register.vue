@@ -64,16 +64,7 @@ export default {
   methods:{
     signUp(){
       let self = this;
-      firebase.auth().createUserWithEmailAndPassword(this.model.email, this.model.password).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/weak-password') {
-          alert('The password is too weak')
-        }else {
-          alert(errorMessage)
-        }
-        console.log('error: ', error);
-      }).then(function(sendEmailVerify){
+      firebase.auth().createUserWithEmailAndPassword(this.model.email, this.model.password).then(function(sendEmailVerify){
         console.log('sendEmailVerify: ', sendEmailVerify);
         if (sendEmailVerify === false) {
           return false;
@@ -83,6 +74,15 @@ export default {
           self.$router.push("/pages/signin");
           return true;
         }
+      }).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/weak-password') {
+          alert('The password is too weak')
+        }else {
+          alert(errorMessage)
+        }
+        console.log('error: ', error);
       })
     }
   }

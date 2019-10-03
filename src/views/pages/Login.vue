@@ -88,7 +88,7 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.model.email, this.model.password).then(function(checkVerify){
         console.log('checkVerify: ', checkVerify);
         firebase.auth().onAuthStateChanged(firebaseUser => {
-           console.log('firebaseUser: ', firebaseUser.ma);
+           console.log('firebaseUser: ', firebaseUser);
           if (firebaseUser.emailVerified) {
               var token = firebaseUser.uid;
               self.getToken(token);
@@ -128,6 +128,8 @@ export default {
     },
     socialGoogleLogin: function() {
       var provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
       let self = this;
       firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.

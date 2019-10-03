@@ -16,7 +16,6 @@ Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueRouter);
-
 new Vue({
   router,
   store,
