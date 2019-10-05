@@ -11,11 +11,25 @@
                   <p class="text-muted">Sign In to your account</p>
                   <b-input-group class="mb-3">
                     <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="email" name="email" v-model="model.email" class="form-control" placeholder="Email" autocomplete="email" required />
+                      <b-form-input type="email" name="email" v-model="email" v-model.trim="$v.email.$model"
+                        :class="{ 'is-invalid': $v.email.$error, 'is-valid': !$v.email.$invalid }" class="form-control" 
+                        placeholder="Email" autocomplete="email" />
+                      <b-form-valid-feedback>Your email is valid!</b-form-valid-feedback>
+                      <b-form-invalid-feedback>
+                        <span v-if="!$v.email.required">Email is required.</span>
+                        <span v-if="!$v.password.email">This email is already registered</span>
+                      </b-form-invalid-feedback>
                   </b-input-group>
                   <b-input-group class="mb-4">
                     <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="password" name="password" v-model="model.password" class="form-control" placeholder="Password" autocomplete="current-password" required />
+                    <b-form-input type="password" name="password" v-model="password" v-model.trim="$v.password.$model"
+                      :class="{ 'is-invalid': $v.password.$error, 'is-valid': !$v.password.$invalid }"  class="form-control" 
+                      placeholder="Password" autocomplete="current-password" />
+                    <b-form-valid-feedback>Your password is valid!</b-form-valid-feedback>
+                    <b-form-invalid-feedback>
+                      <span v-if="!$v.password.required">Password is required.</span>
+                      <span v-if="!$v.email.minLength">{{ $v.password.$params.minLength.min }} characters minimum.</span>
+                    </b-form-invalid-feedback>
                   </b-input-group>
                   <b-row>
                     <b-col cols="6 mb-2">
@@ -64,16 +78,26 @@
 </template>
 
 <script>
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
 import firebase from 'firebase/firebase';
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Login',
   data() {
     return {
-      model:{
         email:'',
         password:''
-      }
+    }
+  },
+   validations: {
+    password: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(50)
+    },
+    email:{
+      required,
+      email
     }
   },
   computed: {
@@ -84,11 +108,13 @@ export default {
       getToken: 'user/getToken',
     }),
     signIn(){
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        return 
+      } else {
       let self = this;
-      firebase.auth().signInWithEmailAndPassword(this.model.email, this.model.password).then(function(checkVerify){
-        console.log('checkVerify: ', checkVerify);
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function(){
         firebase.auth().onAuthStateChanged(firebaseUser => {
-           console.log('firebaseUser: ', firebaseUser);
           if (firebaseUser.emailVerified) {
               var token = firebaseUser.uid;
               self.getToken(token);
@@ -107,7 +133,8 @@ export default {
         }else {
           alert(errorMessage)
         }
-      });
+      })
+      }
     },
      pageRegister(){
      this.$router.push("/pages/signup");
