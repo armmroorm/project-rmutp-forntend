@@ -80,6 +80,8 @@
 <script>
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
 import firebase from 'firebase/firebase';
+import { BoardService } from "@/services/BoardService";
+const boardService = new BoardService();
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Login',
@@ -112,28 +114,34 @@ export default {
       if (this.$v.$invalid) {
         return 
       } else {
-      let self = this;
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function(){
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-          if (firebaseUser.emailVerified) {
-              var token = firebaseUser.uid;
-              self.getToken(token);
-              if (self.token){
-                self.$router.push("/");
-              }
-          } else {
-            alert('Please verify your email address then Sign-In again.')
-          }
+         boardService.fetchSignin({email:this.email, password:this.password})
+        .then(res => {
+          console.log('res: ', res);
+        }).catch(err => {
+          alert(err)
         })
-      }).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/wromg-password') {
-          alert('Wrong password')
-        }else {
-          alert(errorMessage)
-        }
-      })
+      // let self = this;
+      // firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function(){
+      //   firebase.auth().onAuthStateChanged(firebaseUser => {
+      //     if (firebaseUser.emailVerified) {
+      //         var token = firebaseUser.uid;
+      //         self.getToken(token);
+      //         if (self.token){
+      //           self.$router.push("/");
+      //         }
+      //     } else {
+      //       alert('Please verify your email address then Sign-In again.')
+      //     }
+      //   })
+      // }).catch(function(error) {
+      //   var errorCode = error.code;
+      //   var errorMessage = error.message;
+      //   if (errorCode === 'auth/wromg-password') {
+      //     alert('Wrong password')
+      //   }else {
+      //     alert(errorMessage)
+      //   }
+      // })
       }
     },
      pageRegister(){

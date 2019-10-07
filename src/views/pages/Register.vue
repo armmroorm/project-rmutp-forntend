@@ -108,8 +108,8 @@
 
 <script>
 import { required, sameAs, minLength, maxLength, email } from 'vuelidate/lib/validators'
-// import firebase from 'firebase/firebase';
-import { BoardService } from "../../services/BoardService";
+import firebase from 'firebase/firebase';
+import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 export default {
   name: 'Register',
@@ -173,11 +173,17 @@ export default {
       if (this.$v.$invalid) {
         return 
       } else {
-        boardService.fetchSignin({email:this.email, password:this.password, gender:this.gender, firstname: this.firstname, lastname: this.lastname}).then(res => {
-          console.log('res: ', res);
-        }).catch(err => {
-          alert(err)
-        })
+        boardService.fetchSignup({email:this.email, password:this.password, gender:this.gender, titlename:this.title, firstname: this.firstname, lastname: this.lastname})
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            alert(res.data)
+            this.$router.push("/pages/signin");
+            return true;
+          }
+          }).catch(err => {
+            alert(err)
+          })
         // let self = this;
         // firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(function(sendEmailVerify){
         //   if (sendEmailVerify === false) {
