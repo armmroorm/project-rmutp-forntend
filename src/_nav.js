@@ -222,50 +222,50 @@ export default {
     //     text: 'NEW'
     //   }
     // },
-    {
-      divider: true
-    },
-    {
-      title: true,
-      name: 'Extras'
-    },
-    {
-      name: 'Pages',
-      url: '/pages',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Sign In',
-          url: '/pages/signin',
-          icon: 'icon-star'
-        },
-        {
-          name: 'Sign Up',
-          url: '/pages/signup',
-          icon: 'icon-star'
-        },
-        {
-          name: 'Error 404',
-          url: '/pages/404',
-          icon: 'icon-star'
-        },
-        {
-          name: 'Error 500',
-          url: '/pages/500',
-          icon: 'icon-star'
-        }
-      ]
-    },
-    {
-      name: 'Disabled',
-      url: '/dashboard',
-      icon: 'icon-ban',
-      badge: {
-        variant: 'secondary',
-        text: 'NEW'
-      },
-      attributes: { disabled: true },
-    },
+    // {
+    //   divider: true
+    // },
+    // {
+    //   title: true,
+    //   name: 'Extras'
+    // },
+    // {
+    //   name: 'Pages',
+    //   url: '/pages',
+    //   icon: 'icon-star',
+    //   children: [
+    //     {
+    //       name: 'Sign In',
+    //       url: '/pages/signin',
+    //       icon: 'icon-star'
+    //     },
+    //     {
+    //       name: 'Sign Up',
+    //       url: '/pages/signup',
+    //       icon: 'icon-star'
+    //     },
+    //     {
+    //       name: 'Error 404',
+    //       url: '/pages/404',
+    //       icon: 'icon-star'
+    //     },
+    //     {
+    //       name: 'Error 500',
+    //       url: '/pages/500',
+    //       icon: 'icon-star'
+    //     }
+    //   ]
+    // },
+    // {
+    //   name: 'Disabled',
+    //   url: '/dashboard',
+    //   icon: 'icon-ban',
+    //   badge: {
+    //     variant: 'secondary',
+    //     text: 'NEW'
+    //   },
+    //   attributes: { disabled: true },
+    // },
     // { 
     //   name: 'Download CoreUI',
     //   url: 'http://coreui.io/vue/',
