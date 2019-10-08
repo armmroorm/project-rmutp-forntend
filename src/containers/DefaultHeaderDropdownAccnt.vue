@@ -2,12 +2,18 @@
   <AppHeaderDropdown right no-caret>
     <template slot="header">
       <img
-        src="img/avatars/6.jpg"
+        v-if="urlAvatar !== null"
+        :src="urlAvatar"
+        class="img-avatar"
+        alt="admin@bootstrapmaster.com" />
+      <img
+        v-else
+        src="img/avatars/user.png"
         class="img-avatar"
         alt="admin@bootstrapmaster.com" />
     </template>\
     <template slot="dropdown">
-      <b-dropdown-header tag="div" class="text-center"><strong>Account</strong></b-dropdown-header>
+      <!-- <b-dropdown-header tag="div" class="text-center"><strong>Account</strong></b-dropdown-header>
       <b-dropdown-item><i class="fa fa-bell-o" /> Updates
         <b-badge variant="info">{{ itemsCount }}</b-badge>
       </b-dropdown-item>
@@ -19,29 +25,29 @@
       </b-dropdown-item>
       <b-dropdown-item><i class="fa fa-comments" /> Comments
         <b-badge variant="warning">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
+      </b-dropdown-item> -->
       <b-dropdown-header
         tag="div"
         class="text-center">
         <strong>Settings</strong>
       </b-dropdown-header>
-      <b-dropdown-item><i class="fa fa-user" /> Profile</b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-wrench" /> Settings</b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-usd" /> Payments
+      <b-dropdown-item><i class="fa fa-user" />Profile</b-dropdown-item>
+       <!-- <b-dropdown-item><i class="fa fa-wrench" /> Settings</b-dropdown-item> 
+       <b-dropdown-item><i class="fa fa-usd" /> Payments
         <b-badge variant="secondary">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-file" /> Projects
-        <b-badge variant="primary">{{ itemsCount }}</b-badge>
-      </b-dropdown-item>
-      <b-dropdown-divider />
-      <b-dropdown-item><i class="fa fa-shield" /> Lock Account</b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-lock" /> Logout</b-dropdown-item>
+      </b-dropdown-item> -->
+      <b-dropdown-divider class="d-lg-none" />
+      <b-dropdown-item class="d-lg-none" v-if="token" @click="logout"><i class="fa fa-lock"  />Sign Out</b-dropdown-item>
     </template>
   </AppHeaderDropdown>
 </template>
 
 <script>
-import { HeaderDropdown as AppHeaderDropdown } from '@coreui/vue'
+import { HeaderDropdown as AppHeaderDropdown } from '@coreui/vue';
+import {mapGetters} from 'vuex';
+import firebase from 'firebase/firebase';
+import { BoardService } from "@/services/BoardService";
+const boardService = new BoardService();
 export default {
   name: 'DefaultHeaderDropdownAccnt',
   components: {
@@ -49,6 +55,30 @@ export default {
   },
   data: () => {
     return { itemsCount: 42 }
-  }
+  },
+  computed: {
+     ...mapGetters({
+        token: "user/token",
+        urlAvatar: "user/urlAvatar"
+      })
+  },
+  methods:{
+      logout: function(){
+        const self = this;
+        boardService.fetchSignout({token : 'token'})
+          .then(() => {
+            return true
+          }).catch(err => {
+            alert(err)
+          });
+        firebase.auth().signOut().then(function(){
+          alert('Sign-out successful.')
+          self.$store.dispatch('user/logout');
+          self.$router.push("/pages/signin");
+          }).catch(function(error){
+            alert("Oops. " + error.message)
+          });
+    }
+  },
 }
 </script>

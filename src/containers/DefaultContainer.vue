@@ -25,7 +25,7 @@
         <b-nav-item class="px-3">Settings</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item class="d-md-down-none">
+        <!-- <b-nav-item class="d-md-down-none">
           <i class="icon-bell"></i>
           <b-badge pill variant="danger">5</b-badge>
         </b-nav-item>
@@ -34,12 +34,15 @@
         </b-nav-item>
         <b-nav-item class="d-md-down-none">
           <i class="icon-location-pin"></i>
-        </b-nav-item>
-        <DefaultHeaderDropdownAccnt />
-        <a class="register-button" @click="logout" href="#" v-if="token">
+        </b-nav-item> -->
+        <span class="text-white" v-if="this.username || null"> <i class="fa fa-user" /> {{this.username || null}}</span>
+        <img  v-if="urlAvatar !== null"  :src="urlAvatar"  border-radius  height="40" class="ml-2 rounded-circle" 
+        alt="admin@bootstrapmaster.com" />
+        <DefaultHeaderDropdownAccnt v-if="stat === true" />
+        <a class="register-button d-md-down-none" @click="logout" href="#" v-if="token">
           <i class="nav-icon icon-logout"></i> Sign Out
         </a>
-         <router-link class="nav-link" :to="{name : 'SignIn'}" v-else>
+         <router-link class="register-button" :to="{name : 'SignIn'}" v-else>
           <i class="nav-icon icon-login"></i> Sign In
          </router-link>
       </b-navbar-nav>
@@ -98,6 +101,8 @@ import {
 import DefaultAside from "./DefaultAside";
 import DefaultHeaderDropdownAccnt from "./DefaultHeaderDropdownAccnt";
 import firebase from 'firebase/firebase';
+import { BoardService } from "@/services/BoardService";
+const boardService = new BoardService();
 import {mapGetters} from 'vuex';
 export default {
   name: "DefaultContainer",
@@ -125,18 +130,27 @@ export default {
   methods:{
       logout: function(){
         const self = this;
+        boardService.fetchSignout({token : 'token'})
+          .then(() => {
+            return true
+          }).catch(err => {
+            alert(err)
+          });
         firebase.auth().signOut().then(function(){
           alert('Sign-out successful.')
           self.$store.dispatch('user/logout');
           self.$router.push("/pages/signin");
-        }).catch(function(error){
-          alert("Oops. " + error.message)
-        });
+          }).catch(function(error){
+            alert("Oops. " + error.message)
+          });
     }
   },
   computed: {
     ...mapGetters({
         token: "user/token",
+        username: "user/username",
+        stat: "user/stat",
+        urlAvatar: "user/urlAvatar"
       }),
     name() {
       return this.$route.name;
@@ -201,7 +215,6 @@ export default {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 }
 .register-button {  // button Sign Out
-
     background: rgba(0, 0, 0, 0);
     color: #fff;
     padding: 5px 25px;

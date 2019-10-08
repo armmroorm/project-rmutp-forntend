@@ -20,6 +20,7 @@
                         <span v-if="!$v.password.email">This email is already registered</span>
                       </b-form-invalid-feedback>
                   </b-input-group>
+
                   <b-input-group class="mb-4">
                     <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
                     <b-form-input type="password" name="password" v-model="password" v-model.trim="$v.password.$model"
@@ -31,6 +32,7 @@
                       <span v-if="!$v.email.minLength">{{ $v.password.$params.minLength.min }} characters minimum.</span>
                     </b-form-invalid-feedback>
                   </b-input-group>
+
                   <b-row>
                     <b-col cols="6 mb-2">
                       <b-button type="submit" class="px-4 bgbutton">Login</b-button>
@@ -108,15 +110,30 @@ export default {
   methods:{
       ...mapActions({
       getToken: 'user/getToken',
+      getUsername: 'user/getUsername',
+      getAvatar: 'user/getAvatar',
+      getStat: 'user/getStat'
     }),
     signIn(){
       this.$v.$touch()
       if (this.$v.$invalid) {
-        return 
+        return
       } else {
          boardService.fetchSignin({email:this.email, password:this.password})
         .then(res => {
-          console.log('res: ', res);
+          if (res.data.accstat === true) {
+            var token = res.data.acctoken
+            var stat = res.data.accstat
+            var username = res.data.user
+            this.getStat(stat)
+            this.getUsername(username)
+            this.getToken(token)
+            if (this.token) {
+              this.$router.push('/')
+            }
+          } else {
+              alert('Please verify your email address then Sign-In again.')
+            }
         }).catch(err => {
           alert(err)
         })
@@ -153,6 +170,11 @@ export default {
       firebase.auth().signInWithPopup(provider).then(function(result){
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
+          if (result.additionalUserInfo.profile.picture.data.url !== null){
+            self.getAvatar(result.additionalUserInfo.profile.picture.data.url)
+          }
+        self.getUsername(result.additionalUserInfo.profile.name);
+
         self.getToken(token);
         if (self.token){
           self.$router.push("/");

@@ -7,7 +7,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store';
 import firebase from 'firebase/firebase';
-import 'firebase/auth';
 import { firebaseConfig } from './config'
 firebase.initializeApp(firebaseConfig)
 Vue.use(VueAxios, axios)

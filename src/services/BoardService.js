@@ -7,10 +7,10 @@ export class BoardService extends BaseService {
     }
 
     fetchSignup = ({ email, password, gender, titlename, firstname, lastname }) => {
-        return this.requester.post('/Signup', { email, password, gender, titlename, firstname, lastname },  mainAPIHeaderOptions())
+        return this.requester.post('/Signup', { email, password, gender, titlename, firstname, lastname },  mainAPIOptions())
     }
 
-    fetchSignout = () => {
-        return this.requester.post('/Signout',  mainAPIOptions())
+    fetchSignout = ({token}) => {
+        return this.requester.post('/Signout',{token},  mainAPIHeaderOptions())
     }
 }

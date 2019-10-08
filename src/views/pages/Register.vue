@@ -108,7 +108,7 @@
 
 <script>
 import { required, sameAs, minLength, maxLength, email } from 'vuelidate/lib/validators'
-import firebase from 'firebase/firebase';
+// import firebase from 'firebase/firebase';
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 export default {
@@ -175,11 +175,13 @@ export default {
       } else {
         boardService.fetchSignup({email:this.email, password:this.password, gender:this.gender, titlename:this.title, firstname: this.firstname, lastname: this.lastname})
         .then(res => {
-          console.log(res);
-          if (res.status === 200) {
-            alert(res.data)
-            this.$router.push("/pages/signin");
-            return true;
+          if (res.data.registat === true) {
+            alert(res.data.message)
+            this.$router.push("/pages/signin")
+            return true
+          } else {
+            alert(res.data.message)
+            return false
           }
           }).catch(err => {
             alert(err)
