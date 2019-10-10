@@ -117,21 +117,21 @@ export default {
     return {
       firstname:'',
       lastname:'',
-      gender:'01',
-      title:'01',
+      gender:'1',
+      title:'1',
       email: '',
       password: '',
       repeatpassword: '',
       showpassword: false,
       genders: [
-          { text: 'Male', value: '01' },
-          { text: 'Female', value: '02' },
-          { text: 'No gender', value: '03' }
+          { text: 'Male', value: '1' },
+          { text: 'Female', value: '2' },
+          { text: 'No gender', value: '3' }
         ],
       titles: [
-        {text: 'Mr.', value: '01'},
-        {text: 'Mrs.', value: '02'},
-        {text: 'Miss', value: '03'},
+        {text: 'Mr.', value: '1'},
+        {text: 'Mrs.', value: '2'},
+        {text: 'Miss', value: '3'},
       ]
     };
   },
@@ -173,15 +173,13 @@ export default {
       if (this.$v.$invalid) {
         return 
       } else {
-        boardService.fetchSignup({email:this.email, password:this.password, gender:this.gender, titlename:this.title, firstname: this.firstname, lastname: this.lastname})
+        boardService.fetchSignup({email:this.email, password:this.password, genderID:this.gender, titleID:this.title, firstname: this.firstname, lastname: this.lastname})
         .then(res => {
-          if (res.data.registat === true) {
+          if (res.data.status === true) {
             alert(res.data.message)
             this.$router.push("/pages/signin")
-            return true
           } else {
             alert(res.data.message)
-            return false
           }
           }).catch(err => {
             alert(err)

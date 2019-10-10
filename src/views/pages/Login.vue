@@ -17,7 +17,7 @@
                       <b-form-valid-feedback>Your email is valid!</b-form-valid-feedback>
                       <b-form-invalid-feedback>
                         <span v-if="!$v.email.required">Email is required.</span>
-                        <span v-if="!$v.password.email">This email is already registered</span>
+                        <span v-if="!$v.email.email">This email is already registered</span>
                       </b-form-invalid-feedback>
                   </b-input-group>
 
@@ -29,7 +29,7 @@
                     <b-form-valid-feedback>Your password is valid!</b-form-valid-feedback>
                     <b-form-invalid-feedback>
                       <span v-if="!$v.password.required">Password is required.</span>
-                      <span v-if="!$v.email.minLength">{{ $v.password.$params.minLength.min }} characters minimum.</span>
+                      <span v-if="!$v.password.minLength">{{ $v.password.$params.minLength.min }} characters minimum.</span>
                     </b-form-invalid-feedback>
                   </b-input-group>
 
