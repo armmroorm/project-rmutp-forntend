@@ -135,7 +135,7 @@ export default {
       ]
     };
   },
-   validations: {
+  validations: {
     firstname:{
       required,
       maxLength: maxLength(50)

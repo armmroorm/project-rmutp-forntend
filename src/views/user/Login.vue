@@ -2,7 +2,7 @@
   <div class="app flex-row align-items-center">
     <div class="container">
       <b-row class="justify-content-center">
-        <b-col md="8">
+        <b-col md="8" >
           <b-card-group>
             <b-card no-body class="p-4">
               <b-card-body>
@@ -121,9 +121,9 @@ export default {
       } else {
          boardService.fetchSignin({email:this.email, password:this.password})
         .then(res => {
-          if (res.data.accstat === true) {
+          if (res.data.status === true) {
             var token = res.data.acctoken
-            var stat = res.data.accstat
+            var stat = res.data.status
             var username = res.data.user
             this.getStat(stat)
             this.getUsername(username)

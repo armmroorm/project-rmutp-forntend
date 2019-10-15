@@ -7,11 +7,12 @@ const DefaultContainer = () => import('@/containers/DefaultContainer')
 // Views
 const Dashboard = () => import('@/views/Dashboard')
 // Views - Pages
-const Page404 = () => import('@/views/pages/Page404')
-const Page500 = () => import('@/views/pages/Page500')
-const Login = () => import('@/views/pages/Login')
-const Register = () => import('@/views/pages/Register')
+const Page404 = () => import('@/views/user/Page404')
+const Page500 = () => import('@/views/user/Page500')
+const Login = () => import('@/views/user/Login')
+const Register = () => import('@/views/user/Register')
 const Welcome = () => import('@/views/home/Welcome')
+const EditProfile = () => import('@/views/user/userEdit')
 
 const router = new Router({
     mode: 'history',
@@ -33,6 +34,11 @@ const router = new Router({
                     path: 'welcome',
                     name: 'Welcome',
                     component: Welcome
+                },
+                {
+                    path:'profile',
+                    name: 'Profile',
+                    component: EditProfile
                 }
             ]
         },
