@@ -6,6 +6,7 @@
           <b-card-body class="p-4">
             <div>
                <h1>Profile</h1>
+               <img src="img/avatars/user.png" alt="avatar" height="100" class="d-block ml-auto mr-auto mb-3 mt-3 rounded-circle">
                <p>Email : {{this.emailProfile}}</p>
                <p>Name : {{this.titleProfile}} {{this.firstnameProfile}} {{this.lastnameProfile}}</p>
                <p>Gender : {{this.genderProfile}}</p>
@@ -184,10 +185,10 @@ export default {
         return 
       } else {
         boardService.fetchUpdateProfile({Userdata:{ genderID:this.gender, titleID:this.title, firstname:this.firstname, lastname:this.lastname}, 
-        Password:{OldPass:this.passwordOld, NewPass1:this.passwordNew}})
+        changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-              location.reload();
+              // location.reload();
           }
         }).catch(err => {
           alert(err)

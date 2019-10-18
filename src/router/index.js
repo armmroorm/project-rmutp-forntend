@@ -38,6 +38,7 @@ const router = new Router({
                 {
                     path:'profile',
                     name: 'Profile',
+                    meta: { requiresAuth: true },
                     component: EditProfile
                 }
             ]
@@ -46,9 +47,9 @@ const router = new Router({
             path: '/pages',
             redirect: '/pages/404',
             name: 'Pages',
+            meta: { signIn: true },
             component: {
                 render(c) { return c('router-view') }
-
             },
             children: [
                 {
@@ -88,4 +89,15 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.signIn)) {
+        if (!store.getters['user/token']) {
+            next()
+            return
+        }
+        next('/')
+    } else {
+        next()
+    }
+})
 export default router
