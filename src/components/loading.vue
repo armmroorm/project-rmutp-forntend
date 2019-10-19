@@ -87,7 +87,7 @@ $loader-color: #FDD835;
   width: $component-dimension;
   height: $component-dimension;
   // border: 1px solid red;
-  margin: 100px auto;
+  margin: 200px auto;
   .loader {
     position: relative;
     top: 10%;

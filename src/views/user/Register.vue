@@ -1,7 +1,8 @@
 <template>
   <div class="app flex-row align-items-center">
     <div class="container">
-      <b-row class="justify-content-center">
+      <Loading v-if="loadingShow === false" />
+      <b-row class="justify-content-center" v-if="loadingShow === true">
         <b-col md="6" sm="8">
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
@@ -111,6 +112,7 @@ import { required, sameAs, minLength, maxLength, email } from 'vuelidate/lib/val
 // import firebase from 'firebase/firebase';
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
+import Loading from '@/components/loading.vue';
 export default {
   name: 'Register',
    data: function() {
@@ -123,6 +125,7 @@ export default {
       password: '',
       repeatpassword: '',
       showpassword: false,
+      loadingShow: true,
       genders: [
           { text: 'Male', value: '1' },
           { text: 'Female', value: '2' },
@@ -134,6 +137,9 @@ export default {
         {text: 'Miss', value: '3'},
       ]
     };
+  },
+  components:{
+    Loading
   },
   validations: {
     firstname:{
@@ -173,6 +179,7 @@ export default {
       if (this.$v.$invalid) {
         return 
       } else {
+        this.loadingShow = false
         boardService.fetchSignup({email:this.email, password:this.password, genderID:this.gender, titleID:this.title, firstname: this.firstname, lastname: this.lastname})
         .then(res => {
           if (res.data.status === true) {
@@ -181,6 +188,7 @@ export default {
           } else {
             alert(res.data.message)
           }
+          this.loadingShow = true
           }).catch(err => {
             alert(err)
           })

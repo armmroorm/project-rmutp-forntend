@@ -1,7 +1,8 @@
 <template>
   <div class="app flex-row align-items-center">
     <div class="container">
-      <b-row class="justify-content-center">
+      <Loading v-if="loadingShow === false" />
+      <b-row class="justify-content-center" v-if="loadingShow === true">
         <b-col md="8" >
           <b-card-group>
             <b-card no-body class="p-4">
@@ -38,7 +39,7 @@
                       <b-button type="submit" class="px-4 bgbutton">Login</b-button>
                     </b-col>
                     <b-col cols="6" class="text-right">
-                      <b-button variant="link" class="px-0">Forgot password?</b-button>
+                      <b-button variant="link" class="px-0" @click="forgetPassword()">Forgot password?</b-button>
                     </b-col>
                   </b-row>
                   <!-- <b-row>
@@ -85,12 +86,14 @@ import firebase from 'firebase/firebase';
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 import { mapActions, mapGetters } from 'vuex';
+import Loading from '@/components/loading.vue';
 export default {
   name: 'Login',
   data() {
     return {
-        email:'',
-        password:''
+      loadingShow: true,
+      email:'',
+      password:''
     }
   },
    validations: {
@@ -104,22 +107,26 @@ export default {
       email
     }
   },
+  components:{
+    Loading
+  },
   computed: {
     ...mapGetters({ token: 'user/token' })
   },
   methods:{
-      ...mapActions({
-      getToken: 'user/getToken',
-      getUsername: 'user/getUsername',
-      getAvatar: 'user/getAvatar',
-      getStat: 'user/getStat'
+    ...mapActions({
+    getToken: 'user/getToken',
+    getUsername: 'user/getUsername',
+    getAvatar: 'user/getAvatar',
+    getStat: 'user/getStat'
     }),
     signIn(){
       this.$v.$touch()
       if (this.$v.$invalid) {
         return
       } else {
-         boardService.fetchSignin({email:this.email, password:this.password})
+        this.loadingShow = false
+        boardService.fetchSignin({email:this.email, password:this.password})
         .then(res => {
           if (res.data.status === true) {
             var token = res.data.acctoken
@@ -131,9 +138,12 @@ export default {
             if (this.token) {
               this.$router.push('/')
             }
+          } else if(res.data.status === false){
+            alert(res.data.message)
           } else {
               alert('Please verify your email address then Sign-In again.')
-            }
+          }
+          this.loadingShow = true
         }).catch(err => {
           alert(err)
         })
@@ -163,6 +173,9 @@ export default {
     },
      pageRegister(){
      this.$router.push("/pages/signup");
+    },
+    forgetPassword(){
+      this.$router.push("/pages/forgetpassword");
     },
     socialFacebook: function(){
       var provider = new firebase.auth.FacebookAuthProvider();

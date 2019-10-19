@@ -130,19 +130,24 @@ export default {
   methods:{
       logout: function(){
         const self = this;
-        boardService.fetchSignout({token : 'token'})
+        if(this.stat === true) {
+          boardService.fetchSignout({token : 'token'})
           .then(() => {
-            return true
+            alert('Sign-out successful.')
+            self.$store.dispatch('user/logout');
+            self.$router.push("/pages/signin");
           }).catch(err => {
             alert(err)
           });
-        firebase.auth().signOut().then(function(){
-          alert('Sign-out successful.')
-          self.$store.dispatch('user/logout');
-          self.$router.push("/pages/signin");
+        } else {
+          firebase.auth().signOut().then(function(){
+            alert('Sign-out successful.')
+            self.$store.dispatch('user/logout');
+            self.$router.push("/pages/signin");
           }).catch(function(error){
             alert("Oops. " + error.message)
           });
+        }
     }
   },
   computed: {

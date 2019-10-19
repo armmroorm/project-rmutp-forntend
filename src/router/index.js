@@ -13,7 +13,8 @@ const Login = () => import('@/views/user/Login')
 const Register = () => import('@/views/user/Register')
 const Welcome = () => import('@/views/home/Welcome')
 const EditProfile = () => import('@/views/user/userEdit')
-
+const forgetPassword = () => import('@/views/user/forgetPassword')
+const resetPassword = () => import('@/views/user/resetPassword')
 const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -71,6 +72,16 @@ const router = new Router({
                     path: 'signup',
                     name: 'SignUp',
                     component: Register
+                },
+                {
+                    path: 'resetpassword',
+                    name: 'resetPassword',
+                    component: resetPassword
+                },
+                {
+                    path: 'forgetpassword',
+                    name: 'forgetPassword',
+                    component: forgetPassword
                 }
             ]
         }

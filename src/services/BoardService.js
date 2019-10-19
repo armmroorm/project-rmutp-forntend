@@ -3,15 +3,22 @@ import { BaseService } from "./BaseService";
 
 export class BoardService extends BaseService {
     fetchSignin = ({ email, password }) => {
-        return this.requester.post('/Signin', { email, password }, mainAPIOptions())
+        return this.requester.post('/SignIn', { email, password }, mainAPIOptions())
+    }
+    fetchForgetPassword = ({ email }) => {
+        return this.requester.post('/ForgetPassword/SendOTP', { email }, mainAPIOptions())
+    }
+    
+    fetchResetPassword = ({ email, password, OTP }) => {
+        return this.requester.post('/ForgetPassword/ResetPassword', { email, password, OTP }, mainAPIOptions())
     }
 
     fetchSignup = ({ email, password, genderID, titleID, firstname, lastname }) => {
-        return this.requester.post('/Signup', { email, password, genderID, titleID, firstname, lastname }, mainAPIOptions())
+        return this.requester.post('/SignUp', { email, password, genderID, titleID, firstname, lastname }, mainAPIOptions())
     }
 
     fetchSignout = ({ token }) => {
-        return this.requester.post('/Signout', { token }, mainAPIHeaderOptions())
+        return this.requester.post('/SignOut', { token }, mainAPIHeaderOptions())
     }
 
     fetchProfile = () => {
