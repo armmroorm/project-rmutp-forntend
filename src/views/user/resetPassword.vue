@@ -119,7 +119,7 @@ export default {
         return 
       } else {
         this.loadingShow = false
-        boardService.fetchResetPassword({email:this.email, password:this.password, OTP:this.OTP}).then(res =>{
+        boardService.fetchResetPassword({email:this.email, newPassword:this.password, OTP:this.OTP}).then(res =>{
         if(res.data.status === true) {
           alert(res.data.message)
           this.$router.push("/pages/signin")

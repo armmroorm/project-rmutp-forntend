@@ -9,8 +9,8 @@ export class BoardService extends BaseService {
         return this.requester.post('/ForgetPassword/SendOTP', { email }, mainAPIOptions())
     }
     
-    fetchResetPassword = ({ email, password, OTP }) => {
-        return this.requester.post('/ForgetPassword/ResetPassword', { email, password, OTP }, mainAPIOptions())
+    fetchResetPassword = ({ email, newPassword, OTP }) => {
+        return this.requester.post('/ForgetPassword/ResetPassword', { email, newPassword, OTP }, mainAPIOptions())
     }
 
     fetchSignup = ({ email, password, genderID, titleID, firstname, lastname }) => {
