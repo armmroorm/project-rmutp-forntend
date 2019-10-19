@@ -64,6 +64,7 @@ export default {
       } else {
        this.loadingShow = false
        boardService.fetchForgetPassword({email: this.email}).then(() => {
+        alert('Send OTP your email address.')
         this.$router.push("/pages/signin");
         this.loadingShow = true
        }).catch(err => {alert(err)})
