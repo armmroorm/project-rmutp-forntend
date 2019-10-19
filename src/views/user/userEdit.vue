@@ -1,7 +1,8 @@
 <template>
   <!-- <div class="app flex-row align-items-center"> -->
     <div class="animated fadeIn">
-      <b-row class="justify-content-center">
+      <Loading v-if="loadingShow === false" />
+      <b-row class="justify-content-center" v-if="loadingShow === true">
         <b-card no-body style="width:auto">
           <b-card-body class="p-4">
             <div>
@@ -109,10 +110,12 @@ import { sameAs, minLength, maxLength} from 'vuelidate/lib/validators';
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 import {mapActions} from 'vuex'
+import Loading from '@/components/loading.vue'
 export default {
   name: 'userEdit',
   data: function() {
     return {
+      loadingShow:false,
       firstnameProfile:'',
       lastnameProfile:'',
       emailProfile:'',
@@ -137,6 +140,9 @@ export default {
         {text: 'Miss', value: '3'},
       ]
     };
+  },
+  components:{
+    Loading
   },
   validations: {
     firstname:{
@@ -175,6 +181,7 @@ export default {
         this.emailProfile = res.data.email
         this.gender = res.data.genderID
         this.title = res.data.titleID
+        this.loadingShow = true
       }).catch(err => {
         alert(err)
       })
@@ -184,12 +191,16 @@ export default {
       if (this.$v.$invalid) {
         return 
       } else {
+        this.loadingShow = false
         boardService.fetchUpdateProfile({Userdata:{ genderID:this.gender, titleID:this.title, firstname:this.firstname, lastname:this.lastname}, 
         changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-              // location.reload();
+            location.reload();
+          } else {
+            alert(res.data.message)
           }
+          this.loadingShow = true
         }).catch(err => {
           alert(err)
         })
