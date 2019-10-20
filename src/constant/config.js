@@ -8,6 +8,12 @@ export const mainAPIHeaderOptions = () => ({
         'x-token' : localStorage.getItem('token')
     }
 })
+export const mainAPIHeaderUpload = () => ({
+    baseURL: CONFIG.MAIN_API_ENDPOINT,
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+})
 
 export const mainAPIOptions = () => ({
     baseURL: CONFIG.MAIN_API_ENDPOINT

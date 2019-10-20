@@ -1,4 +1,4 @@
-import { mainAPIOptions, mainAPIHeaderOptions } from "../constant/config";
+import { mainAPIOptions, mainAPIHeaderOptions, mainAPIHeaderUpload } from "../constant/config";
 import { BaseService } from "./BaseService";
 
 export class BoardService extends BaseService {
@@ -27,5 +27,9 @@ export class BoardService extends BaseService {
 
     fetchUpdateProfile = ({ Userdata, changePassword }) => {
         return this.requester.post('/Profile/EditProfile', { Userdata, changePassword }, mainAPIHeaderOptions())
+    }
+
+    fetchUpdateMenu = (file) => {
+        return this.requester.post('/CMS/Upload',file, mainAPIHeaderUpload())
     }
 }

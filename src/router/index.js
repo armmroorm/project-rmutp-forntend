@@ -15,6 +15,7 @@ const Welcome = () => import('@/views/home/Welcome')
 const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
+const Create = () => import('@/components/DetailFood/Create')
 const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -41,7 +42,22 @@ const router = new Router({
                     name: 'Profile',
                     meta: { requiresAuth: true },
                     component: EditProfile
-                }
+                },
+                {
+                    path: 'cms',
+                    redirect: '/cms/create',
+                    name: 'Create',
+                    component: {
+                      render (c) { return c('router-view') }
+                    },
+                    children: [
+                      {
+                        path: 'create',
+                        name: 'CMS',
+                        component: Create
+                      }
+                    ]
+                  }
             ]
         },
         {

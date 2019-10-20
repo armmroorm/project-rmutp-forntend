@@ -5,17 +5,17 @@
       <b-link class="navbar-brand" to="#">
         <img
           class="navbar-brand-full"
-          src="img/brand/logo.svg"
-          width="89"
-          height="25"
-          alt="CoreUI Logo"
+          src="img/logoB.png"
+          width="130"
+          height="30"
+          alt="Barn Arharn"
         />
         <img
           class="navbar-brand-minimized"
-          src="img/brand/sygnet.svg"
+          src="img/logoS.png"
           width="30"
           height="30"
-          alt="CoreUI Logo"
+          alt="Barn Arharn"
         />
       </b-link>
       <SidebarToggler class="d-md-down-none" display="lg" :defaultOpen="true" />
