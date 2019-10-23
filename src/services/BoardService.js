@@ -25,11 +25,11 @@ export class BoardService extends BaseService {
         return this.requester.get('/Profile', mainAPIHeaderOptions())
     }
 
-    fetchUpdateProfile = ({ Userdata, changePassword }) => {
-        return this.requester.post('/Profile/EditProfile', { Userdata, changePassword }, mainAPIHeaderUpload())
+    fetchUpdateProfile = (formData, { Userdata, changePassword }) => {
+        return this.requester.post('/Profile/EditProfile', formData, { Userdata, changePassword }, mainAPIHeaderUpload())
     }
 
-    fetchUpdateMenu = (file) => {
-        return this.requester.post('/CMS/Upload',file, mainAPIHeaderUpload())
+    fetchUpdateMenu = (formData) => {
+        return this.requester.post('/CMS/Upload',formData, mainAPIHeaderUpload())
     }
 }

@@ -31,10 +31,10 @@
 </template>
 
 <script>
-// import { BoardService } from "@/services/BoardService";
-// const boardService = new BoardService();
+import { BoardService } from "@/services/BoardService";
+const boardService = new BoardService();
 import Loading from '@/components/loading.vue';
-import axios from 'axios';
+// import axios from 'axios';
 export default {
   name:'create',
   data() {
@@ -53,15 +53,16 @@ export default {
     onUpload(){
       let formData = new FormData();
       formData.append('myFile', this.file);
-      axios.post('http://localhost:9000/CMS/Upload',formData,{ headers: {'Content-Type': 'multipart/form-data'} }).then(() => {})
+      // axios.post('http://localhost:9000/CMS/Upload',formData,{ headers: {'Content-Type': 'multipart/form-data'} }).then(() => {})
+       boardService.fetchUpdateMenu(formData).then(()=>{
+        console.log('success')
+      }).catch(err => {
+        alert(err)
+      })
     }
-    // update() {
-    //   boardService.fetchUpdateMenu({file: this.file.name}).then(()=>{
-    //     console.log('success')
-    //   }).catch(err => {
-    //     alert(err)
-    //   })
-    // }
+
+     
+   
   }
 }
 </script>
