@@ -8,7 +8,7 @@
             <b-card no-body class="p-4">
               <b-card-body>
                 <b-form @submit.prevent="signIn()">
-                  <h1>Login</h1>
+                  <h1>Sign In</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <b-input-group class="mb-3">
                     <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
@@ -36,7 +36,7 @@
 
                   <b-row>
                     <b-col cols="6 mb-2">
-                      <b-button type="submit" class="px-4 bgbutton">Login</b-button>
+                      <b-button type="submit" class="px-4 bgbutton">Sign In</b-button>
                     </b-col>
                     <b-col cols="6" class="text-right">
                       <b-button variant="link" class="px-0" @click="forgetPassword()">Forgot password?</b-button>
@@ -58,7 +58,7 @@
                 <div>
                   <h2>Sign up</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  <b-button class="active mt-3 bgbutton" @click="pageRegister">Register Now!</b-button>
+                  <b-button class="active mt-3 bgbutton" @click="pageRegister">Sign Up</b-button>
                   
                 </div>
               </b-card-body>
@@ -139,7 +139,7 @@ export default {
               this.$router.push('/')
             }
           } else if(res.data.status === false){
-            alert(res.data.message)
+            alert('E-mail or Password is incorrect')
           } else {
               alert('Please verify your email address then Sign-In again.')
           }

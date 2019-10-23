@@ -20,6 +20,7 @@
             <b-card-body class="p-4">
               <b-form @submit.prevent="update()">
                 <h1>Edit Profile</h1>
+                <b-form-file v-model="file" name="myFile"  id="file" ref="file" accept="image/*" v-on:change="handleFileUpload()" placeholder="Choose a file your image avatar" ></b-form-file>
                 <b-form-group label="Titlename">
                   <b-form-radio-group
                     v-model="title"
@@ -116,6 +117,7 @@ export default {
   data: function() {
     return {
       loadingShow:false,
+      file: null,
       firstnameProfile:'',
       lastnameProfile:'',
       emailProfile:'',
@@ -186,17 +188,22 @@ export default {
         alert(err)
       })
     },
+     handleFileUpload(){
+      this.file = this.$refs.file.files[0];
+    },
     update(){
        this.$v.$touch()
       if (this.$v.$invalid) {
         return 
       } else {
         this.loadingShow = false
-        boardService.fetchUpdateProfile({Userdata:{ genderID:this.gender, titleID:this.title, firstname:this.firstname, lastname:this.lastname}, 
+        let formData = new FormData();
+        formData.append('myFile', this.file);
+        boardService.fetchUpdateProfile(formData,{Userdata:{ genderID:this.gender, titleID:this.title, firstname:this.firstname, lastname:this.lastname}, 
         changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-            location.reload();
+            // location.reload();
           } else {
             alert(res.data.message)
           }

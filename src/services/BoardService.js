@@ -26,7 +26,7 @@ export class BoardService extends BaseService {
     }
 
     fetchUpdateProfile = ({ Userdata, changePassword }) => {
-        return this.requester.post('/Profile/EditProfile', { Userdata, changePassword }, mainAPIHeaderOptions())
+        return this.requester.post('/Profile/EditProfile', { Userdata, changePassword }, mainAPIHeaderUpload())
     }
 
     fetchUpdateMenu = (file) => {
