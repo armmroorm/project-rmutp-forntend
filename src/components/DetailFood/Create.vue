@@ -7,18 +7,9 @@
         <b-col md="6" sm="8">
           <b-card no-body>
             <b-card-body class="p-4">
-              <form
-                enctype="multipart/form-data"
-                action="http://localhost:9000/CMS/Upload"
-                method="post"
-              >
-                <input type="file" name="myFile" />
-                <input type="submit" value="upload" />
-              </form>
-
               <b-form @submit.prevent="onUpload()">
                 <h1>Create Menu</h1>
-                  <b-form-file v-model="file" name="myFile"  id="file" ref="file" v-on:change="handleFileUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
+                  <b-form-file name="myFile" id="file" ref="file" v-on:change="handleFilesUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
                   <div class="m-3 mx-auto">Selected file: {{ file ? file.name : '' }}</div>
                 <b-button type="submit" variant="success" block>Update</b-button>
               </b-form>
@@ -34,7 +25,6 @@
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 import Loading from '@/components/loading.vue';
-// import axios from 'axios';
 export default {
   name:'create',
   data() {
@@ -48,21 +38,17 @@ export default {
   },
   methods:{
     handleFileUpload(){
-      this.file = this.$refs.file.files[0];
+      this.file = this.$refs.files.files[0];
     },
     onUpload(){
       let formData = new FormData();
       formData.append('myFile', this.file);
-      // axios.post('http://localhost:9000/CMS/Upload',formData,{ headers: {'Content-Type': 'multipart/form-data'} }).then(() => {})
-       boardService.fetchUpdateMenu(formData).then(()=>{
-        console.log('success')
+      boardService.fetchUpdateMenu(formData).then(()=> {
+        return
       }).catch(err => {
         alert(err)
       })
     }
-
-     
-   
   }
 }
 </script>
