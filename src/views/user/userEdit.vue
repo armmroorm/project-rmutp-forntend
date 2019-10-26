@@ -177,7 +177,9 @@ export default {
         var username = res.data.firstname
         var avatarProfile = res.data.avatar
         this.getUsername(username)
-        this.getAvatar(avatarProfile)
+        if (avatarProfile != "" ) {
+          this.getAvatar(avatarProfile)
+        }
         this.firstnameProfile = res.data.firstname
         this.lastnameProfile = res.data.lastname
         this.firstname = res.data.firstname
