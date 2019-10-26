@@ -7,8 +7,8 @@
           <b-card-body class="p-4">
             <div>
                <h1>Profile</h1>
-               <img src="img/avatars/user.png" alt="avatar" height="100" class="d-block ml-auto mr-auto mb-3 mt-3 rounded-circle">
-               <p>Email : {{this.emailProfile}}</p>
+               <img :src="this.avatar || this.avatarDefault" alt="avatar" height="100" class="d-block ml-auto mr-auto mb-3 mt-3 rounded-circle">
+               <p>Email : {{this.emailProfile}}</p> 
                <p>Name : {{this.titleProfile}} {{this.firstnameProfile}} {{this.lastnameProfile}}</p>
                <p>Gender : {{this.genderProfile}}</p>
             </div>
@@ -20,7 +20,7 @@
             <b-card-body class="p-4">
               <b-form @submit.prevent="update()">
                 <h1>Edit Profile</h1>
-                <b-form-file v-model="file" name="myFile"  id="file" ref="file" accept=".jpg, .png, .gif"  @change="handleFileUpload()" placeholder="Choose a file your image avatar" ></b-form-file>
+                <b-form-file v-model="file" name="myFile" id="file" ref="file" accept=".jpg, .png, .gif"  @change="handleFileUpload()" placeholder="Choose a file your image avatar" ></b-form-file>
                 <b-form-group label="Titlename">
                   <b-form-radio-group
                     v-model="title"
@@ -131,6 +131,7 @@ export default {
       passwordNew: '',
       repeatpassword: '',
       avatar: null,
+      avatarDefault:'img/avatars/user.png',
       changAvatar: false,
       genders: [
           { text: 'Male', value: '1' },
@@ -170,11 +171,13 @@ export default {
     this.getProfile();
   },
   methods:{
-    ...mapActions({getUsername : 'user/getUsername'}),
+    ...mapActions({getUsername : 'user/getUsername', getAvatar: 'user/getAvatar'}),
     getProfile(){
       boardService.fetchProfile().then(res => {
         var username = res.data.firstname
+        var avatarProfile = res.data.avatar
         this.getUsername(username)
+        this.getAvatar(avatarProfile)
         this.firstnameProfile = res.data.firstname
         this.lastnameProfile = res.data.lastname
         this.firstname = res.data.firstname
@@ -184,6 +187,7 @@ export default {
         this.emailProfile = res.data.email
         this.gender = res.data.genderID
         this.title = res.data.titleID
+        this.avatar = res.data.avatar
         this.loadingShow = true
       }).catch(err => {
         alert(err)

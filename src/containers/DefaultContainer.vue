@@ -36,7 +36,7 @@
           <i class="icon-location-pin"></i>
         </b-nav-item> -->
         <span class="text-white" v-if="this.username || null"> <i class="fa fa-user" /> {{this.username || null}}</span>
-        <img  v-if="urlAvatar !== null"  :src="urlAvatar"  border-radius  height="40" class="ml-2 rounded-circle" 
+        <img  v-if="urlAvatar !== null && stat === false"  :src="urlAvatar"  border-radius  height="40" class="ml-2 rounded-circle" 
         alt="admin@bootstrapmaster.com" />
         <DefaultHeaderDropdownAccnt v-if="stat === true" />
         <a class="register-button d-md-down-none" @click="logout" href="#" v-if="token">
