@@ -132,16 +132,18 @@ export default {
             var token = res.data.acctoken
             var stat = res.data.status
             var username = res.data.user
+            var avatarProfile = res.data.avatar
             this.getStat(stat)
             this.getUsername(username)
             this.getToken(token)
+            if (avatarProfile != "" ) {
+              this.getAvatar(avatarProfile)
+            }
             if (this.token) {
               this.$router.push('/')
             }
           } else if(res.data.status === false){
             alert('E-mail or Password is incorrect')
-          } else {
-              alert('Please verify your email address then Sign-In again.')
           }
           this.loadingShow = true
         }).catch(err => {

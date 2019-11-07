@@ -15,9 +15,10 @@ const Welcome = () => import('@/views/home/Welcome')
 const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
-const Create = () => import('@/components/DetailFood/Create')
+const Create = () => import('@/components/DetailCms/Create')
+const Details = () => import('@/views/DetailFood/Details')
 const router = new Router({
-    mode: 'history',
+    mode: 'hash',
     base: process.env.BASE_URL,
     routes: [
         {
@@ -36,6 +37,11 @@ const router = new Router({
                     path: 'welcome',
                     name: 'Welcome',
                     component: Welcome
+                },
+                {
+                    path:'details',
+                    name: 'Details',
+                    component: Details
                 },
                 {
                     path:'profile',
@@ -57,7 +63,7 @@ const router = new Router({
                         component: Create
                       }
                     ]
-                  }
+                },
             ]
         },
         {
