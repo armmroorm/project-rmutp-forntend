@@ -88,7 +88,7 @@
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" v-model.trim="$v.repeatpassword.$model" v-model="repeatpassword"  
+                  <b-form-input type="password" id="repeatpassword"  v-model.trim="$v.repeatpassword.$model" v-model="repeatpassword"  
                     :class="{ 'is-invalid': $v.repeatpassword.$error, 'is-valid': (password != '') ? !$v.repeatpassword.$invalid : '' }" 
                     class="form-control" placeholder="Repeat password" autocomplete="new-password" />
                   <b-form-valid-feedback>Your password is identical!</b-form-valid-feedback>
@@ -166,12 +166,15 @@ export default {
   methods:{
     toggleShowpassword(){
       var show = document.getElementById('password')
+      var show1 = document.getElementById('repeatpassword')
       if(this.showpassword == false) {
         this.showpassword = true  
         show.type = 'text'  
+        show1.type = 'text'
       }else {
         this.showpassword = false  
         show.type = 'password'  
+        show1.type = 'password'
       }
     },
     signUp(){
