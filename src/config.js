@@ -1,9 +1,10 @@
 export const firebaseConfig = {
-    apiKey: "AIzaSyDJ1Yo5XhIdXMLsOiom00bPhzS7A_XLboY",
-    authDomain: "authorization-system.firebaseapp.com",
-    databaseURL: "https://authorization-system.firebaseio.com",
-    projectId: "authorization-system",
-    storageBucket: "",
-    messagingSenderId: "791557357893",
-    appId: "1:791557357893:web:ad9b4b2d19907bcae1be2c"
+  apiKey: "AIzaSyBypubhqTdIB7y6MTfus869pFzjBGqnzTA",
+  authDomain: "loginsocial-ea69e.firebaseapp.com",
+  databaseURL: "https://loginsocial-ea69e.firebaseio.com",
+  projectId: "loginsocial-ea69e",
+  storageBucket: "loginsocial-ea69e.appspot.com",
+  messagingSenderId: "579953916532",
+  appId: "1:579953916532:web:7aa1796c2f21fa6447ef21",
+  measurementId: "G-4M1P4ZHNDQ"
   }

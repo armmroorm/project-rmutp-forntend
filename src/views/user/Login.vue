@@ -82,7 +82,7 @@
 
 <script>
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
-import firebase from 'firebase/firebase';
+import firebase from 'firebase/app';
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 import { mapActions, mapGetters } from 'vuex';
@@ -185,9 +185,9 @@ export default {
       firebase.auth().signInWithPopup(provider).then(function(result){
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
-          if (result.additionalUserInfo.profile.picture.data.url !== null){
-            self.getAvatar(result.additionalUserInfo.profile.picture.data.url)
-          }
+        if (result.additionalUserInfo.profile.picture.data.url !== null){
+          self.getAvatar(result.additionalUserInfo.profile.picture.data.url)
+        }
         self.getUsername(result.additionalUserInfo.profile.name);
 
         self.getToken(token);
@@ -206,7 +206,11 @@ export default {
       firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
-         self.getToken(token);
+        if (result.additionalUserInfo.profile.picture !== null) {
+          self.getAvatar(result.additionalUserInfo.profile.picture)
+        }
+        self.getUsername(result.additionalUserInfo.profile.name);
+        self.getToken(token);
         if (self.token){
           self.$router.push("/");
         }

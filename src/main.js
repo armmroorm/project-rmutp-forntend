@@ -6,8 +6,9 @@ import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store';
-import firebase from 'firebase/firebase';
 import { firebaseConfig } from './config'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 firebase.initializeApp(firebaseConfig)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false

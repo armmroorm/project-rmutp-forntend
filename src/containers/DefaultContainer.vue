@@ -100,7 +100,7 @@ import {
 } from "@coreui/vue";
 import DefaultAside from "./DefaultAside";
 import DefaultHeaderDropdownAccnt from "./DefaultHeaderDropdownAccnt";
-import firebase from 'firebase/firebase';
+import firebase from 'firebase/app';
 import { BoardService } from "@/services/BoardService";
 const boardService = new BoardService();
 import {mapGetters} from 'vuex';
@@ -171,8 +171,8 @@ export default {
 
 <style lang="scss">
 .bg-header {
-  // background: linear-gradient(40deg, #ffecd2 10%, #fcb69f 100%)!important; //Color header
-  background-image: url('/img/header.png');
+  // background-image: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)!important; //Color header
+  background-image: url('/img/header3.png');
 }
 .bg-sidebar {
 //  background: linear-gradient(40deg,#ffecd2 0% , #fcb69f 12%, #ffecd2 90%)!important; //Color sidebars
@@ -191,23 +191,23 @@ export default {
 }
 
 .app-footer {
-  // background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)!important; //Color footer
-  background-image: url('/img/footer.png');
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)!important; //Color footer
+  // background-image: url('/img/footer.png');
 }
 .breadcrumb {
-  // background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)!important;
-  background-image: url('/img/breadcrumb.png');
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)!important;
+  // background-image: url('/img/breadcrumb.png');
 }
 .navbar-nav .nav-link {
   color: #000000;
   font-size: 16px;
 }
-span.active{
-  color: #fff;
-}
-a.router-link-active {
-    color: #fff;
-}
+// span.active{
+//   color: #fff;
+// }
+// a.router-link-active {
+//     color: #fff;
+// }
 .sidebar .nav-link {
    background-image: url('/img/sign.png');
 }

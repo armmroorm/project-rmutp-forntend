@@ -9,8 +9,8 @@
             <b-card-body class="p-4">
               <b-form @submit.prevent="onUpload()">
                 <h1>Create Menu</h1>
-                  <b-form-file name="myFile" id="file" ref="file" v-on:change="handleFilesUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
-                  <div class="m-3 mx-auto">Selected file: {{ file ? file.name : '' }}</div>
+                  <b-form-file v-model="files"  name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
+                  <div class="m-3 mx-auto">Selected file: {{ files ? files.name : '' }}</div>
                 <b-button type="submit" variant="success" block>Update</b-button>
               </b-form>
             </b-card-body>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       loadingShow:true,
-      file: '',
+      files: '',
     }
   },
    components:{
@@ -38,11 +38,14 @@ export default {
   },
   methods:{
     handleFileUpload(){
-      this.file = this.$refs.files.files[0];
+      this.files = this.$refs.files.files;
     },
     onUpload(){
       let formData = new FormData();
-      formData.append('myFile', this.file);
+      for( var i = 0; i < this.files.length; i++ ){
+          let file = this.files[i];
+          formData.append('myFile', file);
+        }
       boardService.fetchUpdateMenu(formData).then(()=> {
         return
       }).catch(err => {
