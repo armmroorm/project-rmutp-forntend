@@ -28,4 +28,14 @@ $simple-line-font-path: "~simple-line-icons/fonts/";
 * {
   font-family: montserrat;
 }
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background: #666; 
+}
+
+body::-webkit-scrollbar-button {display:none}
 </style>

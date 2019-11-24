@@ -40,10 +40,10 @@
         alt="admin@bootstrapmaster.com" />
         <DefaultHeaderDropdownAccnt v-if="stat === true" />
         <a class="register-button d-md-down-none" @click="logout" href="#" v-if="token">
-          <i class="nav-icon icon-logout"></i> Sign Out
+          <i class="nav-icon icon-logout"></i> ออกจากระบบ
         </a>
          <router-link class="register-button" :to="{name : 'SignIn'}" v-else>
-          <i class="nav-icon icon-login"></i> Sign In
+          <i class="nav-icon icon-login"></i> ลงชื่อเข้าใช้
          </router-link>
       </b-navbar-nav>
       <AsideToggler class="d-none d-lg-block" />
@@ -172,7 +172,7 @@ export default {
 <style lang="scss">
 .bg-header {
   // background-image: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%)!important; //Color header
-  background-image: url('/img/header3.png');
+  background-image: url('/img/header6.png');
 }
 .bg-sidebar {
 //  background: linear-gradient(40deg,#ffecd2 0% , #fcb69f 12%, #ffecd2 90%)!important; //Color sidebars

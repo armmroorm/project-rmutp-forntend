@@ -7,9 +7,9 @@
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
               <b-form @submit.prevent="signUp()">
-                <h1>Sign-Up</h1>
-                <p class="text-muted">Create your account</p>
-                <b-form-group label="Titlename">
+                <h1>ลงชื่อสมัคร</h1>
+                <p class="text-muted">สร้างบัญชีของคุณ</p>
+                <b-form-group label="คำนำหน้าชื่อ">
                   <b-form-radio-group
                     v-model="title"
                     :options="titles"
@@ -22,11 +22,11 @@
                     <b-input-group-text><i class="icon-user"></i></b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input type="text" v-model.trim="$v.firstname.$model" v-model="firstname" 
-                    :class="{ 'is-invalid': $v.firstname.$error, 'is-valid': !$v.firstname.$invalid }" class="form-control" placeholder="First name" autocomplete="firstname" />
-                  <b-form-valid-feedback>Your first name is valid!</b-form-valid-feedback>
+                    :class="{ 'is-invalid': $v.firstname.$error, 'is-valid': !$v.firstname.$invalid }" class="form-control" placeholder="ชื่อ" autocomplete="firstname" />
+                  <b-form-valid-feedback>ชื่อของคุณถูกต้อง!</b-form-valid-feedback>
                    <b-form-invalid-feedback>
-                    <span v-if="!$v.firstname.required">First name is required.</span>
-                    <span v-if="!$v.firstname.maxLength">First name must have at most {{$v.firstname.$params.maxLength.max}} letters.</span>
+                    <span v-if="!$v.firstname.required">กรุณาระบุชื่อของคุณ</span>
+                    <span v-if="!$v.firstname.maxLength">ชื่อต้องมีตัวอักษรไม่เกิน {{$v.firstname.$params.maxLength.max}} ตัว</span>
                   </b-form-invalid-feedback>
                 </b-input-group>
 
@@ -35,15 +35,15 @@
                     <b-input-group-text><i class="icon-user"></i></b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input type="text" v-model.trim="$v.lastname.$model" v-model="lastname" 
-                    :class="{ 'is-invalid': $v.lastname.$error, 'is-valid': !$v.lastname.$invalid }" class="form-control" placeholder="Last name" autocomplete="lastname" />
-                  <b-form-valid-feedback>Your last name is valid!</b-form-valid-feedback>
+                    :class="{ 'is-invalid': $v.lastname.$error, 'is-valid': !$v.lastname.$invalid }" class="form-control" placeholder="นามสกุล" autocomplete="lastname" />
+                  <b-form-valid-feedback>นามสกุลของคุณถูกต้อง!</b-form-valid-feedback>
                    <b-form-invalid-feedback>
-                    <span v-if="!$v.lastname.required">Last name is required.</span>
-                    <span v-if="!$v.lastname.maxLength">Last name must have at most {{$v.lastname.$params.maxLength.max}} letters.</span>
+                    <span v-if="!$v.lastname.required">กรุณาระบุนามสกุลของคุณ</span>
+                    <span v-if="!$v.lastname.maxLength">นามสกุลต้องมีตัวอักษรไม่เกิน {{$v.lastname.$params.maxLength.max}} ตัว</span>
                   </b-form-invalid-feedback>
                 </b-input-group>
                 
-                <b-form-group label="Gender">
+                <b-form-group label="เพศ">
                   <b-form-radio-group
                     v-model="gender"
                     :options="genders"
@@ -57,11 +57,11 @@
                   </b-input-group-prepend>
                   <b-form-input type="email" v-model.trim="$v.email.$model"
                     :class="{ 'is-invalid': $v.email.$error, 'is-valid': !$v.email.$invalid }" class="form-control" v-model="email" 
-                    placeholder="Email" autocomplete="email" /> 
-                  <b-form-valid-feedback>Your email is valid!</b-form-valid-feedback>
+                    placeholder="อีเมล" autocomplete="email" /> 
+                  <b-form-valid-feedback>อีเมลของคุณถูกต้อง!</b-form-valid-feedback>
                   <b-form-invalid-feedback>
-                    <span v-if="!$v.email.required">Email is required.</span>
-                    <span v-if="!$v.email.email">This email is already registered</span>
+                    <span v-if="!$v.email.required">กรุณาระบุอีเมล</span>
+                    <span v-if="!$v.email.email">กรุณาระบุอีเมลให้ถูกต้อง</span>
                   </b-form-invalid-feedback>
                 </b-input-group>
 
@@ -71,33 +71,33 @@
                   </b-input-group-prepend>
                   <b-form-input type="password" id='password' v-model.trim="$v.password.$model" v-model='password' 
                     :class="{ 'is-invalid': $v.password.$error, 'is-valid': !$v.password.$invalid }" class="form-control" 
-                    placeholder="Password" autocomplete="new-password" />
+                    placeholder="รหัสผ่าน" autocomplete="new-password" />
                   <!-- <div class="valid-feedback">Your password is valid!</div> -->
-                   <b-form-valid-feedback>Your password is valid!</b-form-valid-feedback>
+                   <b-form-valid-feedback>รหัสผ่านของคุณถูกต้อง!</b-form-valid-feedback>
                     <b-form-invalid-feedback>
-                      <span v-if="!$v.password.required">Password is required.</span>
-                      <span v-if="!$v.password.minLength">{{ $v.password.$params.minLength.min }} characters minimum.</span>
+                      <span v-if="!$v.password.required">กรุณาระบุรหัสผ่าน</span>
+                      <span v-if="!$v.password.minLength">ระบุขั้นต่ำ {{ $v.password.$params.minLength.min }} ตัว</span>
                     </b-form-invalid-feedback>
                   <!-- <div class="invalid-feedback">
                     <span v-if="!$v.password.required">Password is required.</span>
                     <span v-if="!$v.password.minLength">{{ $v.password.$params.minLength.min }} characters minimum.</span>
                   </div> -->
                 </b-input-group>
-                <b-form-checkbox class="mb-2" v-model="showpassword" name="checkbox-1" @change="toggleShowpassword">Show password</b-form-checkbox>  
+                <b-form-checkbox class="mb-2" v-model="showpassword" name="checkbox-1" @change="toggleShowpassword">แสดงรหัสผ่าน</b-form-checkbox>  
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input type="password" id="repeatpassword"  v-model.trim="$v.repeatpassword.$model" v-model="repeatpassword"  
                     :class="{ 'is-invalid': $v.repeatpassword.$error, 'is-valid': (password != '') ? !$v.repeatpassword.$invalid : '' }" 
-                    class="form-control" placeholder="Repeat password" autocomplete="new-password" />
-                  <b-form-valid-feedback>Your password is identical!</b-form-valid-feedback>
+                    class="form-control" placeholder="ระบุรหัสผ่านใหม่อีกครั้ง" autocomplete="new-password" />
+                  <b-form-valid-feedback>รหัสผ่านตรงกัน</b-form-valid-feedback>
                   <b-form-invalid-feedback>
-                    <span v-if="!$v.repeatpassword.sameAsPassword">Passwords must be identical.</span>
+                    <span v-if="!$v.repeatpassword.sameAsPassword">รหัสผ่านไม่ตรงกัน</span>
                   </b-form-invalid-feedback>
                 </b-input-group>
-                <b-button type="submit" variant="success" block>Create Account</b-button>
-                <p class="text-center"> or <router-link :to="{name : 'SignIn'}" >Sign In</router-link></p>
+                <b-button type="submit" variant="success" block>สร้างบัญชี</b-button>
+                <p class="text-center"> หรือ <router-link :to="{name : 'SignIn'}" >ลงชื่อเข้าใช้</router-link></p>
               </b-form>
             </b-card-body>
           </b-card>
@@ -127,14 +127,14 @@ export default {
       showpassword: false,
       loadingShow: true,
       genders: [
-          { text: 'Male', value: '1' },
-          { text: 'Female', value: '2' },
-          { text: 'No gender', value: '3' }
+          { text: 'ชาย', value: '1' },
+          { text: 'หญิง', value: '2' },
+          { text: 'ไม่ระบุเพศ', value: '3' }
         ],
       titles: [
-        {text: 'Mr.', value: '1'},
-        {text: 'Mrs.', value: '2'},
-        {text: 'Miss', value: '3'},
+        {text: 'นาย', value: '1'},
+        {text: 'นาง', value: '2'},
+        {text: 'นางสาว', value: '3'},
       ]
     };
   },

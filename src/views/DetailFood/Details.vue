@@ -1,7 +1,6 @@
 <template>
   <div class="animated fadeIn">
       <Carousel />
-    
     <b-container class="bv-example-row">
       <h2>{{Menu}}</h2>
       <b-row>

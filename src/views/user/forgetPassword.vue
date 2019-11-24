@@ -7,7 +7,7 @@
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
               <b-form @submit.prevent="forgetPassword()">
-                <h1 class="mb-3">Forget Password</h1> 
+                <h1 class="mb-3">ลืมรหัสผ่าน</h1> 
                 <i class="icon-lock text-center d-block ml-auto mr-auto mb-3" style="font-size: 10em;"></i>
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
@@ -15,16 +15,16 @@
                   </b-input-group-prepend>
                   <b-form-input type="email" v-model.trim="$v.email.$model"
                     :class="{ 'is-invalid': $v.email.$error, 'is-valid': !$v.email.$invalid }" class="form-control" v-model="email" 
-                    placeholder="Email" autocomplete="email" /> 
-                  <b-form-valid-feedback>Your email is valid!</b-form-valid-feedback>
+                    placeholder="อีเมล" autocomplete="email" /> 
+                  <b-form-valid-feedback>อีเมลของคุณถูกต้อง!</b-form-valid-feedback>
                   <b-form-invalid-feedback>
-                    <span v-if="!$v.email.required">Email is required.</span>
-                    <span v-if="!$v.email.email">This email is already registered</span>
+                    <span v-if="!$v.email.required">กรุณาระบุอีเมล</span>
+                    <span v-if="!$v.email.email">กรุณาระบุอีเมลให้ถูกต้อง</span>
                   </b-form-invalid-feedback>
                 </b-input-group>
 
-                <b-button type="submit" variant="success" block>Send</b-button>
-                <p class="text-center"> or <router-link :to="{name : 'SignIn'}" >Sign In</router-link></p>
+                <b-button type="submit" variant="success" block>ส่ง</b-button>
+                <p class="text-center"> หรือ <router-link :to="{name : 'SignIn'}" >ลงชื่อเข้าใช้</router-link></p>
               </b-form>
             </b-card-body>
           </b-card>
