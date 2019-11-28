@@ -30,9 +30,9 @@ export default {
     }
   },
   methods: {
-    getBoard(items,index) {
-      const boardID =  items[index].title;
-    }
+    // getBoard(items,index) {
+    //   const boardID =  items[index].title;
+    // }
   }
 }
 </script>

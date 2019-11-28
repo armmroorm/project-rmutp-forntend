@@ -9,6 +9,9 @@ import store from './store';
 import { firebaseConfig } from './config'
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import VueApexCharts from 'vue-apexcharts';
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 firebase.initializeApp(firebaseConfig)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false

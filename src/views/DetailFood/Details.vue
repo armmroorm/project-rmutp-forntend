@@ -6,7 +6,7 @@
       <b-row>
         <b-col> <p>{{title}}</p>  </b-col>
       </b-row>
-     
+      <Chart class=" float-right" />
     <ul id="example-1">
         <li v-for="(item,index) in items" :key="index">
           <b-row>
@@ -25,6 +25,8 @@
           </b-row>
         </li>
       </ul>
+      <span class="text-center"><h4>ให้คะแนนเมนูอาหาร</h4></span>
+      <Rating />
     </b-container>
     
   </div>
@@ -32,6 +34,8 @@
 
 <script>
 import Carousel from '@/components/componentsFood/carousel'
+import Rating from '@/components/componentsFood/rating'
+import Chart from '@/components/componentsFood/chart'
 export default {
   name:'Details',
   data() {
@@ -59,7 +63,9 @@ export default {
     }
   },
    components:{
-    Carousel
+    Carousel,
+    Rating,
+    Chart
   },
 }
 </script>
