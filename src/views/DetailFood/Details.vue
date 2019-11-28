@@ -1,6 +1,6 @@
 <template>
   <div class="animated fadeIn">
-      <Carousel />
+      <Gallery />
     <b-container class="bv-example-row">
       <h2>{{Menu}}</h2>
       <b-row>
@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import Carousel from '@/components/componentsFood/carousel'
 import Rating from '@/components/componentsFood/rating'
 import Chart from '@/components/componentsFood/chart'
+import Gallery from '@/components/componentsFood/gallery'
 export default {
   name:'Details',
   data() {
@@ -63,9 +63,9 @@ export default {
     }
   },
    components:{
-    Carousel,
     Rating,
-    Chart
+    Chart,
+    Gallery
   },
 }
 </script>

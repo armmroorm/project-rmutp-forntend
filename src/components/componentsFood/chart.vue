@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated fadeIn">
     <apexchart type="radialBar" height="400" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
