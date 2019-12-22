@@ -1,17 +1,15 @@
 <template>
-  <div class="animated fadeIn row">
-    <div v-for="(DetailMenu, index) in DetailMenu" :key="index" class="col-sm-4">
-      <a href="#"> <h2 style="line-height:1.2em;color: #000000;">{{DetailMenu.Menu}}</h2></a>
+ <div class="animated fadeIn row">
+    <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
+        <a href="#"> <h2 style="line-height:1.2em;color: #000000;">{{detailFood.menuName}}</h2></a>
         <b-card
           overlay
-          :img-src="DetailMenu.img"
-          :title="DetailMenu.Menu"
+          :title="detailFood.menuName"
           img-alt="Card Image"
           text-variant="white"
           style="max-width: 30rem;"
           align="center"
           class="imgbg shadow-lg block"
-          @click="showDetail()"
         >
           <h3 class="animate-text text-animate">
             <b-card-text>Choose this Menu</b-card-text>
@@ -24,19 +22,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import buttons from '@/components/componentsFood/button'
 import ratingReadOnly from '@/components/componentsFood/ratingReadOnly'
 export default {
-  name:'card',
-  props: {
-    DetailMenu: {
-      required: true
-    },
-  },
-  methods:{
-    showDetail(){
-      this.$router.push('/details')
-    },
+  name: 'Menu',
+  computed: {
+    ...mapGetters({ detailFood: 'food/detailFood' })
   },
   components:{
     buttons,
@@ -46,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .imgbg {
+.imgbg {
   border: none;
   width: 100%;
   height: 180px;

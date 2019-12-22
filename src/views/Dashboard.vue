@@ -18,7 +18,7 @@
               :img-src="model.img"
         ></b-carousel-slide>
     </b-carousel>
-       <card :model="DetailMenu" />
+       <card :DetailMenu="DetailMenu" />
   </div>
 </template>
 <script>
@@ -28,14 +28,6 @@ export default {
   data() {
     return {
       DetailMenu:Object,
-      NameMenu:[
-        'Menu 1',
-        'Menu 2',
-        'Menu 3',
-        'Menu 4',
-        'Menu 5',
-        'Menu 6',
-      ]
     };
   },
   components:{
@@ -49,7 +41,7 @@ export default {
       {img:'img/Foods/2.webp',Menu:'Menu 4'},
       {img:'img/Foods/1.webp',Menu:'Menu 5'},
       {img:'img/Foods/2.webp',Menu:'Menu 6'},
-      ]
+    ]
   },
   methods: {
     showDetail(){

@@ -10,29 +10,41 @@
 </template>
 
 <script>
+import { FoodService } from "@/services/FoodService";
+const foodService = new FoodService();
+import { mapActions } from 'vuex';
 export default {
-  name:'card',
+  name:'type',
   data() {
     return {
       items: [
-      { message: 'อาหาประเภทเรียกน้ำย่อย', title: 1,img: 'img/typeFood/Appetizers.png'},
-      { message: 'ประเภทสลัด/ยำ', title: 2,img: 'img/typeFood/salad.png'},
-      { message: 'อาหารประเภททอด', title: 3,img: 'img/typeFood/FriedFood.png'},
-      { message: 'อาหารประเภทเส้น', title:4,img: 'img/typeFood/Noodle.png'},
-      { message: 'อาหารประเภทนึ่ง/ต้ม', title: 5,img: 'img/typeFood/Boiled.png'},
-      { message: 'อาหารจานด่วน/เดียว', title: 6,img: 'img/typeFood/onedishmeal.png'},
-      { message: 'ซุป', title: 7,img: 'img/typeFood/soup.png'},
-      { message: 'อาหารประเภทแกง', title: 8,img: 'img/typeFood/Curry.png'},
-      { message: 'ของหวาน', title: 9,img: 'img/typeFood/desserts.png'},
-      { message: 'เครื่องดื่ม', title: 10,img: 'img/typeFood/beverage.png'},
-      { message: 'ซอส/เครื่องจิ้ม', title: 11,img: 'img/typeFood/Sauce.png'}
+      { message: 'อาหาประเภทเรียกน้ำย่อย', title: '1',img: 'img/typeFood/Appetizers.png'},
+      { message: 'ประเภทสลัด/ยำ', title: '2',img: 'img/typeFood/salad.png'},
+      { message: 'อาหารประเภททอด', title: '3',img: 'img/typeFood/FriedFood.png'},
+      { message: 'อาหารประเภทเส้น', title:'4',img: 'img/typeFood/Noodle.png'},
+      { message: 'อาหารประเภทนึ่ง/ต้ม', title: '5',img: 'img/typeFood/Boiled.png'},
+      { message: 'อาหารจานด่วน/เดียว', title: '6',img: 'img/typeFood/onedishmeal.png'},
+      { message: 'ซุป', title: '7',img: 'img/typeFood/soup.png'},
+      { message: 'อาหารประเภทแกง', title: '8',img: 'img/typeFood/Curry.png'},
+      { message: 'ของหวาน', title: '9',img: 'img/typeFood/desserts.png'},
+      { message: 'เครื่องดื่ม', title: '10',img: 'img/typeFood/beverage.png'},
+      { message: 'ซอส/เครื่องจิ้ม', title: '11',img: 'img/typeFood/Sauce.png'}
       ],
+      Details: Object
     }
   },
   methods: {
-    // getBoard(items,index) {
-    //   const boardID =  items[index].title;
-    // }
+    ...mapActions({
+    getDetailFood: 'food/getDetailFood',
+    }),
+    getBoard(items,index) {
+      const boardID =  items[index].title;
+      foodService.fetchGetCategoryMenu({categoryId : boardID}).then(resp => {
+        this.Details = resp.data
+        this.getDetailFood(this.Details)
+        this.$router.push('/menu')
+      })
+    }
   }
 }
 </script>

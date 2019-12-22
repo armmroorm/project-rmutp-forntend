@@ -18,6 +18,7 @@ const resetPassword = () => import('@/views/user/resetPassword')
 const Create = () => import('@/components/DetailCms/Create')
 const Details = () => import('@/views/DetailFood/Details')
 const typeOfFood = () => import('@/components/componentsFood/typeOfFood')
+const Menu = () => import('@/views/DetailFood/Menu')
 const router = new Router({
     mode: 'hash',
     base: process.env.BASE_URL,
@@ -55,6 +56,12 @@ const router = new Router({
                     name: 'typeOfFood',
                     meta: {requiresAuth: true},
                     component: typeOfFood
+                },
+                {
+                    path:'menu',
+                    name: 'Menu',
+                    meta: {requiresAuth: true},
+                    component: Menu
                 },
                 {
                     path: 'cms',
