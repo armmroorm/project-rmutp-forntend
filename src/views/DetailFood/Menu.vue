@@ -9,7 +9,7 @@
           text-variant="white"
           style="max-width: 30rem;"
           align="center"
-          class="imgbg shadow-lg block"
+          class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
             <b-card-text>Choose this Menu</b-card-text>
@@ -63,11 +63,11 @@ export default {
   opacity: 0;
   transition: all 0.6s ease-in-out;
 }
-.block:hover .animate-text {
+.blockMenu:hover .animate-text {
   transform: translateX(0);
   opacity: 1;
 }
-.block:hover {
+.blockMenu:hover {
   z-index: 100;
   -webkit-animation: scale 0.3s linear;
   -moz-animation: scale 0.3s linear;

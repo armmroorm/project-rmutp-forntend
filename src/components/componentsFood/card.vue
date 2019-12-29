@@ -10,7 +10,7 @@
           text-variant="white"
           style="max-width: 30rem;"
           align="center"
-          class="imgbg shadow-lg block"
+          class="imgbg shadow-lg blockCard"
           @click="showDetail()"
         >
           <h3 class="animate-text text-animate">
@@ -71,11 +71,11 @@ export default {
   opacity: 0;
   transition: all 0.6s ease-in-out;
 }
-.block:hover .animate-text {
+.blockCard:hover .animate-text {
   transform: translateX(0);
   opacity: 1;
 }
-.block:hover {
+.blockCard:hover {
   z-index: 100;
   -webkit-animation: scale 0.3s linear;
   -moz-animation: scale 0.3s linear;

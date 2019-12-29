@@ -3,7 +3,7 @@ export default {
     {
       name: 'เมนูแนะนำ',
       url: '/dashboard',
-      icon: 'icon-star',
+      icon: 'icon-home',
       badge: {
         variant: 'primary',
         text: 'NEW'
@@ -13,13 +13,12 @@ export default {
     {
       name: 'ประเภทอาหาร',
       url: '/typeoffood',
-      icon: 'icon-star',
-      // children: [
-      //   {
-      //     name: 'Breadcrumbs',
-      //     url: '/base/breadcrumbs',
-      //   },
-      // ]
+      icon: 'icon-list',
+    },
+    {
+      name: 'สร้างเมนูอาหาร',
+      url: '/cms',
+      icon: 'icon-note',
     },
     // {
     //   name: 'Buttons',

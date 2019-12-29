@@ -15,7 +15,7 @@ const Welcome = () => import('@/views/home/Welcome')
 const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
-const Create = () => import('@/components/DetailCms/Create')
+const Create = () => import('@/views/Cms/Create')
 const Details = () => import('@/views/DetailFood/Details')
 const typeOfFood = () => import('@/components/componentsFood/typeOfFood')
 const Menu = () => import('@/views/DetailFood/Menu')
@@ -25,13 +25,13 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            name: 'Home',
+            name: 'หน้าแรก',
             redirect: '/welcome',
             component: DefaultContainer,
             children: [
                 {
                     path: 'dashboard',
-                    name: 'Dashboard',
+                    name: 'แนะนำเมนูอาหาร',
                     meta: { requiresAuth: true },
                     component: Dashboard
                 },
@@ -42,31 +42,31 @@ const router = new Router({
                 },
                 {
                     path:'details',
-                    name: 'Details',
+                    name: 'เมนูอาหาร',
                     component: Details
                 },
                 {
                     path:'profile',
-                    name: 'Profile',
+                    name: 'โปรไฟล์',
                     meta: { requiresAuth: true },
                     component: EditProfile
                 },
                 {
                     path:'typeoffood',
-                    name: 'typeOfFood',
+                    name: 'ประเภทของอาหาร',
                     meta: {requiresAuth: true},
                     component: typeOfFood
                 },
                 {
                     path:'menu',
-                    name: 'Menu',
+                    name: 'เมนู',
                     meta: {requiresAuth: true},
                     component: Menu
                 },
                 {
                     path: 'cms',
                     redirect: '/cms/create',
-                    name: 'Create',
+                    name: 'สร้างเมนูอาหาร',
                     component: {
                       render (c) { return c('router-view') }
                     },

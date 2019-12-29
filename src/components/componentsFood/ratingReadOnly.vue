@@ -18,7 +18,7 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      rating: 3
+      rating: 0
     }
   },
 

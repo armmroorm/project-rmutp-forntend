@@ -31,7 +31,7 @@
         class="text-center">
         <strong>Settings</strong>
       </b-dropdown-header>
-       <b-dropdown-item><router-link style="text-decoration:none" :to="{name : 'Profile'}"><i class="fa fa-user" /> Profile</router-link></b-dropdown-item>
+       <b-dropdown-item><router-link style="text-decoration:none" :to="{path : 'profile'}"><i class="fa fa-user" /> Profile</router-link></b-dropdown-item>
        <!-- <b-dropdown-item><i class="fa fa-wrench" /> Settings</b-dropdown-item> 
        <b-dropdown-item><i class="fa fa-usd" /> Payments
         <b-badge variant="secondary">{{ itemsCount }}</b-badge>

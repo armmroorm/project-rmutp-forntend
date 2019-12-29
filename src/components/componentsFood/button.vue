@@ -1,6 +1,6 @@
 <template>
   <div class="animated fadeIn">
-    <button class="fill">Read More</button>
+    <button class="fill buttonRead">Read More</button>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ $colors: (
 }
 
 // Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
-button {  
+.buttonRead {  
   color: var(--color);
   transition: 0.25s;
   
@@ -40,7 +40,7 @@ button {
   }
 }
 
-button {
+.buttonRead {
   background: none;
   border: 2px solid;
   font: inherit;
