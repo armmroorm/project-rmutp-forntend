@@ -36,13 +36,21 @@
         <div class="col-5">
           <div class="form-group">
             <span>วัตถุดิบอาหารที่เลือก</span>
-            <select ref="selectedDropdown" class="form-control" size="10" v-model="selectedTable[index]">
+            <select ref="selectedDropdown" class="form-control" size="10" v-model="selectedTable[index]"
+                    v-validate="'required'"
+                    :class="{ 'is-invalid': errors.has('table-select')}"
+                    name="table-select">
               <option v-for="(table, i) in filterSelectedTable[index]"
                       :value="table"
                       :key="i">
                 {{ table.name }}
               </option>
             </select>
+            <b-form-invalid-feedback>
+              <span v-if="errors.has('table-select')">
+                โปรดเลือกข้อมูลวัตถุดิบ
+              </span>
+            </b-form-invalid-feedback>
           </div>
         </div>
       </div>
@@ -75,7 +83,7 @@
         selectedTable: [],
       }
     },
-    computed: {
+    computed: { 
       selectedDatabase() {
         return this.databases.filter(database => {
           let index = _.findIndex(this.selected, v => { return v.id === database.id })
@@ -127,6 +135,10 @@
       }
     },
     methods: {
+      formValidate() {
+        // valiadate this form parent components call this
+        return this.$validator.validate()
+      },
       add(index) {
         let selectedIndex = this.$refs.availableDropdown[index].selectedIndex
         if (selectedIndex > -1) {

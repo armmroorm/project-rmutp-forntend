@@ -7,10 +7,10 @@
           </a>
       </div>
     </div>
+    <form @submit.prevent="submit">
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
-          <form @submit.prevent="submit">
             <div class="block">
               <div class="block-content">
                 <div class="row">
@@ -21,10 +21,8 @@
                             :model="model">
                   </component>
                 </div>
-                
               </div>
             </div>
-          </form>
         </div>
       </div>
     </div>
@@ -39,6 +37,7 @@
         </button>
       </div>
     </div>
+    </form>
   </div>
 </template>
 
@@ -81,6 +80,12 @@
         } else {
           this.step++
         }
+      },
+      submit() {
+        console.log('func submit :', this.model)
+        this.submitting = true
+        const ref = this.$refs.child[0]
+        ref.formValidate()
       },
       // disableNextStep() {
       //   const isChooseSourceType = this.componentName[this.step - 1] === 'ChooseSourceType'

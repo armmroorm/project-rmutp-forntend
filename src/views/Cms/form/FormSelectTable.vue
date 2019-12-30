@@ -28,6 +28,11 @@
     components: {
       TableSelector
     },
+    methods: {
+      formValidate() {
+        return this.$refs.tables.formValidate()
+      }
+    }
   }
 
 </script>

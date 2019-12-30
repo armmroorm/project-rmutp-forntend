@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
 import App from './App.vue'
 import router from './router';
 import VueRouter from 'vue-router';

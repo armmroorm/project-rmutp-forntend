@@ -3,6 +3,7 @@
     <databaseSelect
     :databases='databases'
     :models='model.databases'
+    ref="db"
     />
   </div>
 </template>
@@ -24,6 +25,11 @@
     },
     components: {
       databaseSelect
+    },
+    methods: {
+      formValidate() {
+        return this.$refs.db.formValidate()
+      }
     }
   }
 </script>

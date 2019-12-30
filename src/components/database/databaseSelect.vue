@@ -26,6 +26,8 @@
       <div class="form-group">
         <label>ข้อมูลวัตถุดิบที่เลือก</label>
         <select ref="selectedDropdown" class="form-control" size="10" v-model="selectedDatabaseValue"
+                v-validate="'required'"
+                :class="{ 'is-invalid': errors.has('db-select')}"
                 name="db-select">
           <option v-for="(db, index) in models"
                   :value="db"
@@ -33,6 +35,11 @@
             {{ db.name }}
           </option>
         </select>
+        <b-form-invalid-feedback>
+         <span v-if="errors.has('db-select')">
+           โปรดเลือกข้อมูลวัตถุดิบ
+        </span>
+        </b-form-invalid-feedback>
       </div>
     </div>
   </div>
@@ -68,6 +75,10 @@
       },
     },
     methods: {
+      formValidate() {
+        // valiadate this form parent components call this
+        return this.$validator.validate()
+      },
       setFocus() {
         if (this.databases.length > 0) {
           this.availableDatabaseValue = this.databases[0]
