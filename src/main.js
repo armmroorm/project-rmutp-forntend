@@ -12,6 +12,8 @@ import { firebaseConfig } from './config'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import VueApexCharts from 'vue-apexcharts';
+import CKEditor from '@ckeditor/ckeditor5-vue';
+Vue.use( CKEditor );
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 firebase.initializeApp(firebaseConfig)

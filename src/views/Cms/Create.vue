@@ -16,9 +16,13 @@
     data() {
       return {
         model: {
+          id:'001',
+          ingredients: [],
+          menuName:'',
+          method:'',
           name: '',
           databases: [],
-          ingredients: [],
+
         }
       }
     }

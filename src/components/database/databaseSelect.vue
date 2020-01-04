@@ -37,7 +37,7 @@
         </select>
         <b-form-invalid-feedback>
          <span v-if="errors.has('db-select')">
-           โปรดเลือกข้อมูลวัตถุดิบ
+            โปรดเลือกข้อมูลวัตถุดิบ
         </span>
         </b-form-invalid-feedback>
       </div>
@@ -55,7 +55,11 @@
       models: {
         type: Array,
         default: () => []
-      }
+      },
+      // modelID: {
+      //   type: '',
+      //   require: true
+      // }
     },
     data() {
       return {
@@ -88,7 +92,7 @@
         }
       },
       add() {
-        let selectedIndex = this.$refs.availableDropdown.selectedIndex
+        let selectedIndex = this.$refs.availableDropdown.selectedIndex  
         if (selectedIndex > -1) {
           this.models.push({
             'id': this.availableDatabaseValue.id,

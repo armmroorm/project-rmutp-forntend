@@ -16,6 +16,7 @@ const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
 const Create = () => import('@/views/Cms/Create')
+const index = () => import('@/views/Cms/index')
 const Details = () => import('@/views/DetailFood/Details')
 const typeOfFood = () => import('@/components/componentsFood/typeOfFood')
 const Menu = () => import('@/views/DetailFood/Menu')
@@ -65,7 +66,7 @@ const router = new Router({
                 },
                 {
                     path: 'cms',
-                    redirect: '/cms/create',
+                    redirect: '/cms/index',
                     name: 'สร้างเมนูอาหาร',
                     component: {
                       render (c) { return c('router-view') }
@@ -75,6 +76,11 @@ const router = new Router({
                         path: 'create',
                         name: 'CMS',
                         component: Create
+                      },
+                      {
+                        path: 'index',
+                        name: 'TableCms',
+                        component: index
                       }
                     ]
                 },

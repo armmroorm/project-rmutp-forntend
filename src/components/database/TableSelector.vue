@@ -15,7 +15,7 @@
               <option v-for="(table, i) in filterAvaliableTable[index]"
                       :value="table"
                       :key="i">
-                {{ table.name }}
+                {{ table.ingredientsName }}
               </option>
             </select>
           </div>
@@ -43,7 +43,7 @@
               <option v-for="(table, i) in filterSelectedTable[index]"
                       :value="table"
                       :key="i">
-                {{ table.name }}
+                {{ table.ingredientsName }}
               </option>
             </select>
             <b-form-invalid-feedback>
@@ -97,13 +97,13 @@
         let result = []
         _.forEach(this.selectedDatabase, database => {
           let data = _.filter(database.ingredients, obj => {
-            let index = this.models.findIndex(model => model.name === obj.name && model.database.id === database.id)
+            let index = this.models.findIndex(model => model.ingredientsName === obj.ingredientsName && model.database.id === database.id)
             return index === -1
           })
           result.push(data)
         })
         const sortResult = result.map((item, index) => {
-          return _.sortBy(result[index], ['name'])
+          return _.sortBy(result[index], ['ingredientsName'])
         })
         return sortResult
       },
@@ -118,7 +118,7 @@
           result[index].push(value)
         })
         const sortResult = result.map((item, index) => {
-          return _.sortBy(result[index], ['name'])
+          return _.sortBy(result[index], ['ingredientsName'])
         })
         return sortResult
       },
@@ -145,9 +145,13 @@
           this.models.push({
             database: {
               id: this.selectedDatabase[index].id,
-              name: this.selectedDatabase[index].name,
+              name: this.selectedDatabase[index].name
             },
-            name: this.availableTable[index].name
+            id: this.availableTable[index].id,
+            ingredientsCalories: this.availableTable[index].ingredientsCalories,
+            ingredientsName: this.availableTable[index].ingredientsName,
+            ingredientsType: this.availableTable[index].ingredientsType,
+            quantity: this.availableTable[index].quantity
           })
         }
         if (this.filterAvaliableTable[index].length > 0) {

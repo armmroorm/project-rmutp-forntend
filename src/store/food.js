@@ -1,25 +1,24 @@
 export const food = {
   namespaced: true,
   actions: {
-      getDetailFood: ({ commit }, food) => {
-        commit('addDetailFood', food)
-      },
-
+    getDetailFood: ({ commit }, food) => {
+      commit('addDetailFood', food)
+    },
+    getIngredients: ({ commit }, Data) => {
+      commit('addIngredients', Data)
+    }
   }, state: {
-      food: Object,
-      data: [ { id:"001", name:"วัตถุดิบ", 
-                ingredients:[ {name:"น้ำปลา"},{name:"ผงชูรส"},{name:"พริกสด"},
-                              {name:"พริกหยวก"},{name:"พริกขี้หนู"},{name:"เกลือปน"},
-                              {name:"เกลือแปรรูป"},{name:"เกลือทรายแดง"}
-                            ]
-              }
-            ]
+    food: Object,
+    data: []
   }, mutations: {
-      addDetailFood: (state, addFood) => {
-          state.food = addFood
-      },
+    addDetailFood: (state, addFood) => {
+      state.food = addFood
+    },
+    addIngredients: (state, addData) => {
+      state.data = addData
+    },
   }, getters: {
-      detailFood: state => state.food,
-      getData: state => state.data
+    detailFood: state => state.food,
+    getData: state => state.data
   }
 }

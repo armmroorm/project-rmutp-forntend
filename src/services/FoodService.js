@@ -5,4 +5,7 @@ export class FoodService extends BaseService {
   fetchGetCategoryMenu = ({ categoryId }) => {
     return this.requester.post('/GetCategoryMenu', { categoryId }, mainAPIHeaderOptions())
   }
+  fetchGetApiIngredients = () => {
+    return this.requester.get('/CMS/GetIngredients', mainAPIHeaderOptions())
+  }
 }

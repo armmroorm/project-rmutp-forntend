@@ -7,7 +7,6 @@
           </a>
       </div>
     </div>
-    <form @submit.prevent="submit">
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
@@ -28,8 +27,7 @@
     </div>
     <div class="card-footer">
       <div class="block-content block-content-full block-content-sm bg-body-light">
-        <button v-if="step === componentName.length" type="submit" class="btn btn-primary"
-                        :loading="submitting">
+        <button v-if="step === componentName.length" class="btn btn-primary" @click="FormSubmit()">
           บันทึกข้อมูล
         </button>
         <button type="button" v-if="step !== componentName.length" class="btn btn-primary" @click="next()">
@@ -37,18 +35,19 @@
         </button>
       </div>
     </div>
-    </form>
   </div>
 </template>
 
 <script>
   import FormCms from './form/FormCms'
   import FormSelectTable from './form/FormSelectTable'
+  import FormDetail from './form/FormDetail'
 
   export default {
     components: {
         FormCms,
-        FormSelectTable
+        FormSelectTable,
+        FormDetail
     },
     props: {
       model: {
@@ -66,7 +65,7 @@
       return {
         submitting: false,
         step: 1,
-        componentName: ['FormCms','FormSelectTable'],
+        componentName: ['FormCms','FormSelectTable','FormDetail']
       }
     },
      methods: {
@@ -81,11 +80,15 @@
           this.step++
         }
       },
-      submit() {
-        console.log('func submit :', this.model)
-        this.submitting = true
-        const ref = this.$refs.child[0]
-        ref.formValidate()
+      FormSubmit() {
+         this.$validator.validate().then(valid => {
+           this.$refs.child[0].formValidate()
+        if (valid) {
+          console.log('func submit :', this.model)
+        }
+      });
+        // console.log('func submit :', this.model)
+        // this.$router.push({path:'/dashboard'})
       },
       // disableNextStep() {
       //   const isChooseSourceType = this.componentName[this.step - 1] === 'ChooseSourceType'
