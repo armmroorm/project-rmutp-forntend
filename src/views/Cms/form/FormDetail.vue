@@ -1,8 +1,8 @@
 <template lang='html'>
   <div class='col-12'>
     <detail-selector
-      :databases='databases'
       :models='model.ingredients'
+      :selectModel='model'
       ref="ds"
     />
   </div>

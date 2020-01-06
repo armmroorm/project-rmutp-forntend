@@ -80,13 +80,14 @@
           this.step++
         }
       },
-      FormSubmit() {
-         this.$validator.validate().then(valid => {
-           this.$refs.child[0].formValidate()
-        if (valid) {
-          console.log('func submit :', this.model)
+       async FormSubmit() {
+        const ref = this.$refs.child[0]
+        if (typeof ref.formValidate === 'function') {
+          let result = await ref.formValidate()
+          if (result) {
+            console.log('func submit :', this.model)
+          }
         }
-      });
         // console.log('func submit :', this.model)
         // this.$router.push({path:'/dashboard'})
       },
