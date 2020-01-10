@@ -23,12 +23,17 @@ export default {
     CreateCMS(){
       this.$router.push('/cms/create')
     },
-    GetApiIngredients() {
+    GetApiIngredients() { 
       foodService.fetchGetApiIngredients().then(resp => {
-        var dataGetIngredients = [resp.data]
-        this.getIngredients(dataGetIngredients)
-        this.LoadingSubmit = true
-        
+        if (resp.data.status === false) {
+          alert(resp.data.status === false)
+          this.LoadingSubmit = true
+        }
+        else {
+          var dataGetIngredients = [resp.data]
+          this.getIngredients(dataGetIngredients)
+          this.LoadingSubmit = true
+        }
       }).catch(err => {
           alert(err)
         })

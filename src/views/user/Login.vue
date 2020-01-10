@@ -118,6 +118,8 @@ export default {
     getToken: 'user/getToken',
     getUsername: 'user/getUsername',
     getAvatar: 'user/getAvatar',
+    getUserID: 'user/getUserID',
+    getAdminID: 'user/getAdminID',
     getStat: 'user/getStat'
     }),
     signIn(){
@@ -132,10 +134,14 @@ export default {
             var token = res.data.acctoken
             var stat = res.data.status
             var username = res.data.user
+            var userId = res.data.userId
+            var adminId = res.data.adminId
             var avatarProfile = res.data.avatar
             this.getStat(stat)
             this.getUsername(username)
             this.getToken(token)
+            this.getAdminID(adminId)
+            this.getUserID(userId)
             if (avatarProfile != "" ) {
               this.getAvatar(avatarProfile)
             }

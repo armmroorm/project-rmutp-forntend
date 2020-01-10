@@ -42,7 +42,8 @@
   import FormCms from './form/FormCms'
   import FormSelectTable from './form/FormSelectTable'
   import FormDetail from './form/FormDetail'
-
+  import { FoodService } from "@/services/FoodService";
+  const foodService = new FoodService();
   export default {
     components: {
         FormCms,
@@ -86,6 +87,11 @@
           let result = await ref.formValidate()
           if (result) {
             console.log('func submit :', this.model)
+            foodService.fetchPostApiMCS({email:this.model}).then(resp => {
+              console.log(resp);
+            }).catch(err => {
+                alert(err)
+              })
           }
         }
         // console.log('func submit :', this.model)

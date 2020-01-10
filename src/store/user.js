@@ -4,6 +4,12 @@ export const user = {
         getUsername: ({ commit }, Username) => {
             commit('addUsername', Username)
         },
+        getUserID:({commit}, userId) => {
+            commit('addUserID', userId)
+        },
+        getAdminID:({commit}, adminId) => {
+            commit('addAdminID', adminId)
+        },
         getToken: ({ commit }, token) => {
             commit('addToken', token)
         },
@@ -20,10 +26,20 @@ export const user = {
             username: null,
             token: null,
             urlAvatar: null,
+            userId: null,
+            adminId: null,
             stat: false
     }, mutations: {
-        addUsername: (state, newUsername) => {
+        addUsername: (state, newUsername, userId, adminId) => {
             state.username = newUsername
+            state.userId = userId
+            state.adminId = adminId
+        },
+        addAdminID: (state,adminId) => {
+            state.adminId = adminId
+        },
+        addUserID: (state, userId) => {
+            state.userId = userId
         },
         addToken: (state, newToken) => {
             state.token = newToken
@@ -40,12 +56,16 @@ export const user = {
             state.token = null
             state.urlAvatar = null
             state.stat = false
+            state.adminId = null,
+            state.userId = null
             localStorage.removeItem('token', null)
         }
     }, getters: {
             username: state => state.username,
             token: state => state.token,
             urlAvatar: state => state.urlAvatar,
-            stat: state => state.stat
+            stat: state => state.stat,
+            userId : state => state.userId,
+            adminId : state => state.adminId
     }
 }

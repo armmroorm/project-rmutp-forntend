@@ -130,7 +130,6 @@ export default {
             items: [                                  
             'bold',
             'italic',
-            'link',
             'bulletedList',
             'numberedList',
             'undo',

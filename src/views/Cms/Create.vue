@@ -8,7 +8,6 @@
 
 <script>
   import ApiForm from './Form'
-
   export default {
     components: {
       ApiForm
@@ -17,12 +16,13 @@
       return {
         model: {
           id:'001',
+          menuId: '',
           ingredients: [],
           menuName: '',
           method:[],
           name: '',
-          userId:'',
-          adminId:'',
+          userId: '1',
+          adminId: '0',
           categoryId:'',
           databases: [],
 
