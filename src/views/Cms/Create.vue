@@ -18,9 +18,12 @@
         model: {
           id:'001',
           ingredients: [],
-          menuName:'',
-          method:'',
+          menuName: '',
+          method:[],
           name: '',
+          userId:'',
+          adminId:'',
+          categoryId:'',
           databases: [],
 
         }

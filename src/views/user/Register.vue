@@ -50,7 +50,6 @@
                     name="radio-gender" 
                   ></b-form-radio-group>
                 </b-form-group>
-
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text>@</b-input-group-text>

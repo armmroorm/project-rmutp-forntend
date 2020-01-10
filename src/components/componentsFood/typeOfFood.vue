@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       items: [
-      { message: 'อาหาประเภทเรียกน้ำย่อย', title: '1',img: 'img/typeFood/Appetizers.png'},
+      { message: 'อาหารประเภทเรียกน้ำย่อย', title: '1',img: 'img/typeFood/Appetizers.png'},
       { message: 'ประเภทสลัด/ยำ', title: '2',img: 'img/typeFood/salad.png'},
       { message: 'อาหารประเภททอด', title: '3',img: 'img/typeFood/FriedFood.png'},
       { message: 'อาหารประเภทเส้น', title:'4',img: 'img/typeFood/Noodle.png'},

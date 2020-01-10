@@ -3,6 +3,7 @@
     <databaseSelect
     :databases='databases'
     :models='model.databases'
+    :model='model'
     ref="db"
     />
   </div>

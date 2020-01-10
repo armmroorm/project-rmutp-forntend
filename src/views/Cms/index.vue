@@ -1,16 +1,19 @@
 <template>
   <div>
+    <loading v-if="LoadingSubmit === false" />
     <button @click="CreateCMS">create</button>
   </div>
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import { FoodService } from "@/services/FoodService";
 const foodService = new FoodService();
 export default {
   data() {
-    return {};
+    return {
+      LoadingSubmit : false,
+    };
   },
   mounted(){
     this.GetApiIngredients();
@@ -24,8 +27,11 @@ export default {
       foodService.fetchGetApiIngredients().then(resp => {
         var dataGetIngredients = [resp.data]
         this.getIngredients(dataGetIngredients)
+        this.LoadingSubmit = true
         
-      })
+      }).catch(err => {
+          alert(err)
+        })
     }
   }
 };

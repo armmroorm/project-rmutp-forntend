@@ -40,6 +40,22 @@
           </b-form-invalid-feedback>
         </b-col>
       </b-row>
+
+      <b-form-group label="ประเภทอาหาร">
+        <b-form-radio-group
+          v-model="typeFoods"
+          :options="items"
+          v-validate="'required'"
+          :class="{ 'is-invalid': errors.has('radio-Type')}"
+          name="radio-Type">
+        </b-form-radio-group>
+        <b-form-invalid-feedback>
+          <span v-if="errors.has('radio-Type')">
+              โปรดกรอกปริมาณวัตถุดิบ
+          </span>
+        </b-form-invalid-feedback>
+      </b-form-group>
+
     <!--[END quantity input]--> 
       <h3 style="margin-top: 40px ; margin-bottom: 20px">วิธีทำอาหาร</h3>
       <ckeditor id="editor" :editor="editor" v-model="editorData" @input="onEditorInput()" :config="editorConfig" 
@@ -50,18 +66,35 @@
         <span v-if="errors.has('content')">
             โปรดกรอกปริมาณวัตถุดิบ
         </span>
-      </b-form-invalid-feedback>  
-          {{selectModel.method}}  
-  </div>
+      </b-form-invalid-feedback>
+       <!--[START Name input]-->
+      <!-- <div class="form-group row" v-for="(item, a) in people" :key="`A-${a}`">
+        <label for="api-method" class="col-sm-2 col-form-label"> วิธีทำอาหาร : {{a + 1}}<span class="text-danger">*</span></label>
+        <div class="col-sm-9 mb-2">
+          <input  type="text"
+                  id="api-method"
+                  @change="addNameMedthod(a)"
+                  v-model="item.name"
+                  name="api-method"
+                  class="form-control"
+                  v-validate="'required'">
+        </div>
+      </div>
+        <button class="btn btn-success  " @click="addMethods()">เพิ่ม</button> -->
+    <!--[END Name input]-->
+  </div>  
 </template>
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export default {
   props: {
-      selectModel:{
+      selectModel:{ 
         required: true
       },
+      // method:{ 
+      //   required: true
+      // },
       models: {
         type: Array,
         default: () => []
@@ -69,6 +102,25 @@ export default {
     },
     data() {
       return {
+        people: [
+          {
+            name: ''
+          },
+        ],
+        typeFoods:'1',
+        items: [
+          { text: 'อาหารประเภทเรียกน้ำย่อย', value: '1'},
+          { text: 'ประเภทสลัด/ยำ', value: '2'},
+          { text: 'อาหารประเภททอด', value: '3'},
+          { text: 'อาหารประเภทเส้น', value:'4'},
+          { text: 'อาหารประเภทนึ่ง/ต้ม', value: '5'},
+          { text: 'อาหารจานด่วน/เดียว', value: '6'},
+          { text: 'ซุป', value: '7'},
+          { text: 'อาหารประเภทแกง',value: '8'},
+          { text: 'ของหวาน', value: '9'},
+          { text: 'เครื่องดื่ม', value: '10'},
+          { text: 'ซอส/เครื่องจิ้ม', value: '11'}
+        ],
         selected: [],
         nameMunu:'',
         editor: ClassicEditor,
@@ -90,15 +142,26 @@ export default {
       }
     },
     methods:{
+      // addMethods(){
+      //   this.people.push({
+      //      name: ''
+      //     })
+      // },
+      // addNameMedthod(a){
+      //   this.method.push({
+      //       name: this.people[a].name
+      //     })
+      // },
       ChangeInt(i) {
         this.selected[i] = parseFloat(this.selected[i])
         this.models[i].quantity = this.selected[i]
       },
-      onEditorInput(){
+      onEditorInput() {
         this.selectModel.method = this.editorData
       },
       onNameMenuInput() { 
          this.selectModel.menuName = this.nameMunu
+         this.selectModel.categoryId = this.typeFoods
       },
       formValidate() {
         // valiadate this form parent components call this

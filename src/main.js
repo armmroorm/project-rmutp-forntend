@@ -23,9 +23,15 @@ Vue.use(BootstrapVue)
 Vue.use(VueRouter);
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
+import loading from '@/components/loading'
+Vue.component('loading', loading)
 
 new Vue({
+  el: '#app',
   router,
   store,
-  render: h => h(App),
-}).$mount('#app')
+  template: '<App/>',
+  components: {
+    App
+  },
+})

@@ -18,6 +18,7 @@
     </b-container>
     <b-container class="bv-example-row">
       <p>วิธีทำ</p>
+      <button-counter />
       <ul id="example-2">
         <li v-for="(howTos,index) in howTo" :key="index">
           <b-row>
@@ -28,16 +29,18 @@
       <span class="text-center"><h4>ให้คะแนนเมนูอาหาร</h4></span>
       <Rating />
     </b-container>
-    
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+Vue.component('button-counter', {
+  template: '<ol><li>ใส่หมู</li><li>ใส่หมา</li><li>ใส่ปาก</li><li>ใส่ไรก็เรื่องของกู</li></ol>'
+})
 import Rating from '@/components/componentsFood/rating'
 import Chart from '@/components/componentsFood/chart'
 import Gallery from '@/components/componentsFood/gallery'
 export default {
-  name:'Details',
   data() {
     return {
       Menu: 'พล่ากุ้ง',
@@ -65,7 +68,7 @@ export default {
    components:{
     Rating,
     Chart,
-    Gallery
+    Gallery,
   },
 }
 </script>

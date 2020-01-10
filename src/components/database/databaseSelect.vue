@@ -56,10 +56,9 @@
         type: Array,
         default: () => []
       },
-      // modelID: {
-      //   type: '',
-      //   require: true
-      // }
+      model: {
+        required: true
+      }
     },
     data() {
       return {
@@ -98,6 +97,7 @@
             'id': this.availableDatabaseValue.id,
             'name': this.availableDatabaseValue.name,
           })
+          this.model.name =  this.availableDatabaseValue.name
         }
         if (this.filterAvaliableDB.length > 0) {
           selectedIndex = Math.min(selectedIndex, this.filterAvaliableDB.length)
