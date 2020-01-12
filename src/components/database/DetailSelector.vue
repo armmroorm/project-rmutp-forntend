@@ -41,6 +41,9 @@
         </b-col>
       </b-row>
 
+      <b-form-file v-model="files"  name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
+      <div class="m-3 mx-auto">Selected file: {{ files ? files.name : '' }}</div>
+
       <b-form-group label="ประเภทอาหาร">
         <b-form-radio-group
           v-model="typeFoods"
@@ -95,6 +98,9 @@ export default {
       // method:{ 
       //   required: true
       // },
+      files:{
+         required: true
+      },
       models: {
         type: Array,
         default: () => []
@@ -151,6 +157,9 @@ export default {
       //       name: this.people[a].name
       //     })
       // },
+      handleFileUpload(){
+      this.files = this.$refs.files.files;
+      },
       ChangeInt(i) {
         this.selected[i] = parseFloat(this.selected[i])
         this.models[i].quantity = this.selected[i]
@@ -158,6 +167,7 @@ export default {
       onEditorInput() {
         this.selectModel.method = this.editorData
       },
+      
       onNameMenuInput() { 
          this.selectModel.menuName = this.nameMunu
          this.selectModel.categoryId = this.typeFoods

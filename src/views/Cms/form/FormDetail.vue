@@ -3,6 +3,7 @@
     <detail-selector
       :models='model.ingredients'
       :selectModel='model'
+      :files='Img.files'
       ref="ds"
     />
   </div>
@@ -23,6 +24,10 @@
         type: Object,
         required: true
       },
+      Img:{
+        type: Object,
+        required: true
+      }
     },
     components: {
       DetailSelector

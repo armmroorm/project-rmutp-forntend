@@ -198,6 +198,7 @@ export default {
     handleFileUpload(){
       this.file = this.$refs.file.files;
       this.changAvatar = true
+      
     },
     update(){
        this.$v.$touch()
@@ -206,12 +207,13 @@ export default {
       } else {
         this.loadingShow = false
         let formData = new FormData();
-        formData.append('myFile', this.file);
+        formData.append('myFile', this.file); 
+        // formData.append('menuID', '1' );
         boardService.fetchUpdateProfile({Userdata:{ genderID:this.gender, titleID:this.title, firstname:this.firstname, lastname:this.lastname}, 
         changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-            location.reload();
+            // location.reload();
           } else {
             alert(res.data.message)
           }

@@ -47,7 +47,7 @@ export default {
     return {
       Menu: 'พล่ากุ้ง',
       title:'เครื่องปรุง',
-      addMenu:'',
+      addMenu: '',
       items: [
       { message: 'น้ำพริกเผา', title: '1 ช้อนโต๊ะ'},
       { message: 'น้ำปลา', title: '1 - 2 ช้อนโต๊ะ'},

@@ -17,7 +17,8 @@
                             :key="index"
                             v-bind:is="name"
                             ref="child"
-                            :model="model">
+                            :model="model"
+                            :Img="Img" >
                   </component>
                 </div>
               </div>
@@ -53,6 +54,9 @@
     props: {
       model: {
         required: true
+      },
+      Img:{
+        required:true
       }
     },
     watch: {
@@ -87,7 +91,7 @@
           let result = await ref.formValidate()
           if (result) {
             console.log('func submit :', this.model)
-            foodService.fetchPostApiMCS({email:this.model}).then(resp => {
+            foodService.fetchPostApiCMS({email:this.model}).then(resp => {
               console.log(resp);
             }).catch(err => {
                 alert(err)

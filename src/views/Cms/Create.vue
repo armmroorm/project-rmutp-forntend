@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content">
-      <api-form :model="model"/>
+      <api-form :model="model" :Img='Img' />
     </div>
   </div>
 </template>
@@ -14,6 +14,9 @@
     },
     data() {
       return {
+        Img: {
+          files: '',
+        },
         model: {
           id:'001',
           menuId: '',
@@ -25,7 +28,6 @@
           adminId: '0',
           categoryId:'',
           databases: [],
-
         }
       }
     }
