@@ -19,7 +19,8 @@
     <b-container class="bv-example-row">
       <p>วิธีทำ</p>
       <div id="app">
-        <button-counter />
+        <!-- <show-detail-food /> -->
+        <component :is="{template:templateString}"/>
       </div>
       <ul id="example-2">
         <li v-for="(howTos,index) in howTo" :key="index">
@@ -35,19 +36,25 @@
 </template>
 
 <script>
-import Vue from 'vue'
-Vue.component('button-counter', {
-  template: `<div>${this.addMenu}</div>`
-})
 import Rating from '@/components/componentsFood/rating'
 import Chart from '@/components/componentsFood/chart'
 import Gallery from '@/components/componentsFood/gallery'
 export default {
+  mounted(){
+    this.add()
+  },
+  methods:{
+    add(){
+      this.templateString = this.addCooking
+
+    }
+  },
   data() {
     return {
+      templateString: '<div>รอเพิ่มวิธีทำอาหาร</div>' ,
       Menu: 'พล่ากุ้ง',
+      addCooking: "<ul><li>กุ้งขาว (แกะเปลือกผ่าหลัง)</li><li>รากผักชีสับละเอียด 3 ช้อนโต๊ะ</li><li>กระเทียมสับละเอียด 3 ช้อนโต๊ะ</li><li>พริกขี้หนูสับละเอียด 2 ช้อนโต๊ะ</li><li>น้ำมะนาว 3 ช้อนโต๊ะ</li><li>น้ำปลา 3 ช้อนโต๊ะ</li><li>น้ำตาลทราย 1 ช้อนชา</li><li>ก้านคะน้าและแครอต แช่น้ำเย็นจัด</li></ul>",
       title:'เครื่องปรุง',
-      addMenu: '',
       items: [
       { message: 'น้ำพริกเผา', title: '1 ช้อนโต๊ะ'},
       { message: 'น้ำปลา', title: '1 - 2 ช้อนโต๊ะ'},

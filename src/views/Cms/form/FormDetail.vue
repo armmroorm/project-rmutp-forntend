@@ -3,7 +3,7 @@
     <detail-selector
       :models='model.ingredients'
       :selectModel='model'
-      :files='Img.files'
+       :submitting="submitting"
       ref="ds"
     />
   </div>
@@ -24,9 +24,8 @@
         type: Object,
         required: true
       },
-      Img:{
-        type: Object,
-        required: true
+      submitting : {
+        required : true
       }
     },
     components: {
@@ -35,6 +34,9 @@
     methods: {
       formValidate() {
         return this.$refs.ds.formValidate()
+      },
+      RequestApiUpload() {
+        return this.$refs.ds.addFiles()
       }
     }
   }

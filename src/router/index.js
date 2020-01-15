@@ -16,6 +16,7 @@ const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
 const Create = () => import('@/views/Cms/Create')
+const CreateCmstest =() => import('@/components/DetailCms/Create')
 const index = () => import('@/views/Cms/index')
 const Details = () => import('@/views/DetailFood/Details')
 const typeOfFood = () => import('@/components/componentsFood/typeOfFood')
@@ -81,6 +82,11 @@ const router = new Router({
                         path: 'index',
                         name: 'TableCms',
                         component: index
+                      },
+                      {
+                        path: 'CmsTest',
+                        name: 'CreateCmstest',
+                        component: CreateCmstest
                       }
                     ]
                 },

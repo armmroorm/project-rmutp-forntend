@@ -15,7 +15,7 @@
                 placeholder="โปรดกรอกชื่อเมนูอาหาร">
           <b-form-invalid-feedback>
             <span v-if="errors.has('api-name')">
-                โปรดกรอกปริมาณวัตถุดิบ
+                โปรดกรอกชื่อเมนูอาหาร
             </span>
           </b-form-invalid-feedback>
         </div>
@@ -40,25 +40,32 @@
           </b-form-invalid-feedback>
         </b-col>
       </b-row>
-
-      <b-form-file v-model="files"  name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
-      <div class="m-3 mx-auto">Selected file: {{ files ? files.name : '' }}</div>
-
-      <b-form-group label="ประเภทอาหาร">
-        <b-form-radio-group
-          v-model="typeFoods"
-          :options="items"
-          v-validate="'required'"
-          :class="{ 'is-invalid': errors.has('radio-Type')}"
-          name="radio-Type">
-        </b-form-radio-group>
+      
+      <h5>เลือกรูปภาพประกอบอาหาร</h5>
+      <b-form @submit.prevent="addFiles()">
+        <b-form-file  class="mb-3"  v-model="files" name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()"
+                      v-validate="'required'" :state="Boolean(files)" accept=".jpg, .png"
+                      :class="{ 'is-invalid': errors.has('myFile')}">
+        </b-form-file>
         <b-form-invalid-feedback>
-          <span v-if="errors.has('radio-Type')">
-              โปรดกรอกปริมาณวัตถุดิบ
-          </span>
-        </b-form-invalid-feedback>
-      </b-form-group>
+            <span v-if="errors.has('myFile')">
+                โปรดเลือกรูปภาพประกอบอาหาร
+            </span>
+          </b-form-invalid-feedback>
+      <!-- <b-button  @click="addFiles()" variant="success" block>Update</b-button> -->
+      </b-form>
 
+      <b-form-group label="ประเภทอาหาร" >
+        <b-form-radio-group
+          v-for="(option, a) in options" :key="`A-${a}`"
+          id="radio-group-2"
+          v-model="typeFoods"
+          v-validate="'required'"
+          name="radio-Type"
+          @change="onChacgTypeFood(a+1)">
+            <b-form-radio :value="option.value">{{option.text}}</b-form-radio>
+        </b-form-radio-group>
+      </b-form-group>
     <!--[END quantity input]--> 
       <h3 style="margin-top: 40px ; margin-bottom: 20px">วิธีทำอาหาร</h3>
       <ckeditor id="editor" :editor="editor" v-model="editorData" @input="onEditorInput()" :config="editorConfig" 
@@ -67,10 +74,11 @@
       </ckeditor>
       <b-form-invalid-feedback>
         <span v-if="errors.has('content')">
-            โปรดกรอกปริมาณวัตถุดิบ
+            โปรดกรอกวิธีทำอาหาร
         </span>
       </b-form-invalid-feedback>
-       <!--[START Name input]-->
+
+      <!--[START Name input]-->
       <!-- <div class="form-group row" v-for="(item, a) in people" :key="`A-${a}`">
         <label for="api-method" class="col-sm-2 col-form-label"> วิธีทำอาหาร : {{a + 1}}<span class="text-danger">*</span></label>
         <div class="col-sm-9 mb-2">
@@ -90,6 +98,8 @@
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FoodService } from "@/services/FoodService";
+const foodService = new FoodService();
 export default {
   props: {
       selectModel:{ 
@@ -98,23 +108,24 @@ export default {
       // method:{ 
       //   required: true
       // },
-      files:{
-         required: true
-      },
       models: {
         type: Array,
         default: () => []
       },
+      submitting : {
+        required : true
+      }
     },
     data() {
       return {
+        files: '',
         people: [
           {
             name: ''
           },
         ],
-        typeFoods:'1',
-        items: [
+        typeFoods: '1',
+        options: [
           { text: 'อาหารประเภทเรียกน้ำย่อย', value: '1'},
           { text: 'ประเภทสลัด/ยำ', value: '2'},
           { text: 'อาหารประเภททอด', value: '3'},
@@ -163,6 +174,25 @@ export default {
       ChangeInt(i) {
         this.selected[i] = parseFloat(this.selected[i])
         this.models[i].quantity = this.selected[i]
+      },
+      addFiles(){
+        let formData = new FormData();
+        for( var i = 0; i < this.files.length; i++ ){
+            let file = this.files[i];
+            formData.append('myFile', file);
+          }
+        formData.append('menuID', '1' );
+        this.submitting.loading = false
+        foodService.fetchPostApiCMSUpdate(formData).then(()=> {
+          return this.submitting.loading = true
+        }).catch(err => {
+          alert(err)
+        })
+      },
+      onChacgTypeFood(a) {
+        var num = a;
+        var n = num.toString();
+        this.selectModel.categoryId = n
       },
       onEditorInput() {
         this.selectModel.method = this.editorData

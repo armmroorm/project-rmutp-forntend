@@ -1,39 +1,42 @@
 <template>
-  <div class="card">
-    <div class="card-header">
-      <div class="block-content block-content-full block-content-sm bg-body-light">
-          <a class="btn btn-secondary" @click="step--">
-            ย้อนกลับ
-          </a>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-12">
-            <div class="block">
-              <div class="block-content">
-                <div class="row">
-                  <component v-if="step === index + 1" v-for="(name, index) in componentName"
-                            :key="index"
-                            v-bind:is="name"
-                            ref="child"
-                            :model="model"
-                            :Img="Img" >
-                  </component>
-                </div>
-              </div>
-            </div>
+  <div>
+    <loading v-if="submitting.loading === false" />
+    <div class="card" v-if="submitting.loading === true">
+      <div class="card-header">
+        <div class="block-content block-content-full block-content-sm bg-body-light">
+            <a class="btn btn-secondary" @click="step--">
+              ย้อนกลับ
+            </a>
         </div>
       </div>
-    </div>
-    <div class="card-footer">
-      <div class="block-content block-content-full block-content-sm bg-body-light">
-        <button v-if="step === componentName.length" class="btn btn-primary" @click="FormSubmit()">
-          บันทึกข้อมูล
-        </button>
-        <button type="button" v-if="step !== componentName.length" class="btn btn-primary" @click="next()">
-          ต่อไป
-        </button>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="block">
+                <div class="block-content">
+                  <div class="row">
+                    <component v-if="step === index + 1" v-for="(name, index) in componentName"
+                              :key="index"
+                              v-bind:is="name"
+                              ref="child"
+                              :model="model"
+                              :submitting="submitting">
+                    </component>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="block-content block-content-full block-content-sm bg-body-light">
+          <button v-if="step === componentName.length" class="btn btn-primary" @click="FormSubmit()">
+            บันทึกข้อมูล
+          </button>
+          <button type="button" v-if="step !== componentName.length" class="btn btn-primary" @click="next()">
+            ต่อไป
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -54,9 +57,6 @@
     props: {
       model: {
         required: true
-      },
-      Img:{
-        required:true
       }
     },
     watch: {
@@ -68,7 +68,9 @@
     },
     data() {
       return {
-        submitting: false,
+        submitting : {
+          loading: true,
+        },
         step: 1,
         componentName: ['FormCms','FormSelectTable','FormDetail']
       }
@@ -89,17 +91,16 @@
         const ref = this.$refs.child[0]
         if (typeof ref.formValidate === 'function') {
           let result = await ref.formValidate()
-          if (result) {
+          if (result) { 
             console.log('func submit :', this.model)
             foodService.fetchPostApiCMS({email:this.model}).then(resp => {
-              console.log(resp);
+              this.model.menuId = resp.data.menuId
+              ref.RequestApiUpload()
             }).catch(err => {
                 alert(err)
               })
           }
         }
-        // console.log('func submit :', this.model)
-        // this.$router.push({path:'/dashboard'})
       },
       // disableNextStep() {
       //   const isChooseSourceType = this.componentName[this.step - 1] === 'ChooseSourceType'

@@ -7,11 +7,11 @@
         <b-col md="6" sm="8">
           <b-card no-body>
             <b-card-body class="p-4">
-              <b-form @submit.prevent="onUpload()">
+              <b-form>
                 <h1>Create Menu</h1>
                   <b-form-file v-model="files"  name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" placeholder="Choose a file or drop it here..." ></b-form-file>
                   <div class="m-3 mx-auto">Selected file: {{ files ? files.name : '' }}</div>
-                <b-button type="submit" variant="success" block>Update</b-button>
+                <b-button  @click="onUpload()" variant="success" block>Update</b-button>
               </b-form>
             </b-card-body>
           </b-card>
@@ -46,7 +46,7 @@ export default {
           let file = this.files[i];
           formData.append('myFile', file);
         }
-      boardService.fetchUpdateMenu(formData).then(()=> {
+      boardService.fetchPostApiUpdate(formData).then(()=> {
         return
       }).catch(err => {
         alert(err)

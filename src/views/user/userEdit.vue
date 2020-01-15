@@ -140,8 +140,8 @@ export default {
         ],
       titles: [
         {text: 'นาย', value: '1'},
-        {text: 'นาง', value: '2'},
-        {text: 'นางสาว', value: '3'},
+        {text: 'นางสาว', value: '2'},
+        {text: 'นาง', value: '3'},
       ]
     };
   },
@@ -213,7 +213,7 @@ export default {
         changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-            // location.reload();
+            location.reload();
           } else {
             alert(res.data.message)
           }

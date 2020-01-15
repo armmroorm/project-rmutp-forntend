@@ -32,4 +32,8 @@ export class BoardService extends BaseService {
     fetchUploadAvatar = (formData) => {
         return this.requester.post('/Profile/UploadAvatar',formData, mainAPIHeaderUpload())
     }
+    
+    fetchPostApiUpdate = (formData) => {
+        return this.requester.post('/CMS/Upload', formData, mainAPIHeaderUpload())
+    }
 }

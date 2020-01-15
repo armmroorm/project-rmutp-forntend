@@ -9,7 +9,8 @@ export const food = {
     }
   }, state: {
     food: Object,
-    data: []
+    data: [],
+    
   }, mutations: {
     addDetailFood: (state, addFood) => {
       state.food = addFood
