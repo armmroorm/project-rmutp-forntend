@@ -4,7 +4,6 @@
          :value="db"
          :key="index">
       <div class="row">
-        <label>Selected Database: {{db.name}}</label>
       </div>
       <div class="row">
         <div class="col-5">
@@ -28,9 +27,9 @@
             <div class="d-flex justify-content-center">
               <button type="button" class="btn btn-outline-primary" @click="remove(index)">&lt;</button>
             </div>
-            <div class="d-flex justify-content-center mt-2">
+            <!-- <div class="d-flex justify-content-center mt-2">
               <button type="button" class="btn btn-outline-primary" @click="removeAll()">reset</button>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-5">
@@ -81,6 +80,7 @@
       return {
         availableTable: [],
         selectedTable: [],
+        search: ''
       }
     },
     computed: { 
@@ -172,9 +172,9 @@
         }
         this.updateDropdownTable(index)
       },
-      removeAll() {
-        this.models.splice(0, this.models.length)
-      },
+      // removeAll() {
+      //   this.models.splice(0, this.models.length)
+      // },
       updateDropdownTable(index = 0) {
         if (this.$refs.availableDropdown[index].selectedIndex === -1) {
           if (this.filterAvaliableTable[index].length > 0) {

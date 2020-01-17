@@ -93,9 +93,10 @@
           let result = await ref.formValidate()
           if (result) { 
             console.log('func submit :', this.model)
-            foodService.fetchPostApiCMS({email:this.model}).then(resp => {
+            foodService.fetchPostApiCMS({model:this.model}).then(resp => {
               this.model.menuId = resp.data.menuId
               ref.RequestApiUpload()
+              this.$router.push('/cms/index')
             }).catch(err => {
                 alert(err)
               })

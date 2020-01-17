@@ -132,8 +132,8 @@ export default {
         ],
       titles: [
         {text: 'นาย', value: '1'},
-        {text: 'นาง', value: '2'},
-        {text: 'นางสาว', value: '3'},
+        {text: 'นางสาว', value: '2'},
+        {text: 'นาง', value: '3'},
       ]
     };
   },
