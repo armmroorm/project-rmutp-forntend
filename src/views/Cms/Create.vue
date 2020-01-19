@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated fadeIn">
     <div class="content">
       <api-form :model="model"  />
     </div>

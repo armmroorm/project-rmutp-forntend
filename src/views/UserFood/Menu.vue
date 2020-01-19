@@ -1,49 +1,51 @@
 <template>
-  <div class="animated fadeIn row">
-    <div v-for="(DetailMenu, index) in DetailMenu" :key="index" class="col-sm-4">
-      <a href="#"> <h2 style="line-height:1.2em;color: #000000;">{{DetailMenu.Menu}}</h2></a>
+ <div class="animated fadeIn row">
+    <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
+      <img src="img/avatars/1.jpg"  border-radius  height="40" class="mr-2 rounded-circle" alt="admin@bootstrapmaster.com" />
+      <span class="text-black"> <i class="fa fa-user" /> Name : User01</span>
+      <a href="#"> <h2 style="line-height:1.2em;color: #000000;">{{detailFood.menuName}}</h2></a>
+
         <b-card
           overlay
-          :img-src="DetailMenu.img"
-          :title="DetailMenu.Menu"
+          :title="detailFood.menuName"
           img-alt="Card Image"
           text-variant="white"
           style="max-width: 30rem;"
           align="center"
-          class="imgbg shadow-lg blockCard"
-          @click="showDetail()"
+          class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
             <b-card-text>Choose this Menu</b-card-text>
           </h3>
         </b-card>
-         <div>
-            <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
+        
+        <div  v-if="detailFood !== null">
+          <div>
+            <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="detailFood.point "></star-rating>
           </div>
+        </div>
+        <div v-if="detailFood == null">
+          <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
+        </div>
+
         <buttons />
     </div>
   </div>
 </template>
 
 <script>
-import buttons from '@/components/componentsFood/button'
+import { mapGetters } from 'vuex';
 import StarRating from 'vue-star-rating'
+import buttons from '@/components/componentsFood/button'
 export default {
-  name:'card',
+  name: 'Menu',
   data() {
     return {
       rating: 0
     }
   },
-  props: {
-    DetailMenu: {
-      required: true
-    },
-  },
-  methods:{
-    showDetail(){
-      this.$router.push('/details')
-    },
+  computed: {
+    ...mapGetters({ detailFood: 'food/detailFood' , urlAvatar: "user/urlAvatar"})
   },
   components:{
     buttons,
@@ -53,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .imgbg {
+.imgbg {
   border: none;
   width: 100%;
   height: 180px;
@@ -78,11 +80,11 @@ export default {
   opacity: 0;
   transition: all 0.6s ease-in-out;
 }
-.blockCard:hover .animate-text {
+.blockMenu:hover .animate-text {
   transform: translateX(0);
   opacity: 1;
 }
-.blockCard:hover {
+.blockMenu:hover {
   z-index: 100;
   -webkit-animation: scale 0.3s linear;
   -moz-animation: scale 0.3s linear;

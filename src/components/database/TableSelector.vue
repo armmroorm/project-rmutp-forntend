@@ -6,6 +6,7 @@
       <div class="row">
       </div>
       <div class="row">
+        <input type="text" id="search" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/>
         <div class="col-5">
           <div class="form-group">
             <span>โปรดเลือกวัตถุดิบอาหาร</span>
@@ -95,6 +96,7 @@
       },
       filterAvaliableTable() {
         let result = []
+        let text = this.search.trim()
         _.forEach(this.selectedDatabase, database => {
           let data = _.filter(database.ingredients, obj => {
             let index = this.models.findIndex(model => model.ingredientsName === obj.ingredientsName && model.database.id === database.id)

@@ -1,5 +1,5 @@
 <template>
-  <div class="app flex-row align-items-center">
+  <div class="app flex-row align-items-center animated fadeIn">
     <div class="container">
       <Loading v-if="loadingShow === false" />
       <b-row class="justify-content-center" v-if="loadingShow === true">

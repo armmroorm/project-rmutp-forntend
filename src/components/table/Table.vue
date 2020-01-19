@@ -17,7 +17,7 @@
 
       <!--[START Data rows]-->
       <td v-for="(v, i) in config" :key="i" :class="'text-' + v.align">
-
+        test
       </td>
       <!--[END Data rows]-->
 

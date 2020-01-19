@@ -181,7 +181,7 @@ export default {
             let file = this.files[i];
             formData.append('myFile', file);
           }
-        formData.append('menuID',  '1' );
+        formData.append('menuID', this.selectModel.menuId );
         this.submitting.loading = false
         foodService.fetchPostApiCMSUpdate(formData).then(()=> {
           return this.submitting.loading = true

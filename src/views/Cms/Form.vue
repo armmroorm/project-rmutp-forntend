@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated fadeIn">
     <loading v-if="submitting.loading === false" />
     <div class="card" v-if="submitting.loading === true">
       <div class="card-header">

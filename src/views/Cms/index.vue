@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated fadeIn">
     <loading v-if="LoadingSubmit === false" />
     <button class="bg-success" @click="CreateCMS">create</button>
     <!--[START Table]-->

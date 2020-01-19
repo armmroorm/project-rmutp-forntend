@@ -19,8 +19,10 @@ const Create = () => import('@/views/Cms/Create')
 const CreateCmstest =() => import('@/components/DetailCms/Create')
 const index = () => import('@/views/Cms/index')
 const Details = () => import('@/views/DetailFood/Details')
-const typeOfFood = () => import('@/components/componentsFood/typeOfFood')
+const typeOfFood = () => import('@/views/PageTypeFood/typeOfFood')
+const UserFood = () => import('@/views/UserFood/pageUserFood')
 const Menu = () => import('@/views/DetailFood/Menu')
+const MenuUserFood = () => import('@/views/UserFood/Menu')
 const router = new Router({
     mode: 'hash',
     base: process.env.BASE_URL,
@@ -66,9 +68,33 @@ const router = new Router({
                     component: Menu
                 },
                 {
+                    path: 'community',
+                    redirect : 'community/userfood',
+                    name: 'ชุมชนอาหาร1',
+                    meta: { requiresAuth: true },
+                    component: {
+                        render (c) { return c('router-view') }
+                      },
+                    children: [
+                        {
+                            path:'userfood',
+                            name: 'ชุมชนอาหารหลัก',
+                            meta: {requiresAuth: true},
+                            component: UserFood
+                        },
+                        {
+                            path:'menu',
+                            name: 'เมนูอาหารสมาชิก',
+                            meta: {requiresAuth: true},
+                            component: MenuUserFood
+                        },
+                    ]
+                },
+                {
                     path: 'cms',
                     redirect: '/cms/index',
                     name: 'สร้างเมนูอาหาร',
+                    meta: { requiresAuth: true },
                     component: {
                       render (c) { return c('router-view') }
                     },

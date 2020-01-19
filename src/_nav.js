@@ -20,6 +20,16 @@ export default {
       url: '/cms',
       icon: 'icon-note',
     },
+    {
+      name: 'ชุมชนอาหาร',
+      url: '/community',
+      icon: 'icon-home',
+    },
+    {
+      name: 'ค้นหาเมนูจากวัตถุดิบ',
+      url: '',
+      icon: 'icon-note',
+    },
     // {
     //   name: 'Buttons',
     //   url: '/buttons',

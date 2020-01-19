@@ -2,6 +2,7 @@
  <div class="animated fadeIn row">
     <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
         <a href="#"> <h2 style="line-height:1.2em;color: #000000;">{{detailFood.menuName}}</h2></a>
+
         <b-card
           overlay
           :title="detailFood.menuName"
@@ -15,7 +16,16 @@
             <b-card-text>Choose this Menu</b-card-text>
           </h3>
         </b-card>
-        <ratingReadOnly />
+        
+        <div  v-if="detailFood !== null">
+          <div>
+            <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="detailFood.point "></star-rating>
+          </div>
+        </div>
+        <div v-if="detailFood == null">
+          <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
+        </div>
+
         <buttons />
     </div>
   </div>
@@ -23,16 +33,21 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import StarRating from 'vue-star-rating'
 import buttons from '@/components/componentsFood/button'
-import ratingReadOnly from '@/components/componentsFood/ratingReadOnly'
 export default {
   name: 'Menu',
+  data() {
+    return {
+      rating: 0
+    }
+  },
   computed: {
     ...mapGetters({ detailFood: 'food/detailFood' })
   },
   components:{
     buttons,
-    ratingReadOnly
+    StarRating
   }
 }
 </script>
