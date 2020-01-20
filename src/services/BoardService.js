@@ -29,11 +29,11 @@ export class BoardService extends BaseService {
         return this.requester.post('/Profile/EditProfile', { Userdata, changePassword }, mainAPIHeaderOptions())
     }
 
-    fetchUpdateMenu = (formData) => {
-        return this.requester.post('/CMS/Upload',formData, mainAPIHeaderUpload())
-    }
-
     fetchUploadAvatar = (formData) => {
         return this.requester.post('/Profile/UploadAvatar',formData, mainAPIHeaderUpload())
+    }
+    
+    fetchPostApiUpdate = (formData) => {
+        return this.requester.post('/CMS/Upload', formData, mainAPIHeaderUpload())
     }
 }

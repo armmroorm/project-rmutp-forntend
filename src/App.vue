@@ -1,10 +1,12 @@
 <template>
-  <router-view></router-view>
+  <div class="animated fadeIn">
+      <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "app"
+  name: 'App'
 };
 </script>
 
@@ -28,4 +30,14 @@ $simple-line-font-path: "~simple-line-icons/fonts/";
 * {
   font-family: montserrat;
 }
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background: #666; 
+}
+
+body::-webkit-scrollbar-button {display:none}
 </style>

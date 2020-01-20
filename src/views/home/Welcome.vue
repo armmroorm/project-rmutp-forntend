@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container animated fadeIn">
     <div class="card cardposittion border-0">
       <!-- Meta Info Section -->
       <div class="col-md-12 d-md-flex align-items-md-center justify-content-md-center text-md-center">

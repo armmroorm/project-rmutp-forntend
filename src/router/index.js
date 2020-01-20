@@ -15,20 +15,28 @@ const Welcome = () => import('@/views/home/Welcome')
 const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
-const Create = () => import('@/components/DetailFood/Create')
+const Create = () => import('@/views/Cms/Create')
+const CreateCmstest =() => import('@/components/DetailCms/Create')
+const index = () => import('@/views/Cms/index')
+const Details = () => import('@/views/DetailFood/Details')
+const typeOfFood = () => import('@/views/PageTypeFood/typeOfFood')
+const UserFood = () => import('@/views/UserFood/pageUserFood')
+const Menu = () => import('@/views/DetailFood/Menu')
+const MenuUserFood = () => import('@/views/UserFood/Menu')
+const SearchMenu = () => import('@/views/Search/SearchMenu')
 const router = new Router({
-    mode: 'history',
+    mode: 'hash',
     base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
-            name: 'Home',
+            name: 'หน้าแรก',
             redirect: '/welcome',
             component: DefaultContainer,
             children: [
                 {
                     path: 'dashboard',
-                    name: 'Dashboard',
+                    name: 'แนะนำเมนูอาหาร',
                     meta: { requiresAuth: true },
                     component: Dashboard
                 },
@@ -38,15 +46,62 @@ const router = new Router({
                     component: Welcome
                 },
                 {
+                    path:'details',
+                    name: 'เมนูอาหาร',
+                    component: Details
+                },
+                {
                     path:'profile',
-                    name: 'Profile',
+                    name: 'โปรไฟล์',
                     meta: { requiresAuth: true },
                     component: EditProfile
                 },
                 {
+                    path:'typeoffood',
+                    name: 'ประเภทของอาหาร',
+                    meta: {requiresAuth: true},
+                    component: typeOfFood
+                },
+                {
+                    path:'menu',
+                    name: 'เมนู',
+                    meta: {requiresAuth: true},
+                    component: Menu
+                },
+                {
+                    path:'searchmenu',
+                    name: 'ค้นหาเมนู',
+                    meta: {requiresAuth: true},
+                    component: SearchMenu
+                },
+                {
+                    path: 'community',
+                    redirect : 'community/userfood',
+                    name: 'ชุมชนอาหาร1',
+                    meta: { requiresAuth: true },
+                    component: {
+                        render (c) { return c('router-view') }
+                      },
+                    children: [
+                        {
+                            path:'userfood',
+                            name: 'ชุมชนอาหารหลัก',
+                            meta: {requiresAuth: true},
+                            component: UserFood
+                        },
+                        {
+                            path:'menu',
+                            name: 'เมนูอาหารสมาชิก',
+                            meta: {requiresAuth: true},
+                            component: MenuUserFood
+                        },
+                    ]
+                },
+                {
                     path: 'cms',
-                    redirect: '/cms/create',
-                    name: 'Create',
+                    redirect: '/cms/index',
+                    name: 'สร้างเมนูอาหาร',
+                    meta: { requiresAuth: true },
                     component: {
                       render (c) { return c('router-view') }
                     },
@@ -55,9 +110,19 @@ const router = new Router({
                         path: 'create',
                         name: 'CMS',
                         component: Create
+                      },
+                      {
+                        path: 'index',
+                        name: 'TableCms',
+                        component: index
+                      },
+                      {
+                        path: 'CmsTest',
+                        name: 'CreateCmstest',
+                        component: CreateCmstest
                       }
                     ]
-                  }
+                },
             ]
         },
         {
