@@ -77,22 +77,6 @@
             โปรดกรอกวิธีทำอาหาร
         </span>
       </b-form-invalid-feedback>
-
-      <!--[START Name input]-->
-      <!-- <div class="form-group row" v-for="(item, a) in people" :key="`A-${a}`">
-        <label for="api-method" class="col-sm-2 col-form-label"> วิธีทำอาหาร : {{a + 1}}<span class="text-danger">*</span></label>
-        <div class="col-sm-9 mb-2">
-          <input  type="text"
-                  id="api-method"
-                  @change="addNameMedthod(a)"
-                  v-model="item.name"
-                  name="api-method"
-                  class="form-control"
-                  v-validate="'required'">
-        </div>
-      </div>
-        <button class="btn btn-success  " @click="addMethods()">เพิ่ม</button> -->
-    <!--[END Name input]-->
   </div>  
 </template>
 
@@ -119,11 +103,6 @@ export default {
     data() {
       return {
         files: '',
-        people: [
-          {
-            name: ''
-          },
-        ],
         typeFoods: '1',
         options: [
           { text: 'อาหารประเภทเรียกน้ำย่อย', value: '1'},
@@ -158,16 +137,6 @@ export default {
       }
     },
     methods:{
-      // addMethods(){
-      //   this.people.push({
-      //      name: ''
-      //     })
-      // },
-      // addNameMedthod(a){
-      //   this.method.push({
-      //       name: this.people[a].name
-      //     })
-      // },
       handleFileUpload(){
       this.files = this.$refs.files.files;
       },

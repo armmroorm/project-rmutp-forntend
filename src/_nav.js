@@ -27,7 +27,7 @@ export default {
     },
     {
       name: 'ค้นหาเมนูจากวัตถุดิบ',
-      url: '',
+      url: '/searchmenu',
       icon: 'icon-note',
     },
     // {

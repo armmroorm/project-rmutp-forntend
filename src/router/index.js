@@ -23,6 +23,7 @@ const typeOfFood = () => import('@/views/PageTypeFood/typeOfFood')
 const UserFood = () => import('@/views/UserFood/pageUserFood')
 const Menu = () => import('@/views/DetailFood/Menu')
 const MenuUserFood = () => import('@/views/UserFood/Menu')
+const SearchMenu = () => import('@/views/Search/SearchMenu')
 const router = new Router({
     mode: 'hash',
     base: process.env.BASE_URL,
@@ -66,6 +67,12 @@ const router = new Router({
                     name: 'เมนู',
                     meta: {requiresAuth: true},
                     component: Menu
+                },
+                {
+                    path:'searchmenu',
+                    name: 'ค้นหาเมนู',
+                    meta: {requiresAuth: true},
+                    component: SearchMenu
                 },
                 {
                     path: 'community',
