@@ -198,7 +198,6 @@ export default {
     handleFileUpload(){
       this.file = this.$refs.file.files;
       this.changAvatar = true
-      
     },
     update(){
        this.$v.$touch()

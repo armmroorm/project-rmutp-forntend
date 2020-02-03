@@ -44,7 +44,6 @@ export default {
     GetApiIngredients() { 
       foodService.fetchGetApiIngredients().then(resp => {
         if (resp.data.status === false) {
-          alert(resp.data.status === false)
           this.LoadingSubmit = true
         }
         else {

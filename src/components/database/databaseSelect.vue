@@ -15,10 +15,10 @@
     <div class="col-2">
       <div style="margin-top:55%">
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-primary" @click="add">&gt;</button>
+          <button type="button" class="btn btn-primary" @click="add">เพิ่ม</button>
         </div>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-primary" @click="remove">&lt;</button>
+          <button type="button" class="btn btn-danger" @click="remove">ลบ</button>
         </div>
       </div>
     </div>

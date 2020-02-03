@@ -77,7 +77,7 @@ const router = new Router({
                 {
                     path: 'community',
                     redirect : 'community/userfood',
-                    name: 'ชุมชนอาหาร1',
+                    name: 'ชุมชนอาหาร',
                     meta: { requiresAuth: true },
                     component: {
                         render (c) { return c('router-view') }

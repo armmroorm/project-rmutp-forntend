@@ -6,7 +6,8 @@
       <div class="row">
       </div>
       <div class="row">
-        <input type="text" id="search" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/>
+        <!-- <span class="text-danger"> กด Ctrl + F เพื่อค้นหาวัตถุดิบ </span> -->
+        <input type="text" id="search" @change="filterSearch()" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/>
         <div class="col-5">
           <div class="form-group">
             <span>โปรดเลือกวัตถุดิบอาหาร</span>
@@ -23,10 +24,10 @@
         <div class="col-2">
           <div style="margin-top:40%">
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-outline-primary" @click="add(index)">&gt;</button>
+              <button type="button" class="btn btn-primary" @click="add(index)">เพิ่ม</button>
             </div>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-outline-primary" @click="remove(index)">&lt;</button>
+              <button type="button" class="btn btn-danger" @click="remove(index)">ลบ</button>
             </div>
             <!-- <div class="d-flex justify-content-center mt-2">
               <button type="button" class="btn btn-outline-primary" @click="removeAll()">reset</button>
@@ -84,7 +85,7 @@
         search: ''
       }
     },
-    computed: { 
+    computed: {
       selectedDatabase() {
         return this.databases.filter(database => {
           let index = _.findIndex(this.selected, v => { return v.id === database.id })
@@ -96,7 +97,6 @@
       },
       filterAvaliableTable() {
         let result = []
-        let text = this.search.trim()
         _.forEach(this.selectedDatabase, database => {
           let data = _.filter(database.ingredients, obj => {
             let index = this.models.findIndex(model => model.ingredientsName === obj.ingredientsName && model.database.id === database.id)

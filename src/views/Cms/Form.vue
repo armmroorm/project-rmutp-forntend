@@ -20,6 +20,7 @@
                               v-bind:is="name"
                               ref="child"
                               :model="model"
+                              :changImg='changImg'
                               :submitting="submitting">
                     </component>
                   </div>
@@ -72,7 +73,10 @@
           loading: true,
         },
         step: 1,
-        componentName: ['FormCms','FormSelectTable','FormDetail']
+        componentName: ['FormCms','FormSelectTable','FormDetail'],
+        changImg : {
+          loading: false,
+        },
       }
     },
      methods: {
@@ -97,7 +101,9 @@
                                          methods:this.model.methods, name:this.model.name, point:this.model.point,userId:this.model.userId,
                                          adminId:this.model.adminId,categoryId:this.model.categoryId,databases:this.model.databases, }).then(resp => {
               this.model.menuId = resp.data.menuId
-              ref.RequestApiUpload()
+              if (this.changImg.loading === true) {
+                ref.RequestApiUpload()
+              }
               this.$router.push('/cms/index')
             }).catch(err => {
                 alert(err)
