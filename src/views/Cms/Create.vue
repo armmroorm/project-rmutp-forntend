@@ -25,7 +25,7 @@
           userId: '1',
           adminId: '0',
           categoryId:'',
-          databases: [],
+          databases: []
         }
       }
     }

@@ -5,9 +5,9 @@
          :key="index">
       <div class="row">
       </div>
+      <h5 class="text-danger"> กด F3 เพื่อค้นหาวัตถุดิบ </h5>
       <div class="row">
-        <!-- <span class="text-danger"> กด Ctrl + F เพื่อค้นหาวัตถุดิบ </span> -->
-        <input type="text" id="search" @change="filterSearch()" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/>
+        <!-- <input type="text" id="search" @change="filterSearch()" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/> -->
         <div class="col-5">
           <div class="form-group">
             <span>โปรดเลือกวัตถุดิบอาหาร</span>
@@ -153,7 +153,8 @@
             ingredientsCalories: this.availableTable[index].ingredientsCalories,
             ingredientsName: this.availableTable[index].ingredientsName,
             ingredientsType: this.availableTable[index].ingredientsType,
-            quantity: this.availableTable[index].quantity
+            quantity: this.availableTable[index].quantity,
+            type: this.availableTable[index].type
           })
         }
         if (this.filterAvaliableTable[index].length > 0) {

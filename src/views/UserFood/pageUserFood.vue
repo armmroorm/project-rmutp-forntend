@@ -22,7 +22,7 @@ export default {
     }),
     getBoard() {
       const boardID =  '1'
-      foodService.fetchGetCategoryMenu({categoryId : boardID}).then(resp => {
+      foodService.fetchGetCategoryMenu({categoryId : boardID, userId: '1', adminId:'0'}).then(resp => {
         this.Details = resp.data
         this.getDetailFood(this.Details)
         this.$router.push('/community/menu')

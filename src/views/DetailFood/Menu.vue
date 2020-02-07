@@ -10,6 +10,7 @@
           text-variant="white"
           style="max-width: 30rem;"
           align="center"
+          @click="getID(detailFood)"
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
@@ -25,14 +26,15 @@
         <div v-if="detailFood == null">
           <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
         </div>
-
         <buttons />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import { FoodService } from "@/services/FoodService";
+const foodService = new FoodService();
 import StarRating from 'vue-star-rating'
 import buttons from '@/components/componentsFood/button'
 export default {
@@ -48,6 +50,20 @@ export default {
   components:{
     buttons,
     StarRating
+  },
+  methods:{
+    ...mapActions({
+    setDetailFood: 'food/setDetailFood',
+    }),
+    getID(detailFood){
+      let foodID = detailFood.id
+      let categoryIdFood = detailFood.categoryId
+      foodService.fetchGetDetailFood({ id:foodID, categoryId:categoryIdFood }).then( resp => {
+        let DataFood = resp.data
+        this.setDetailFood(DataFood)
+        this.$router.push('/details')
+      })
+    }
   }
 }
 </script>

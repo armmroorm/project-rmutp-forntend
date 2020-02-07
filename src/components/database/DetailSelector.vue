@@ -32,12 +32,16 @@
                         v-validate="'required'"
                         :class="{ 'is-invalid': errors.has('input-quantity')}"
                         name="input-quantity"
-                        placeholder="โปรดกรอกปริมาณวัตถุดิบ"></b-form-input>
+                        placeholder="โปรดกรอกปริมาณวัตถุดิบ">
+          </b-form-input>
           <b-form-invalid-feedback>
             <span v-if="errors.has('input-quantity')">
                 โปรดกรอกปริมาณวัตถุดิบ
             </span>
           </b-form-invalid-feedback>
+        </b-col>
+        <b-col>
+          <label for="type-food" class="col-form-label"> {{select.type}}</label>
         </b-col>
       </b-row>
       
@@ -131,6 +135,7 @@ export default {
             'italic',
             'bulletedList',
             'numberedList',
+            'link',
             'undo',
             'redo',
             ]
