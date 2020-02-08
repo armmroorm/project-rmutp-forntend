@@ -85,10 +85,14 @@
 </template>
 
 <script>
+import { mapGetters  } from 'vuex'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FoodService } from "@/services/FoodService";
 const foodService = new FoodService();
 export default {
+  computed:{
+    ...mapGetters({userId:'user/userId',adminId:'user/adminId'})
+  },
   props: {
       selectModel:{ 
         required: true
@@ -127,7 +131,7 @@ export default {
         selected: [],
         nameMunu:'',
         editor: ClassicEditor,
-        editorData: '',
+        editorData: this.selectModel.methods,
         editorConfig: {
           toolbar: {
             items: [                                  
@@ -145,7 +149,16 @@ export default {
       }
     },
     mounted(){
-      
+      if (this.selectModel.menuName) {
+        this.nameMunu = this.selectModel.menuName
+        this.typeFoods = this.selectModel.categoryId
+        for (var i = 0; i < this.models.length; i++) {
+          this.selected[i] = this.models[i].quantity
+        }
+      if (this.editorData) {
+          this.onEditorInput();
+        }
+      }
     },
     methods:{
       removeFile( key ){
@@ -179,12 +192,13 @@ export default {
         this.selectModel.categoryId = n
       },
       onEditorInput() {
-        this.selectModel.methods = this.editorData
+          this.selectModel.methods = this.editorData
       },
-      
-      onNameMenuInput() { 
+      onNameMenuInput() {
          this.selectModel.menuName = this.nameMunu
          this.selectModel.categoryId = this.typeFoods
+         this.selectModel.userId = this.userId
+         this.selectModel.adminId = this.adminId
       },
       formValidate() {
         // valiadate this form parent components call this

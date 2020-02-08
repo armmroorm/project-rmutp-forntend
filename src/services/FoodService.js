@@ -2,7 +2,7 @@ import { mainAPIHeaderOptions, mainAPIHeaderUpload } from "../constant/config";
 import { BaseService } from "./BaseService";
 
 export class FoodService extends BaseService {  
-  fetchGetCategoryMenu = ({ categoryId,userId,adminId }) => {
+  fetchGetCategoryMenu = ({ categoryId, userId, adminId }) => {
     return this.requester.post('/GetCategoryMenu', { categoryId , userId, adminId }, mainAPIHeaderOptions())
   }
   fetchGetDetailFood = ({ id , categoryId }) => {

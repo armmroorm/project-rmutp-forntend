@@ -26,7 +26,7 @@
         <div v-if="detailFood == null">
           <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
         </div>
-        <buttons />
+        <buttons @click="getID(detailFood)" />
     </div>
   </div>
 </template>
