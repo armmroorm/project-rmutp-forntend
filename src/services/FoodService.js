@@ -8,6 +8,9 @@ export class FoodService extends BaseService {
   fetchGetDetailFood = ({ id , categoryId }) => {
     return this.requester.post('/GetDetailFood', { id, categoryId }, mainAPIHeaderOptions())
   }
+  fetchGetDetailUpdateMenu = ({ menuId  }) => {
+    return this.requester.post('/CMS/GetDetailUpdateMenu', { menuId }, mainAPIHeaderOptions())
+  }
   fetchSetPoint = ({ id , userId, point }) => {
     return this.requester.post('/GetPointMenu', { id, userId, point }, mainAPIHeaderOptions())
   }
@@ -16,6 +19,9 @@ export class FoodService extends BaseService {
   }
   fetchPostApiCMS = ({id,menuId,ingredients,menuName,methods,name,point,userId,adminId,categoryId,databases}) => {
     return this.requester.post('/CMS/CreateMenu',{id,menuId,ingredients,menuName,methods,name,point,userId,adminId,categoryId,databases}, mainAPIHeaderOptions())
+  }
+  fetchManegeMenu = ({userId,adminId}) => {
+    return this.requester.post('/CMS/ManageMenu',{userId,adminId}, mainAPIHeaderOptions())
   }
   fetchPostApiCMSUpdate = (formData) => {
     return this.requester.post('/CMS/Upload', formData, mainAPIHeaderUpload())

@@ -1,42 +1,44 @@
 <template>
 
-  <!--[START Table]-->
-  <table class="table-vcenter table-bordered table-responsive" width="100%">
-
-    <!--[START Header columns]-->
-    <thead>
-    <tr class="bg-primary">
-      <th v-for="(v, i) in config" :key="i" :width="v.width">{{v.label}}</th>
-    </tr>
-    </thead>
-    <!--[END Header columns]-->
-
-    <!--[START Body table]-->
-    <tbody>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-
-      <!--[START Data rows]-->
-      <td v-for="(v, i) in config" :key="i" :class="'text-' + v.align">
-        test
-      </td>
-      <!--[END Data rows]-->
-
-
+      <th scope="col">ภาพประกอบ</th>
+      <th scope="col">ID</th>
+      <th scope="col">ชื่อเมนูอาหาร</th>
+      <th scope="col">Action</th>
     </tr>
-    </tbody>
-    <!--[END Body table]-->
-
-  </table>
-  <!--[END Table]-->
+  </thead>
+  <tbody v-for="(trV, index) in data" :key="index">
+    <tr class="text-center table-secondary">
+      <td><img v-if="trV.imgPath !== null" :src="trV.imgPath[0].href" class="manegeImg" alt="..."><img v-else src="img/plate2.png" class="manegeImg" alt="..."></td>
+      <th scope="row">{{trV.id}}</th>
+      <td>{{trV.menuName}}</td>
+      <td>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            @click="getBoard(trV)"
+            style="width: 150px; font-size: .9em;">
+            <i class="fa fa-edit"></i> แก้ไข
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 </template>
-
 <script>
-
+import { mapActions} from 'vuex';
+import { FoodService } from "@/services/FoodService";
+const foodService = new FoodService();
   export default {
     props: {
       config: {
         type: Array
+      },
+      data:{
+        required : true
       }
     },
     data() {
@@ -45,10 +47,24 @@
         stateMsg: ''
       }
     },
+    methods: {
+    ...mapActions({getModelUpdate : 'food/getModelUpdate'}),
+    getBoard(trV){
+      console.log(trV.id);
+      foodService.fetchGetDetailUpdateMenu({menuId:trV.id}).then(resp => {
+        this.getModelUpdate(resp.data)
+        console.log(resp);
+        this.$router.push('/cms/CmsUpdate')
+      })
+    }
+  }
   }
 </script>
 
 <style lang="css" scoped>
+  .manegeImg{
+    width: 120px;
+  }
   thead > tr > th {
     color: white;
     text-align: center;

@@ -1,23 +1,24 @@
 <template>
   <div class="animated fadeIn">
     <loading v-if="LoadingSubmit === false" />
-    <button class="bg-success" @click="CreateCMS">create</button>
+    <button type="button" class="btn btn-success" @click="CreateCMS">สร้างเมนูอาหาร</button>
     <!--[START Table]-->
       <div class="block-rounded block-bordered table">
-        <Table :config="tableConfig" />
+        <Table :config="tableConfig" :data="Data" />
       </div>
       <!--[END Table]-->
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters} from 'vuex';
 import Table from '@/components/table/Table'
 import { FoodService } from "@/services/FoodService";
 const foodService = new FoodService();
 export default {
   data() {
     return {
+      Data: Object,
       LoadingSubmit : false,
       tableConfig: [
           { label: 'ID', field: 'id', width: '7.5%', align: 'center' },
@@ -35,13 +36,22 @@ export default {
     },
   mounted(){
     this.GetApiIngredients();
+    this.GetManegeMenu();
+  },
+  computed:{
+    ...mapGetters({userId:'user/userId',adminId:'user/adminId'})
   },
   methods: {
     ...mapActions({getIngredients : 'food/getIngredients'}),
     CreateCMS(){
       this.$router.push('/cms/create')
     },
-    GetApiIngredients() { 
+    GetManegeMenu(){
+      foodService.fetchManegeMenu({userId:this.userId,adminId:this.adminId}).then(resp => {
+        this.Data = resp.data
+      })
+    },
+    GetApiIngredients() {
       foodService.fetchGetApiIngredients().then(resp => {
         if (resp.data.status === false) {
           this.LoadingSubmit = true

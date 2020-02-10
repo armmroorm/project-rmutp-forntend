@@ -27,8 +27,14 @@ export default {
   methods: {
     setRating: function(rating){
       this.rating = rating;
-      foodService.fetchSetPoint({ id:this.detailFoods.menuId , userId:this.detailFoods.userId, point: this.rating }).then(resp => {
-      })
+      var r = confirm("คุณต้องการให้คะแนน " + this.rating + " คะแนน สำหรับเมนูอาหารนี่ใช่หรือไม่");
+      if (r == true) {
+        foodService.fetchSetPoint({ id:this.detailFoods.menuId , userId:this.detailFoods.userId, point: this.rating }).then(() => {
+          alert('ขอบคุณสำหรับการให้คะแนนรีวิวเมนูอาหาร')
+        })
+      } else {
+        return;
+      }
     }
   },
   components: {

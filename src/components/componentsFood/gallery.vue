@@ -11,7 +11,9 @@ export default {
     Gallery
   },
   mounted(){
-    this.add()
+    if (this.ImgFood) {
+      this.add();
+    }
   },
   props:{
     ImgFood : {
@@ -26,17 +28,21 @@ export default {
   data() {
     return {
       images: [
-            // {
-            // href:'http://localhost:9000/img/imgfood/menuid1/1-1.png'
-            // },  
-            // {
-            // href:'http://localhost:9000/img/imgfood/menuid1/1-0.png'
-            // },  
-            // {id: "3", menuId: "3", href: "http://localhost:9000/img/imgfood/menuid3/3-0.png"},
-            // {id: "4", menuId: "3", href: "http://localhost:9000/img/imgfood/menuid3/3-1.png"},
-            // {id: "5", menuId: "3", href: "http://localhost:9000/img/imgfood/menuid3/3-2.png"},
-            // {id: "6", menuId: "3", href: "http://localhost:9000/img/imgfood/menuid3/3-3.png"},
-            // {id: "7", menuId: "3", href: "http://localhost:9000/img/imgfood/menuid3/3-4.png"}
+            {
+            href:'img/food.jpg'
+            },  
+            {
+            href:'img/food.jpg'
+            },  
+            {
+            href:'img/food.jpg'
+            },  
+            {
+            href:'img/food.jpg'
+            },  
+            {
+            href:'img/food.jpg'
+            }
      ],
     };
   },

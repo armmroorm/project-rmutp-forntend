@@ -2,15 +2,31 @@
  <div class="animated fadeIn row">
     <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
         <a @click="getID(detailFood)"> <h2 style="line-height:1.2em;color: #000000;cursor: pointer;">{{detailFood.menuName}}</h2></a>
-        <b-card
+         <b-card
+          v-if="detailFood.imgPath !== null"
           overlay
           :title="detailFood.menuName"
           img-alt="Card Image"
           :img-src="detailFood.imgPath[0].href"
           text-variant="white"
           style="max-width: 30rem;"
-          align="center"
           @click="getID(detailFood)"
+          align="center"
+          class="imgbg shadow-lg blockMenu"
+        >
+          <h3 class="animate-text text-animate">
+            <b-card-text>Choose this Menu</b-card-text>
+          </h3>
+        </b-card>
+        <b-card
+          v-else
+          overlay
+          :title="detailFood.menuName"
+          img-alt="Card Image"
+          text-variant="white"
+          style="max-width: 30rem;"
+          @click="getID(detailFood)"
+          align="center"
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
