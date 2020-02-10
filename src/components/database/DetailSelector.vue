@@ -23,6 +23,7 @@
     <!--[END Name input]-->
 
     <!--[START quantity input]-->
+      <h5 class="mt-2">ปริมาณวัตถุดิบ</h5>
       <b-row class="my-1"  v-for="(select,i) in models" :key="i">
         <b-col sm="2">
           <label for="type-number" class="col-form-label"> {{select.ingredientsName}} :<span class="text-danger"> * </span></label>
@@ -32,27 +33,31 @@
                         v-validate="'required'"
                         :class="{ 'is-invalid': errors.has('input-quantity')}"
                         name="input-quantity"
-                        placeholder="โปรดกรอกปริมาณวัตถุดิบ"></b-form-input>
+                        placeholder="โปรดกรอกปริมาณวัตถุดิบ">
+          </b-form-input>
           <b-form-invalid-feedback>
             <span v-if="errors.has('input-quantity')">
                 โปรดกรอกปริมาณวัตถุดิบ
             </span>
           </b-form-invalid-feedback>
         </b-col>
+        <b-col>
+          <label for="type-food" class="col-form-label"> {{select.type}}</label>
+        </b-col>
       </b-row>
       
-      <h5>เลือกรูปภาพประกอบอาหาร</h5>
+      <h5 class="mt-2">เลือกรูปภาพประกอบอาหาร</h5>
       <b-form @submit.prevent="addFiles()">
-        <b-form-file  class="mb-3"  v-model="files" name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()"
-                      v-validate="'required'" :state="Boolean(files)" accept=".jpg, .png"
-                      :class="{ 'is-invalid': errors.has('myFile')}">
-        </b-form-file>
-        <b-form-invalid-feedback>
+        <b-form-file  class="mb-3"  v-model="files" name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" accept=".jpg, .png">                
+      </b-form-file>
+        <div v-for="(img,key) in files" :key="key">
+          <span><b>รูปภาพที่ {{key + 1}} : {{img.name}}</b></span> <span class="remove-file" @click="removeFile(key)"> ลบ </span>
+        </div>
+        <!-- <b-form-invalid-feedback>
             <span v-if="errors.has('myFile')">
                 โปรดเลือกรูปภาพประกอบอาหาร
             </span>
-          </b-form-invalid-feedback>
-      <!-- <b-button  @click="addFiles()" variant="success" block>Update</b-button> -->
+          </b-form-invalid-feedback> -->
       </b-form>
 
       <b-form-group label="ประเภทอาหาร" >
@@ -81,10 +86,14 @@
 </template>
 
 <script>
+import { mapGetters  } from 'vuex'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FoodService } from "@/services/FoodService";
 const foodService = new FoodService();
 export default {
+  computed:{
+    ...mapGetters({userId:'user/userId',adminId:'user/adminId'})
+  },
   props: {
       selectModel:{ 
         required: true
@@ -97,6 +106,9 @@ export default {
         default: () => []
       },
       submitting : {
+        required : true
+      },
+      changImg : {
         required : true
       }
     },
@@ -120,7 +132,7 @@ export default {
         selected: [],
         nameMunu:'',
         editor: ClassicEditor,
-        editorData: '',
+        editorData: this.selectModel.methods,
         editorConfig: {
           toolbar: {
             items: [                                  
@@ -128,6 +140,7 @@ export default {
             'italic',
             'bulletedList',
             'numberedList',
+            'link',
             'undo',
             'redo',
             ]
@@ -136,9 +149,25 @@ export default {
         }
       }
     },
+    mounted(){
+      if (this.selectModel.menuName) {
+        this.nameMunu = this.selectModel.menuName
+        this.typeFoods = this.selectModel.categoryId
+        for (var i = 0; i < this.models.length; i++) {
+          this.selected[i] = this.models[i].quantity
+        }
+      if (this.editorData) {
+          this.onEditorInput();
+        }
+      }
+    },
     methods:{
+      removeFile( key ){
+        this.files.splice( key, 1 );
+      },
       handleFileUpload(){
       this.files = this.$refs.files.files;
+      this.changImg.loading = true
       },
       ChangeInt(i) {
         this.selected[i] = parseFloat(this.selected[i])
@@ -164,12 +193,13 @@ export default {
         this.selectModel.categoryId = n
       },
       onEditorInput() {
-        this.selectModel.methods = this.editorData
+          this.selectModel.methods = this.editorData
       },
-      
-      onNameMenuInput() { 
+      onNameMenuInput() {
          this.selectModel.menuName = this.nameMunu
          this.selectModel.categoryId = this.typeFoods
+         this.selectModel.userId = this.userId
+         this.selectModel.adminId = this.adminId
       },
       formValidate() {
         // valiadate this form parent components call this
@@ -183,4 +213,9 @@ export default {
   .ck-editor__editable {
     min-height: 300px;
    }
+   span.remove-file{
+    color: red;
+    cursor: pointer;
+    float: right;
+  }
 </style>

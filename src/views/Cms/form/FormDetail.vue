@@ -3,7 +3,8 @@
     <detail-selector
       :models='model.ingredients'
       :selectModel='model'
-       :submitting="submitting"
+      :submitting="submitting"
+      :changImg="changImg"
       ref="ds"
     />
   </div>
@@ -25,6 +26,9 @@
         required: true
       },
       submitting : {
+        required : true
+      },
+      changImg : {
         required : true
       }
     },

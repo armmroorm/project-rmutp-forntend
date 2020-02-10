@@ -3,11 +3,12 @@
     <loading v-if="submitting.loading === false" />
     <div class="card" v-if="submitting.loading === true">
       <div class="card-header">
-        <div class="block-content block-content-full block-content-sm bg-body-light">
+        <h5>เลือกวัตถุดิบ</h5>
+        <!-- <div class="block-content block-content-full block-content-sm bg-body-light">
             <a class="btn btn-secondary" @click="step--">
               ย้อนกลับ
             </a>
-        </div>
+        </div> -->
       </div>
       <div class="card-body">
         <div class="row">
@@ -20,6 +21,7 @@
                               v-bind:is="name"
                               ref="child"
                               :model="model"
+                              :changImg='changImg'
                               :submitting="submitting">
                     </component>
                   </div>
@@ -30,10 +32,13 @@
       </div>
       <div class="card-footer">
         <div class="block-content block-content-full block-content-sm bg-body-light">
-          <button v-if="step === componentName.length" class="btn btn-primary" @click="FormSubmit()">
+          <button v-if="step === componentName.length" class="btn btn-success float-right" @click="FormSubmit()">
             บันทึกข้อมูล
           </button>
-          <button type="button" v-if="step !== componentName.length" class="btn btn-primary" @click="next()">
+         <button type="button" class="btn btn-primary float-left" @click="step--">
+            ย้อนกลับ
+          </button>
+          <button type="button" v-if="step !== componentName.length" class="btn btn-primary float-right" @click="next()">
             ต่อไป
           </button>
         </div>
@@ -72,7 +77,10 @@
           loading: true,
         },
         step: 1,
-        componentName: ['FormCms','FormSelectTable','FormDetail']
+        componentName: ['FormCms','FormSelectTable','FormDetail'],
+        changImg : {
+          loading: false,
+        },
       }
     },
      methods: {
@@ -97,7 +105,9 @@
                                          methods:this.model.methods, name:this.model.name, point:this.model.point,userId:this.model.userId,
                                          adminId:this.model.adminId,categoryId:this.model.categoryId,databases:this.model.databases, }).then(resp => {
               this.model.menuId = resp.data.menuId
-              ref.RequestApiUpload()
+              if (this.changImg.loading === true) {
+                ref.RequestApiUpload()
+              }
               this.$router.push('/cms/index')
             }).catch(err => {
                 alert(err)

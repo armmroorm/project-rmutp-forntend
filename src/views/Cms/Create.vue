@@ -22,10 +22,10 @@
           methods:'',
           name: '',
           point: 0,
-          userId: '1',
-          adminId: '0',
+          userId: '',
+          adminId: '',
           categoryId:'',
-          databases: [],
+          databases: []
         }
       }
     }

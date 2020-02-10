@@ -56,7 +56,7 @@
             <b-card no-body class="text-white bgCard py-5 d-md-down-none" style="width:44%">
               <b-card-body class="text-center">
                 <div>
-                  <h2>Sign up</h2>
+                  <h2>สมัครสมาชิก</h2>
                   <p>ยินดีต้อนรับสู่บ้านอาหาร ถ้าคุณสนใจในการทำอาหารมาสมัครสมาชิกเพื่อเข้าใช้งานเว็บไซต์เราสิ เว็บไซต์ฟรี ไม่มีค่าใช้จ่าย ไม่มีค่าบริการเสริมใดๆ เว็บไซต์ของเราจะพาทุกท่านเข้าสู่ชุมชมของคนรักทำอาหาร</p>
                   <b-button class="active mt-3 bgbutton" @click="pageRegister">ลงชื่อสมัคร</b-button>
                   

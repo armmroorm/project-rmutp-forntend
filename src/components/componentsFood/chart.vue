@@ -6,9 +6,22 @@
 
 <script>
 export default {
+  mounted(){
+    this.add()
+  },
+  props:{
+    menuCalories : {
+      required : true
+    }
+  },
+  methods:{
+    add(){
+      this.series.push(this.menuCalories)
+    }
+  },
   data() {
     return {
-      series: [210],
+      series: [],
       stroke: {
         lineCap: 'round'
       },

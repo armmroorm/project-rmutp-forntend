@@ -12,7 +12,7 @@
 <script>
 import { FoodService } from "@/services/FoodService";
 const foodService = new FoodService();
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name:'type',
   data() {
@@ -33,13 +33,14 @@ export default {
       Details: Object
     }
   },
+  computed:{
+    ...mapGetters({userId:'user/userId',adminId:'user/adminId'})
+  },
   methods: {
-    ...mapActions({
-    getDetailFood: 'food/getDetailFood',
-    }),
+    ...mapActions({ getDetailFood: 'food/getDetailFood' }),
     getBoard(items,index) {
       const boardID =  items[index].title;
-      foodService.fetchGetCategoryMenu({categoryId : boardID}).then(resp => {
+      foodService.fetchGetCategoryMenu({categoryId : boardID, userId: this.userId, adminId:'1' }).then(resp => {
         this.Details = resp.data
         this.getDetailFood(this.Details)
         this.$router.push('/menu')
@@ -48,7 +49,7 @@ export default {
   }
 }
 </script>
-
+  
 <style lang="scss">
 .typeBlock:hover .animate-text {
   transform: translateX(0);
