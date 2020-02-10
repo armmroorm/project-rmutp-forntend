@@ -40,7 +40,7 @@ export default {
     ...mapActions({ getDetailFood: 'food/getDetailFood' }),
     getBoard(items,index) {
       const boardID =  items[index].title;
-      foodService.fetchGetCategoryMenu({categoryId : boardID, userId: '0', adminId:'1' }).then(resp => {
+      foodService.fetchGetCategoryMenu({categoryId : boardID, userId: this.userId, adminId:'1' }).then(resp => {
         this.Details = resp.data
         this.getDetailFood(this.Details)
         this.$router.push('/menu')

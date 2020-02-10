@@ -1,9 +1,34 @@
 <template>
   <div class="animated fadeIn">
-    <button class="fill buttonRead">Read More</button>
+    <button @click="getID(model)" class="fill buttonRead">Read More</button>
   </div>
 </template>
-
+<script>
+import {mapActions } from 'vuex';
+import { FoodService } from "@/services/FoodService";
+const foodService = new FoodService();
+export default {
+  props:{
+    model : {
+        required : true
+      }
+  },
+   methods:{
+    ...mapActions({
+    setDetailFood: 'food/setDetailFood',
+    }),
+    getID(model){
+      let foodID = model.id
+      let categoryIdFood = model.categoryId
+      foodService.fetchGetDetailFood({ id:foodID, categoryId:categoryIdFood }).then( resp => {
+        let DataFood = resp.data
+        this.setDetailFood(DataFood)
+        this.$router.push('/details')
+      })
+    }
+  },
+}
+</script>
 <style lang='scss'>
 
 // Animate the size, inside

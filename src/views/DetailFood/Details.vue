@@ -2,6 +2,8 @@
   <div class="animated fadeIn">
       <Gallery :ImgFood="this.detailFoods.imgPath" />
     <b-container class="bv-example-row">
+        <span class="text-danger font-2xl mr-5">*ปริมาณบริโภคต่อ : จาน</span>
+        <img src="img/plate1.png" alt="plate">
       <h2>{{Menu}}</h2>
       <b-row>
         <b-col> <p>{{title}}</p>  </b-col>
@@ -17,7 +19,7 @@
     </ul>
     </b-container>
     <b-container class="bv-example-row">
-      <p>วิธีทำ</p>
+      <p>วิธีทำ{{Menu}}</p>
       <div id="app">
         <!-- <show-detail-food /> -->
         <component :is="{template:templateString}"/>

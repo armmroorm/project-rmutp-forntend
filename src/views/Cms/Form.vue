@@ -3,11 +3,12 @@
     <loading v-if="submitting.loading === false" />
     <div class="card" v-if="submitting.loading === true">
       <div class="card-header">
-        <div class="block-content block-content-full block-content-sm bg-body-light">
+        <h5>เลือกวัตถุดิบ</h5>
+        <!-- <div class="block-content block-content-full block-content-sm bg-body-light">
             <a class="btn btn-secondary" @click="step--">
               ย้อนกลับ
             </a>
-        </div>
+        </div> -->
       </div>
       <div class="card-body">
         <div class="row">
@@ -31,10 +32,13 @@
       </div>
       <div class="card-footer">
         <div class="block-content block-content-full block-content-sm bg-body-light">
-          <button v-if="step === componentName.length" class="btn btn-primary" @click="FormSubmit()">
+          <button v-if="step === componentName.length" class="btn btn-success float-right" @click="FormSubmit()">
             บันทึกข้อมูล
           </button>
-          <button type="button" v-if="step !== componentName.length" class="btn btn-primary" @click="next()">
+         <button type="button" class="btn btn-primary float-left" @click="step--">
+            ย้อนกลับ
+          </button>
+          <button type="button" v-if="step !== componentName.length" class="btn btn-primary float-right" @click="next()">
             ต่อไป
           </button>
         </div>

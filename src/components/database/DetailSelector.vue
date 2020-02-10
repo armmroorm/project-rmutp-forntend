@@ -23,6 +23,7 @@
     <!--[END Name input]-->
 
     <!--[START quantity input]-->
+      <h5 class="mt-2">ปริมาณวัตถุดิบ</h5>
       <b-row class="my-1"  v-for="(select,i) in models" :key="i">
         <b-col sm="2">
           <label for="type-number" class="col-form-label"> {{select.ingredientsName}} :<span class="text-danger"> * </span></label>

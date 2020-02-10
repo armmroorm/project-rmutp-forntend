@@ -1,12 +1,12 @@
 <template>
  <div class="animated fadeIn row">
     <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
-        <a href="#"> <h2 style="line-height:1.2em;color: #000000;">{{detailFood.menuName}}</h2></a>
-
+        <a @click="getID(detailFood)"> <h2 style="line-height:1.2em;color: #000000;cursor: pointer;">{{detailFood.menuName}}</h2></a>
         <b-card
           overlay
           :title="detailFood.menuName"
           img-alt="Card Image"
+          :img-src="detailFood.imgPath[0].href"
           text-variant="white"
           style="max-width: 30rem;"
           align="center"
@@ -26,7 +26,7 @@
         <div v-if="detailFood == null">
           <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
         </div>
-        <buttons @click="getID(detailFood)" />
+        <buttons :model="detailFood" />
     </div>
   </div>
 </template>
