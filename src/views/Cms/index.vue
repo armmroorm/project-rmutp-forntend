@@ -37,14 +37,22 @@ export default {
   mounted(){
     this.GetApiIngredients();
     this.GetManegeMenu();
+    this.filterData();
   },
   computed:{
-    ...mapGetters({userId:'user/userId',adminId:'user/adminId'})
+    ...mapGetters({userId:'user/userId',adminId:'user/adminId',getData:'food/getData'})
   },
   methods: {
-    ...mapActions({getIngredients : 'food/getIngredients'}),
+    ...mapActions({getIngredients : 'food/getIngredients', GetDataingredients:'food/GetDataingredients'}),
     CreateCMS(){
       this.$router.push('/cms/create')
+    },
+    filterData() {
+        let result = []
+        for (let i = 0; i < this.getData[0].ingredients.length; i++) {
+          result.push(this.getData[0].ingredients[i].ingredientsName)
+        }
+        this.GetDataingredients(result)
     },
     GetManegeMenu(){
       foodService.fetchManegeMenu({userId:this.userId,adminId:this.adminId}).then(resp => {

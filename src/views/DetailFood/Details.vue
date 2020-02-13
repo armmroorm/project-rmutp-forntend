@@ -8,7 +8,10 @@
       <b-row>
         <b-col> <p>{{title}}</p>  </b-col>
       </b-row>
-      <Chart :menuCalories="detailFoods.menuCalories" class=" float-right" />
+      <div class="float-right">
+        <span class="text-danger font-2xl ml-5">*แคลลอรี่โดยประมาณ</span>
+        <Chart :menuCalories="detailFoods.menuCalories" />
+      </div>
     <ul id="example-1">
         <li v-for="(item,index) in items" :key="index">
           <b-row>

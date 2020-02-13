@@ -12,7 +12,7 @@ const foodService = new FoodService();
 
 export default {
    computed:{
-    ...mapGetters({ detailFoods:'food/detailFoods'})
+    ...mapGetters({ detailFoods:'food/detailFoods',userId:'user/userId',adminId:'user/adminId'})
   },
   props:{
     model : {
@@ -29,7 +29,7 @@ export default {
       this.rating = rating;
       var r = confirm("คุณต้องการให้คะแนน " + this.rating + " คะแนน สำหรับเมนูอาหารนี่ใช่หรือไม่");
       if (r == true) {
-        foodService.fetchSetPoint({ id:this.detailFoods.menuId , userId:this.detailFoods.userId, point: this.rating }).then(() => {
+        foodService.fetchSetPoint({ id:this.detailFoods.menuId , userId:this.userId, point: this.rating }).then(() => {
           alert('ขอบคุณสำหรับการให้คะแนนรีวิวเมนูอาหาร')
         })
       } else {

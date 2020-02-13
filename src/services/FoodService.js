@@ -20,6 +20,9 @@ export class FoodService extends BaseService {
   fetchPostApiCMS = ({id,menuId,ingredients,menuName,methods,name,point,userId,adminId,categoryId,databases}) => {
     return this.requester.post('/CMS/CreateMenu',{id,menuId,ingredients,menuName,methods,name,point,userId,adminId,categoryId,databases}, mainAPIHeaderOptions())
   }
+  fetchSearch = ({ingredients}) => {
+    return this.requester.post('/Search',{ingredients}, mainAPIHeaderOptions())
+  }
   fetchManegeMenu = ({userId,adminId}) => {
     return this.requester.post('/CMS/ManageMenu',{userId,adminId}, mainAPIHeaderOptions())
   }

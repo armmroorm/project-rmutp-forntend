@@ -12,16 +12,23 @@ export const food = {
     },
     getModelUpdate: ({ commit }, DataUpdate) => {
       commit('addModelUpdate', DataUpdate)
+    },
+    GetDataingredients: ({ commit }, Dataingredients) => {
+      commit('addDataingredients', Dataingredients)
     }
   }, state: {
     food: Object,
     detail: Object,
     data: [],
-    dataUpdate: null
+    dataUpdate: null,
+    dataAuto: Array
     
   }, mutations: {
     addDetailFood: (state, addFood) => {
       state.food = addFood
+    },
+    addDataingredients: (state, Dataingredients) => {
+      state.dataAuto = Dataingredients
     },
     setDetailFoods: (state, addFoods) => {
       state.detail = addFoods
@@ -36,6 +43,7 @@ export const food = {
     detailFood: state => state.food,
     detailFoods: state => state.detail,
     getData: state => state.data,
-    getDataUpdate : state => state.dataUpdate
+    getDataUpdate : state => state.dataUpdate,
+    getDataingredient : state => state.dataAuto
   }
 }

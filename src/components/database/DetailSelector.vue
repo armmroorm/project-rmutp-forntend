@@ -125,9 +125,9 @@ export default {
           { text: 'อาหารจานด่วน/เดียว', value: '6'},
           { text: 'ซุป', value: '7'},
           { text: 'อาหารประเภทแกง',value: '8'},
-          { text: 'ของหวาน', value: '9'},
-          { text: 'เครื่องดื่ม', value: '10'},
-          { text: 'ซอส/เครื่องจิ้ม', value: '11'}
+          // { text: 'ของหวาน', value: '9'},
+          // { text: 'เครื่องดื่ม', value: '10'},
+          // { text: 'ซอส/เครื่องจิ้ม', value: '11'}
         ],
         selected: [],
         nameMunu:'',

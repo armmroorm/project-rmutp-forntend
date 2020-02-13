@@ -2,7 +2,7 @@
   <div class="app">
     <AppHeader class="bg-header border-0" fixed>
       <SidebarToggler class="d-lg-none" display="md" mobile />
-      <b-link class="navbar-brand" to="#">
+      <b-link class="navbar-brand" to="/dashboard">
         <img
           class="navbar-brand-full"
           src="img/logoB.png"

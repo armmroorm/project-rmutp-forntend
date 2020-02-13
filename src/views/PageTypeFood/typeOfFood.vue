@@ -26,9 +26,9 @@ export default {
       { message: 'อาหารจานด่วน/เดียว', title: '6',img: 'img/typeFood/onedishmeal.png'},
       { message: 'ซุป', title: '7',img: 'img/typeFood/soup.png'},
       { message: 'อาหารประเภทแกง', title: '8',img: 'img/typeFood/Curry.png'},
-      { message: 'ของหวาน', title: '9',img: 'img/typeFood/desserts.png'},
-      { message: 'เครื่องดื่ม', title: '10',img: 'img/typeFood/beverage.png'},
-      { message: 'ซอส/เครื่องจิ้ม', title: '11',img: 'img/typeFood/Sauce.png'}
+      // { message: 'ของหวาน', title: '9',img: 'img/typeFood/desserts.png'},
+      // { message: 'เครื่องดื่ม', title: '10',img: 'img/typeFood/beverage.png'},
+      // { message: 'ซอส/เครื่องจิ้ม', title: '11',img: 'img/typeFood/Sauce.png'}
       ],
       Details: Object
     }

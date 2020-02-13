@@ -3,7 +3,7 @@
     <loading v-if="submitting.loading === false" />
     <div class="card" v-if="submitting.loading === true">
       <div class="card-header">
-        <h5>เลือกวัตถุดิบ</h5>
+        <h5>สร้างเมนูอาหาร</h5>
         <!-- <div class="block-content block-content-full block-content-sm bg-body-light">
             <a class="btn btn-secondary" @click="step--">
               ย้อนกลับ
@@ -77,7 +77,7 @@
           loading: true,
         },
         step: 1,
-        componentName: ['FormCms','FormSelectTable','FormDetail'],
+        componentName: ['FormSelectTable','FormDetail'],
         changImg : {
           loading: false,
         },
@@ -100,7 +100,7 @@
         if (typeof ref.formValidate === 'function') {
           let result = await ref.formValidate()
           if (result) { 
-            console.log('func submit :', this.model)
+            // console.log('func submit :', this.model)
             if (confirm('คุณต้องการบันทึกข้อมูลเมนูอาหารใช่หรือไม่')) {
                 foodService.fetchPostApiCMS({id:this.model.id,menuId:this.model.menuId,ingredients:this.model.ingredients,menuName:this.model.menuName,
                                          methods:this.model.methods, name:this.model.name, point:this.model.point,userId:this.model.userId,

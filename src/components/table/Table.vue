@@ -50,10 +50,10 @@ const foodService = new FoodService();
     methods: {
     ...mapActions({getModelUpdate : 'food/getModelUpdate'}),
     getBoard(trV){
-      console.log(trV.id);
+      // console.log(trV.id);
       foodService.fetchGetDetailUpdateMenu({menuId:trV.id}).then(resp => {
         this.getModelUpdate(resp.data)
-        console.log(resp);
+        // console.log(resp);
         this.$router.push('/cms/CmsUpdate')
       })
     }

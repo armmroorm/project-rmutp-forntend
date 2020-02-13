@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-5">
       <div class="form-group">
-        <label>โปรดเลือกข้อมูลวัตถุดิบ</label>
+        <h4>โปรดเลือกฐานข้อมูลวัตถุดิบ</h4>
        <select ref="availableDropdown" class="form-control" size="10"
                 v-model="availableDatabaseValue">
           <option v-for="(db, index) in filterAvaliableDB"
@@ -24,7 +24,7 @@
     </div>
     <div class="col-5">
       <div class="form-group">
-        <label>ข้อมูลวัตถุดิบที่เลือก</label>
+        <h4>ฐานข้อมูลวัตถุดิบที่เลือก</h4>
         <select ref="selectedDropdown" class="form-control" size="10" v-model="selectedDatabaseValue"
                 v-validate="'required'"
                 :class="{ 'is-invalid': errors.has('db-select')}"
