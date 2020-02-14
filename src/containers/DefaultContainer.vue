@@ -135,6 +135,7 @@ export default {
           .then(() => {
             alert('Sign-out successful.')
             self.$store.dispatch('user/logout');
+            self.$store.dispatch('food/deleteData');
             self.$router.push("/pages/signin");
           }).catch(err => {
             alert(err)
@@ -143,6 +144,7 @@ export default {
           firebase.auth().signOut().then(function(){
             alert('Sign-out successful.')
             self.$store.dispatch('user/logout');
+            self.$store.dispatch('food/deleteData');
             self.$router.push("/pages/signin");
           }).catch(function(error){
             alert("Oops. " + error.message)

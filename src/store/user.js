@@ -30,10 +30,8 @@ export const user = {
             adminId: null,
             stat: false
     }, mutations: {
-        addUsername: (state, newUsername, userId, adminId) => {
+        addUsername: (state, newUsername) => {
             state.username = newUsername
-            state.userId = userId
-            state.adminId = adminId
         },
         addAdminID: (state,adminId) => {
             state.adminId = adminId
@@ -56,7 +54,7 @@ export const user = {
             state.token = null
             state.urlAvatar = null
             state.stat = false
-            state.adminId = null,
+            state.adminId = null
             state.userId = null
             localStorage.removeItem('token', null)
         }

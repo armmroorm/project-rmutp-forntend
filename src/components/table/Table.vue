@@ -9,7 +9,7 @@
       <th scope="col">Action</th>
     </tr>
   </thead>
-  <tbody v-for="(trV, index) in data" :key="index">
+  <tbody v-for="(trV, index) in getTableData" :key="index">
     <tr class="text-center table-secondary">
       <td><img v-if="trV.imgPath !== null" :src="trV.imgPath[0].href" class="manegeImg" alt="..."><img v-else src="img/plate2.png" class="manegeImg" alt="..."></td>
       <th scope="row">{{trV.id}}</th>
@@ -20,7 +20,14 @@
             class="btn btn-outline-primary"
             @click="getBoard(trV)"
             style="width: 150px; font-size: .9em;">
-            <i class="fa fa-edit"></i> แก้ไข
+            <i class="fa fa-edit"></i> แก้ไขเมนูอาหาร
+          </button>
+          <br>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            style="width: 150px; font-size: .9em;">
+            <i class="fa fa-edit"></i> ลบเมนูอาหาร
           </button>
       </td>
     </tr>
@@ -29,23 +36,21 @@
 
 </template>
 <script>
-import { mapActions} from 'vuex';
+import { mapActions,mapGetters} from 'vuex';
 import { FoodService } from "@/services/FoodService";
 const foodService = new FoodService();
   export default {
     props: {
-      config: {
-        type: Array
-      },
       data:{
         required : true
       }
     },
     data() {
       return {
-        state: '',
-        stateMsg: ''
       }
+    },
+    computed:{
+    ...mapGetters({getTableData:'food/getTableData'})
     },
     methods: {
     ...mapActions({getModelUpdate : 'food/getModelUpdate'}),

@@ -27,23 +27,7 @@ export default {
   },
   data() {
     return {
-      images: [
-            {
-            href:'img/food.jpg'
-            },  
-            {
-            href:'img/food.jpg'
-            },  
-            {
-            href:'img/food.jpg'
-            },  
-            {
-            href:'img/food.jpg'
-            },  
-            {
-            href:'img/food.jpg'
-            }
-     ],
+      images: [],
     };
   },
 }

@@ -20,7 +20,7 @@ export default {
       items: [
       { message: 'อาหารประเภทเรียกน้ำย่อย', title: '1',img: 'img/typeFood/Appetizers.png'},
       { message: 'ประเภทสลัด/ยำ', title: '2',img: 'img/typeFood/salad.png'},
-      { message: 'อาหารประเภททอด', title: '3',img: 'img/typeFood/FriedFood.png'},
+      { message: 'อาหารประเภททอด/ผัด', title: '3',img: 'img/typeFood/FriedFood.png'},
       { message: 'อาหารประเภทเส้น', title:'4',img: 'img/typeFood/Noodle.png'},
       { message: 'อาหารประเภทนึ่ง/ต้ม', title: '5',img: 'img/typeFood/Boiled.png'},
       { message: 'อาหารจานด่วน/เดียว', title: '6',img: 'img/typeFood/onedishmeal.png'},

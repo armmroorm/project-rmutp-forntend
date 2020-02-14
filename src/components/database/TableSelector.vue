@@ -16,7 +16,7 @@
               <option v-for="(table, i) in filterAvaliableTable[index]"
                       :value="table"
                       :key="i">
-                {{ table.ingredientsName }}
+                {{ table.ingredientsName }} &nbsp {{'('+table.type+')'}}
               </option>
             </select>
           </div>
@@ -44,7 +44,7 @@
               <option v-for="(table, i) in filterSelectedTable[index]"
                       :value="table"
                       :key="i">
-                {{ table.ingredientsName }}
+                {{ table.ingredientsName }} &nbsp {{'('+table.type+')'}}
               </option>
             </select>
             <b-form-invalid-feedback>
