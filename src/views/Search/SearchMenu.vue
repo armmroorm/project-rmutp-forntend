@@ -151,7 +151,9 @@ export default {
                   this.Details = resp.data
                   this.getDetailFood(this.Details)
                   this.$router.push('/community/menu')
-                })
+                }).catch(err => {
+                alert(err)
+              })
             } else {
                 return;
             }

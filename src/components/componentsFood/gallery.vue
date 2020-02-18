@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Gallery :images="images" ></Gallery>
+    <Gallery :images="images"></Gallery>
   </div>
 </template>
 

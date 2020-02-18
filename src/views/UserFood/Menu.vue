@@ -1,6 +1,10 @@
 <template>
  <div class="animated fadeIn row">
-    <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
+    <div class="input-group input-group-lg my-3">
+      <div class="input-group-prepend"> <span class="input-group-text"> <i class="icon-magnifier"></i> </span></div>
+      <input type="text" id="search" class="form-control" v-model="search" placeholder="ค้นหาเมนูอาหาร" aria-label="Search" autocomplete="on" />
+    </div>
+    <div v-for="(detailFood, index) in filteredCardFood" :key="index" class="col-sm-4">
       <!-- <img :src="this.avatarDefault"  border-radius  height="40" class="mr-2 rounded-circle" alt="admin@bootstrapmaster.com" /> -->
       <img v-if="detailFood.userdata[0].avatar !== ''" :src="detailFood.userdata[0].avatar" border-radius height="40" class="mr-2 rounded-circle" alt="admin@bootstrapmaster.com" />
       <img v-else src="img/avatars/user.png" border-radius height="40" class="mr-2 rounded-circle" alt="admin@bootstrapmaster.com" />
@@ -63,16 +67,21 @@ export default {
   data() {
     return {
       rating: 0,
+      search: '',
       avatarDefault:'img/avatars/user.png'
     }
   },
   computed: {
-    ...mapGetters({ detailFood: 'food/detailFood' , urlAvatar: "user/urlAvatar"})
+    ...mapGetters({ detailFood: 'food/detailFood' , urlAvatar: "user/urlAvatar"}),
+    filteredCardFood() {
+      let text = this.search.trim().toLowerCase()
+      return this.detailFood.filter(index => {
+        return index.menuName.toLowerCase().includes(text)
+      });
+    },
   },
    methods:{
-    ...mapActions({
-    setDetailFood: 'food/setDetailFood',
-    }),
+    ...mapActions({setDetailFood: 'food/setDetailFood',}),
     getID(detailFood){
       let foodID = detailFood.id
       let categoryIdFood = detailFood.categoryId

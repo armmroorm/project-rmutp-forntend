@@ -1,6 +1,10 @@
 <template>
  <div class="animated fadeIn row">
-    <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
+    <div class="input-group input-group-lg my-3">
+      <div class="input-group-prepend"> <span class="input-group-text"> <i class="icon-magnifier"></i> </span></div>
+      <input type="text" id="search" class="form-control" v-model="search" placeholder="ค้นหาเมนูอาหาร" aria-label="Search" autocomplete="on" />
+    </div>
+    <div v-for="(detailFood, index) in filteredCardFood" :key="index" class="col-sm-4">
         <a @click="getID(detailFood)"> <h2 style="line-height:1.2em;color: #000000;cursor: pointer;">{{detailFood.menuName}}</h2></a>
          <b-card
           v-if="detailFood.imgPath !== null"
@@ -57,11 +61,18 @@ export default {
   name: 'Menu',
   data() {
     return {
-      rating: 0
+      rating: 0,
+      search: '',
     }
   },
   computed: {
-    ...mapGetters({ detailFood: 'food/detailFood' })
+    ...mapGetters({ detailFood: 'food/detailFood' }),
+    filteredCardFood() {
+      let text = this.search.trim().toLowerCase()
+      return this.detailFood.filter(index => {
+        return index.menuName.toLowerCase().includes(text)
+      });
+    },
   },
   components:{
     buttons,

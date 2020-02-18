@@ -46,7 +46,7 @@
           <i class="nav-icon icon-login"></i> ลงชื่อเข้าใช้
          </router-link>
       </b-navbar-nav>
-      <AsideToggler class="d-none d-lg-block" />
+      <!-- <AsideToggler class="d-none d-lg-block" /> -->
       <!--<AsideToggler class="d-lg-none" mobile />-->
     </AppHeader>
     <div class="app-body">
@@ -64,7 +64,6 @@
         </div>
       </main>
       <AppAside fixed>
-        <!--aside-->
         <DefaultAside />
       </AppAside>
     </div>
@@ -128,6 +127,14 @@ export default {
     };
   },
   methods:{
+      logoutSocial(){
+        boardService.fetchSignout({token : 'token'})
+          .then(() => {
+            return;
+          }).catch(err => {
+            alert(err)
+          });
+      },
       logout: function(){
         const self = this;
         if(this.stat === true) {
@@ -143,10 +150,11 @@ export default {
         } else {
           firebase.auth().signOut().then(function(){
             alert('Sign-out successful.')
+            self.logoutSocial();
             self.$store.dispatch('user/logout');
             self.$store.dispatch('food/deleteData');
             self.$router.push("/pages/signin");
-          }).catch(function(error){
+          }).catch(function(error) {
             alert("Oops. " + error.message)
           });
         }

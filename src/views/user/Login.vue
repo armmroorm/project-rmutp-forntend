@@ -57,7 +57,7 @@
               <b-card-body class="text-center">
                 <div>
                   <h2>สมัครสมาชิก</h2>
-                  <p>ยินดีต้อนรับสู่บ้านอาหาร ถ้าคุณสนใจในการทำอาหารมาสมัครสมาชิกเพื่อเข้าใช้งานเว็บไซต์เราสิ เว็บไซต์ฟรี ไม่มีค่าใช้จ่าย ไม่มีค่าบริการเสริมใดๆ เว็บไซต์ของเราจะพาทุกท่านเข้าสู่ชุมชมของคนรักทำอาหาร</p>
+                  <p>ยินดีต้อนรับสู่บ้านอาหาร ถ้าคุณสนใจในการทำอาหารมาสมัครสมาชิกเพื่อเข้าใช้งานเว็บไซต์เราสิ เว็บไซต์ฟรี ไม่มีค่าใช้จ่าย เว็บไซต์ของเราจะพาทุกท่านเข้าสู่บ้านอาหารของคนรักทำอาหาร</p>
                   <b-button class="active mt-3 bgbutton" @click="pageRegister">ลงชื่อสมัคร</b-button>
                   
                 </div>
@@ -92,8 +92,15 @@ export default {
   data() {
     return {
       loadingShow: true,
-      email:'',
-      password:''
+      firstname:'',
+      lastname:'',
+      gender:'',
+      title:'',
+      email: '',
+      password: '',
+      emailSocial:'',
+      signinMethod: '',
+      avatar:'',
     }
   },
    validations: {
@@ -185,19 +192,40 @@ export default {
     forgetPassword(){
       this.$router.push("/pages/forgetpassword");
     },
+    signInSocial(){
+      boardService.fetchSignup({email:this.emailSocial,signinMethod:this.signinMethod, avatar:this.avatar, password:this.password, genderID:this.gender, titleID:this.title, firstname: this.firstname, lastname: this.lastname})
+        .then(res => {
+            var username = res.data.firstname
+            var userId = res.data.userId
+            var adminId = res.data.adminId
+            var avatarProfile = res.data.avatar
+            this.getUsername(username)
+            this.getAdminID(adminId)
+            this.getUserID(userId)
+            if (avatarProfile != "" ) {
+              this.getAvatar(avatarProfile)
+            }
+          }).catch(err => {
+            alert(err)
+          })
+    },
     socialFacebook: function(){
       var provider = new firebase.auth.FacebookAuthProvider();
       let self = this;
       firebase.auth().signInWithPopup(provider).then(function(result){
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
+        self.emailSocial = result.additionalUserInfo.profile.email;
+        self.signinMethod = result.credential.signInMethod;
+        self.firstname = result.additionalUserInfo.profile.first_name;
+        self.avatar = result.additionalUserInfo.profile.picture.data.url;
         if (result.additionalUserInfo.profile.picture.data.url !== null){
           self.getAvatar(result.additionalUserInfo.profile.picture.data.url)
         }
         self.getUsername(result.additionalUserInfo.profile.name);
-
         self.getToken(token);
         if (self.token){
+          self.signInSocial();
           self.$router.push("/");
         }
       }).catch(function(error){
@@ -212,12 +240,17 @@ export default {
       firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
+        self.emailSocial = result.additionalUserInfo.profile.email;
+        self.signinMethod = result.credential.signInMethod;
+        self.firstname = result.additionalUserInfo.profile.name;
+        self.avatar = result.additionalUserInfo.profile.picture;
         if (result.additionalUserInfo.profile.picture !== null) {
           self.getAvatar(result.additionalUserInfo.profile.picture)
         }
         self.getUsername(result.additionalUserInfo.profile.name);
         self.getToken(token);
         if (self.token){
+          self.signInSocial();
           self.$router.push("/");
         }
       }).catch(function(error) {

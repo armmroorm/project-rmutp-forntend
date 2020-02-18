@@ -6,7 +6,7 @@
         <img src="img/plate1.png" alt="plate">
       <h2>{{Menu}}</h2>
       <b-row>
-        <b-col> <p>{{title}}</p>  </b-col>
+        <b-col> <h5>{{title}}</h5>  </b-col>
       </b-row>
       <div class="float-right">
         <span class="text-danger font-2xl ml-5">*แคลลอรี่โดยประมาณ</span>
@@ -22,7 +22,7 @@
     </ul>
     </b-container>
     <b-container class="bv-example-row">
-      <p>วิธีทำ{{Menu}}</p>
+      <h5>วิธีทำ{{Menu}}</h5>
       <div id="app">
         <!-- <show-detail-food /> -->
         <component :is="{template:templateString}"/>

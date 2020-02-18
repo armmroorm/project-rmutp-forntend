@@ -29,7 +29,9 @@ export default {
       Table
     },
   mounted(){
-    this.GetApiIngredients();
+    if (this.getData == null) {
+      this.GetApiIngredients();
+    }
     this.GetManegeMenu();
   },
   computed:{
@@ -43,6 +45,7 @@ export default {
     GetManegeMenu(){
       foodService.fetchManegeMenu({userId:this.userId,adminId:this.adminId}).then(resp => {
         this.getTabelData(resp.data)
+        this.LoadingSubmit = true
         // this.Data = resp.data
       })
     },

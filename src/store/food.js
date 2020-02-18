@@ -22,7 +22,7 @@ export const food = {
   }, state: {
     food: Object,
     detail: Object,
-    data: [],
+    data: null,
     dataUpdate: null,
     TablesData:null
     
@@ -45,7 +45,7 @@ export const food = {
     removeData: (state) => {
       state.food = Object
       state.detail = Object
-      state.data = []
+      state.data = null
       state.dataUpdate = null
       state.TablesData = null
   }

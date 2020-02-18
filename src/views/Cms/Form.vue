@@ -112,7 +112,7 @@
               this.$router.push('/cms/index')
               location.reload();
             }).catch(err => {
-                alert(err)
+              alert(err)
               })
             } else {
                 return;

@@ -1,18 +1,20 @@
 <template>
-
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">ภาพประกอบ</th>
       <th scope="col">ID</th>
+      <th scope="col">ภาพประกอบ</th>
       <th scope="col">ชื่อเมนูอาหาร</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody v-for="(trV, index) in getTableData" :key="index">
     <tr class="text-center table-secondary">
-      <td><img v-if="trV.imgPath !== null" :src="trV.imgPath[0].href" class="manegeImg" alt="..."><img v-else src="img/plate2.png" class="manegeImg" alt="..."></td>
-      <th scope="row">{{trV.id}}</th>
+      <th scope="row">{{index+1}}</th>
+      <td>
+        <img v-if="trV.imgPath !== null" :src="trV.imgPath[0].href" class="manegeImg" alt="FoodMenu">
+        <img v-else src="img/plate2.png" class="manegeImg" alt="...">
+      </td>
       <td>{{trV.menuName}}</td>
       <td>
           <button
@@ -26,6 +28,7 @@
           <button
             type="button"
             class="btn btn-outline-danger"
+            @click="getBoardDelete(trV)"
             style="width: 150px; font-size: .9em;">
             <i class="fa fa-edit"></i> ลบเมนูอาหาร
           </button>
@@ -54,13 +57,33 @@ const foodService = new FoodService();
     },
     methods: {
     ...mapActions({getModelUpdate : 'food/getModelUpdate'}),
+    getBoardDelete(trV){
+      if (confirm('คุณต้องการลบเมนูอาหารใช่หรือไม่')) {
+          // console.log('func submit :', this.model)
+          foodService.fetchGetDetailDeleteMenu({menuId:trV.id}).then(() => {
+            location.reload();
+          }).catch(err => {
+                alert(err)
+              })
+      } else {
+          return;
+      }
+    },
     getBoard(trV){
       // console.log(trV.id);
-      foodService.fetchGetDetailUpdateMenu({menuId:trV.id}).then(resp => {
-        this.getModelUpdate(resp.data)
-        // console.log(resp);
-        this.$router.push('/cms/CmsUpdate')
-      })
+      if (confirm('คุณต้องการแก้ไขเมนูอาหารใช่หรือไม่')) {
+              // console.log('func submit :', this.model)
+        foodService.fetchGetDetailUpdateMenu({menuId:trV.id}).then(resp => {
+          this.getModelUpdate(resp.data)
+          // console.log(resp);
+          this.$router.push('/cms/CmsUpdate')
+      }).catch(err => {
+          alert(err)
+        })
+      } else {
+          return;
+      }
+
     }
   }
   }
@@ -68,7 +91,7 @@ const foodService = new FoodService();
 
 <style lang="css" scoped>
   .manegeImg{
-    width: 120px;
+    width: 100px;
   }
   thead > tr > th {
     color: white;
