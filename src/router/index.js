@@ -16,8 +16,8 @@ const EditProfile = () => import('@/views/user/userEdit')
 const forgetPassword = () => import('@/views/user/forgetPassword')
 const resetPassword = () => import('@/views/user/resetPassword')
 const Create = () => import('@/views/Cms/Create')
-const CreateCmstest =() => import('@/components/DetailCms/Create')
 const index = () => import('@/views/Cms/index')
+const Update = () => import('@/views/Cms/Update')
 const Details = () => import('@/views/DetailFood/Details')
 const typeOfFood = () => import('@/views/PageTypeFood/typeOfFood')
 const UserFood = () => import('@/views/UserFood/pageUserFood')
@@ -108,18 +108,18 @@ const router = new Router({
                     children: [
                       {
                         path: 'create',
-                        name: 'CMS',
+                        name: 'เลือกรายการวัตถุดิบอาหาร',
                         component: Create
                       },
                       {
                         path: 'index',
-                        name: 'TableCms',
+                        name: 'ตารางอาหารของฉัน',
                         component: index
                       },
                       {
-                        path: 'CmsTest',
-                        name: 'CreateCmstest',
-                        component: CreateCmstest
+                        path: 'CmsUpdate',
+                        name: 'แก้ไขเมนูอาหาร',
+                        component: Update
                       }
                     ]
                 },

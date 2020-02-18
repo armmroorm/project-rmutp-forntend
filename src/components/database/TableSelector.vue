@@ -5,18 +5,18 @@
          :key="index">
       <div class="row">
       </div>
-      <h5 class="text-danger"> กด F3 เพื่อค้นหาวัตถุดิบ </h5>
+      <h4 class="text-danger"> (Tips) *กด F3 เพื่อค้นหาวัตถุดิบ </h4>
       <div class="row">
         <!-- <input type="text" id="search" @change="filterSearch()" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/> -->
         <div class="col-5">
           <div class="form-group">
-            <span>โปรดเลือกวัตถุดิบอาหาร</span>
+            <h4>โปรดเลือกรายการวัตถุดิบอาหาร</h4>
             <select ref="availableDropdown" class="form-control" size="10"
                     v-model="availableTable[index]">
               <option v-for="(table, i) in filterAvaliableTable[index]"
                       :value="table"
                       :key="i">
-                {{ table.ingredientsName }}
+                {{ table.ingredientsName }} &nbsp {{'('+table.type+')'}}
               </option>
             </select>
           </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-5">
           <div class="form-group">
-            <span>วัตถุดิบอาหารที่เลือก</span>
+            <h4>รายการวัตถุดิบอาหารที่เลือก</h4>
             <select ref="selectedDropdown" class="form-control" size="10" v-model="selectedTable[index]"
                     v-validate="'required'"
                     :class="{ 'is-invalid': errors.has('table-select')}"
@@ -44,7 +44,7 @@
               <option v-for="(table, i) in filterSelectedTable[index]"
                       :value="table"
                       :key="i">
-                {{ table.ingredientsName }}
+                {{ table.ingredientsName }} &nbsp {{'('+table.type+')'}}
               </option>
             </select>
             <b-form-invalid-feedback>
@@ -175,9 +175,6 @@
         }
         this.updateDropdownTable(index)
       },
-      // removeAll() {
-      //   this.models.splice(0, this.models.length)
-      // },
       updateDropdownTable(index = 0) {
         if (this.$refs.availableDropdown[index].selectedIndex === -1) {
           if (this.filterAvaliableTable[index].length > 0) {

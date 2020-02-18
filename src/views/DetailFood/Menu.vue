@@ -1,16 +1,36 @@
 <template>
  <div class="animated fadeIn row">
-    <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
+    <div class="input-group input-group-lg my-3">
+      <div class="input-group-prepend"> <span class="input-group-text"> <i class="icon-magnifier"></i> </span></div>
+      <input type="text" id="search" class="form-control" v-model="search" placeholder="ค้นหาเมนูอาหาร" aria-label="Search" autocomplete="on" />
+    </div>
+    <div v-for="(detailFood, index) in filteredCardFood" :key="index" class="col-sm-4">
         <a @click="getID(detailFood)"> <h2 style="line-height:1.2em;color: #000000;cursor: pointer;">{{detailFood.menuName}}</h2></a>
-        <b-card
+         <b-card
+          v-if="detailFood.imgPath !== null"
           overlay
           :title="detailFood.menuName"
           img-alt="Card Image"
           :img-src="detailFood.imgPath[0].href"
           text-variant="white"
           style="max-width: 30rem;"
-          align="center"
           @click="getID(detailFood)"
+          align="center"
+          class="imgbg shadow-lg blockMenu"
+        >
+          <h3 class="animate-text text-animate">
+            <b-card-text>Choose this Menu</b-card-text>
+          </h3>
+        </b-card>
+        <b-card
+          v-else
+          overlay
+          :title="detailFood.menuName"
+          img-alt="Card Image"
+          text-variant="white"
+          style="max-width: 30rem;"
+          @click="getID(detailFood)"
+          align="center"
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
@@ -20,11 +40,11 @@
         
         <div  v-if="detailFood !== null">
           <div>
-            <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="detailFood.point "></star-rating>
+            <star-rating :increment="0.1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="detailFood.point "></star-rating>
           </div>
         </div>
         <div v-if="detailFood == null">
-          <star-rating :increment="1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
+          <star-rating :increment="0.1" inactive-color="#ffcc99" :read-only="true" :star-size="35"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
         </div>
         <buttons :model="detailFood" />
     </div>
@@ -41,11 +61,18 @@ export default {
   name: 'Menu',
   data() {
     return {
-      rating: 0
+      rating: 0,
+      search: '',
     }
   },
   computed: {
-    ...mapGetters({ detailFood: 'food/detailFood' })
+    ...mapGetters({ detailFood: 'food/detailFood' }),
+    filteredCardFood() {
+      let text = this.search.trim().toLowerCase()
+      return this.detailFood.filter(index => {
+        return index.menuName.toLowerCase().includes(text)
+      });
+    },
   },
   components:{
     buttons,

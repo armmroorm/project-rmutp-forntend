@@ -20,12 +20,12 @@
           ingredients: [],
           menuName: '',
           methods:'',
-          name: '',
+          name: 'วัตถุดิบ',
           point: 0,
           userId: '',
           adminId: '',
           categoryId:'',
-          databases: []
+          databases: [{id: "001",name: "วัตถุดิบ"}]
         }
       }
     }

@@ -20,9 +20,7 @@ export default {
      ...mapGetters({userId:'user/userId',adminId:'user/adminId'})
   },
   methods: {
-    ...mapActions({
-    getDetailFood: 'food/getDetailFood',
-    }),
+    ...mapActions({getDetailFood: 'food/getDetailFood',}),
     getBoard() {
       const boardID =  '1'
       foodService.fetchGetCategoryMenu({categoryId : boardID,  userId: this.userId, adminId:'0'}).then(resp => {

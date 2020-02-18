@@ -2,13 +2,16 @@
   <div class="animated fadeIn">
       <Gallery :ImgFood="this.detailFoods.imgPath" />
     <b-container class="bv-example-row">
-        <span class="text-danger font-2xl mr-5">*ปริมาณบริโภคต่อ : จาน</span>
+        <span class="text-danger font-2xl mr-5">*ปริมาณบริโภคต่อ : จาน,ชาม,ถ้วย</span>
         <img src="img/plate1.png" alt="plate">
       <h2>{{Menu}}</h2>
       <b-row>
-        <b-col> <p>{{title}}</p>  </b-col>
+        <b-col> <h5>{{title}}</h5>  </b-col>
       </b-row>
-      <Chart :menuCalories="detailFoods.menuCalories" class=" float-right" />
+      <div class="float-right">
+        <span class="text-danger font-2xl ml-5">*แคลลอรี่โดยประมาณ</span>
+        <Chart :menuCalories="detailFoods.menuCalories" />
+      </div>
     <ul id="example-1">
         <li v-for="(item,index) in items" :key="index">
           <b-row>
@@ -19,7 +22,7 @@
     </ul>
     </b-container>
     <b-container class="bv-example-row">
-      <p>วิธีทำ{{Menu}}</p>
+      <h5>วิธีทำ{{Menu}}</h5>
       <div id="app">
         <!-- <show-detail-food /> -->
         <component :is="{template:templateString}"/>

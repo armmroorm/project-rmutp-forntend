@@ -122,6 +122,8 @@ export default {
       title:'1',
       email: '',
       password: '',
+      signinMethod: '',
+      avatar:'',
       repeatpassword: '',
       showpassword: false,
       loadingShow: true,
@@ -182,7 +184,7 @@ export default {
         return 
       } else {
         this.loadingShow = false
-        boardService.fetchSignup({email:this.email, password:this.password, genderID:this.gender, titleID:this.title, firstname: this.firstname, lastname: this.lastname})
+        boardService.fetchSignup({email:this.email,signinMethod:this.signinMethod, avatar:this.avatar, password:this.password, genderID:this.gender, titleID:this.title, firstname: this.firstname, lastname: this.lastname})
         .then(res => {
           if (res.data.status === true) {
             alert(res.data.message)
