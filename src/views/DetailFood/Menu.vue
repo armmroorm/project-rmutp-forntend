@@ -19,7 +19,7 @@
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
-            <b-card-text>Choose this Menu</b-card-text>
+            <b-card-text>ดูรายละเอียดเมนูอาหาร</b-card-text>
           </h3>
         </b-card>
         <b-card
@@ -34,7 +34,7 @@
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
-            <b-card-text>Choose this Menu</b-card-text>
+            <b-card-text>ดูรายละเอียดเมนูอาหาร</b-card-text>
           </h3>
         </b-card>
         

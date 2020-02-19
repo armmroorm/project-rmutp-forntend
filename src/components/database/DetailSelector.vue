@@ -24,6 +24,7 @@
 
     <!--[START quantity input]-->
       <h5 class="mt-2">ปริมาณวัตถุดิบ</h5>
+      <span class="text-danger">*ปริมาณ 1/2 เท่ากับ 0.5</span>
       <b-row class="my-1"  v-for="(select,i) in models" :key="i">
         <b-col sm="2">
           <label for="type-number" class="col-form-label"> {{select.ingredientsName}} :<span class="text-danger"> * </span></label>
@@ -47,6 +48,7 @@
       </b-row>
       
       <h5 class="mt-2">เลือกรูปภาพประกอบอาหาร</h5>
+      <span class="text-danger">*เลือกรูปภาพประกอบอาหาร 2-3 รูปภาพเป็นอย่างน้อยหรือมากกว่านั้น</span>
       <b-form @submit.prevent="addFiles()">
         <b-form-file  class="mb-3"  v-model="files" name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" accept=".jpg, .png">                
       </b-form-file>

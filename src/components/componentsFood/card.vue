@@ -1,10 +1,6 @@
 <template>
   <div class="animated fadeIn row">
-    <div class="input-group input-group-lg my-3">
-      <div class="input-group-prepend"> <span class="input-group-text"> <i class="icon-magnifier"></i> </span></div>
-      <input type="text" id="search" class="form-control" v-model="search" placeholder="ค้นหาเมนูอาหาร" aria-label="Search" autocomplete="on" />
-    </div>
-        <div v-for="(detailFood, index) in filteredCardFood" :key="index" class="col-sm-4">
+        <div v-for="(detailFood, index) in detailFood" :key="index" class="col-sm-4">
         <a @click="getID(detailFood)"> <h2 style="line-height:1.2em;color: #000000;cursor: pointer;">{{detailFood.menuName}}</h2></a>
          <b-card
           v-if="detailFood.imgPath !== null"
@@ -19,7 +15,7 @@
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
-            <b-card-text>Choose this Menu</b-card-text>
+            <b-card-text>ดูรายละเอียดเมนูอาหาร</b-card-text>
           </h3>
         </b-card>
         <b-card
@@ -34,7 +30,7 @@
           class="imgbg shadow-lg blockMenu"
         >
           <h3 class="animate-text text-animate">
-            <b-card-text>Choose this Menu</b-card-text>
+            <b-card-text>ดูรายละเอียดเมนูอาหาร</b-card-text>
           </h3>
         </b-card>
         
@@ -61,17 +57,16 @@ export default {
   name:'card',
   data() {
     return {
-      rating: 0,
-      search: ''
+      rating: 0
     }
   },
   computed:{
-    filteredCardFood() {
-      let text = this.search.trim().toLowerCase()
-      return this.detailFood.filter(index => {
-        return index.menuName.toLowerCase().includes(text)
-      });
-    },
+    // filteredCardFood() {
+    //   let text = this.search.trim().toLowerCase()
+    //   return this.detailFood.filter(index => {
+    //     return index.menuName.toLowerCase().includes(text)
+    //   });
+    // },
   },
   props: {
     detailFood: {
@@ -89,7 +84,9 @@ export default {
         let DataFood = resp.data
         this.setDetailFood(DataFood)
         this.$router.push('/details')
-      })
+      }).catch(err => {
+          alert(err)
+        })
     }
   },
   components:{
@@ -125,11 +122,11 @@ export default {
   opacity: 0;
   transition: all 0.6s ease-in-out;
 }
-.blockCard:hover .animate-text {
+.blockMenu:hover .animate-text {
   transform: translateX(0);
   opacity: 1;
 }
-.blockCard:hover {
+.blockMenu:hover {
   z-index: 100;
   -webkit-animation: scale 0.3s linear;
   -moz-animation: scale 0.3s linear;
@@ -148,7 +145,6 @@ export default {
     box-shadow: 10px 10px 60px 10px rgba(0, 0, 0, 0.1);
   }
 }
-
 @keyframes scaledown {
   0% {
     transform: scale(1.1);

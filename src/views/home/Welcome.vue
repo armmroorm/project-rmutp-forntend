@@ -4,7 +4,7 @@
       <!-- Meta Info Section -->
       <div class="col-md-12 d-md-flex align-items-md-center justify-content-md-center text-md-center">
         <div class="p-3">
-          <p class="display-4 font-w900 text-white-75 mb-3">Welcome to My Website</p>
+          <p class="display-4 font-w900 text-white-75 mb-3">ยินดีต้อนรับสู่บ้านอาหาร</p>
           <p class="font-size-lg font-w600 text-white-75 mb-0">
             Copyright &copy;
             <span class="js-year-copy">2018</span>
