@@ -47,7 +47,7 @@
         </b-col>
       </b-row>
       
-      <h5 class="mt-2">เลือกรูปภาพประกอบอาหาร</h5>
+      <h5 class="mt-2">เลือกรูปภาพประกอบอาหาร<span class="text-danger">*</span></h5>
       <span class="text-danger">*เลือกรูปภาพประกอบอาหาร 2-3 รูปภาพเป็นอย่างน้อยหรือมากกว่านั้น</span>
       <b-form @submit.prevent="addFiles()">
         <b-form-file  class="mb-3"  v-model="files" name="myFile" id="files" ref="files" multiple  v-on:change="handleFileUpload()" accept=".jpg, .png">                
@@ -62,7 +62,7 @@
           </b-form-invalid-feedback> -->
       </b-form>
 
-      <b-form-group label="ประเภทอาหาร" >
+      <b-form-group label="ประเภทอาหาร">
         <b-form-radio-group
           v-for="(option, a) in options" :key="`A-${a}`"
           id="radio-group-2"
@@ -74,7 +74,7 @@
         </b-form-radio-group>
       </b-form-group>
     <!--[END quantity input]--> 
-      <h3 style="margin-top: 40px ; margin-bottom: 20px">วิธีทำอาหาร</h3>
+      <h3 style="margin-top: 40px ; margin-bottom: 20px">วิธีทำอาหาร<span class="text-danger">*</span></h3>
       <ckeditor id="editor" :editor="editor" v-model="editorData" @input="onEditorInput()" :config="editorConfig" 
                 name="content" v-validate="'required'"
                 :class="{ 'is-invalid': errors.has('content')}">
@@ -200,8 +200,11 @@ export default {
       onNameMenuInput() {
          this.selectModel.menuName = this.nameMunu
          this.selectModel.categoryId = this.typeFoods
-         this.selectModel.userId = this.userId
-         this.selectModel.adminId = this.adminId
+         if (this.selectModel.userId == "") {
+          console.log('เข้า');
+          this.selectModel.userId = this.userId
+          this.selectModel.adminId = this.adminId
+         }
       },
       formValidate() {
         // valiadate this form parent components call this

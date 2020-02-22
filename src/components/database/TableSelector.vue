@@ -5,7 +5,7 @@
          :key="index">
       <div class="row">
       </div>
-      <h4 class="text-danger"> (Tips) *กด F3 เพื่อค้นหาวัตถุดิบ </h4>
+      <h4 class="text-danger"> (Tips) *กด F3 เพื่อค้นหาวัตถุดิบ จากนั้นคลิกเลือกวัตถุดิบแล้วกดปุ่มเพิ่ม </h4>
       <div class="row">
         <!-- <input type="text" id="search" @change="filterSearch()" class="form-control" v-model="search" placeholder="Search Sprint..." aria-label="Search" autocomplete="on"/> -->
         <div class="col-5">

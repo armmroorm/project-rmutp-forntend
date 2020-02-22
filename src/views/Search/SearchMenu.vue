@@ -16,7 +16,7 @@
                             :key="index">
                           <div class="row">
                           </div>
-                          <h4 class="text-danger"> (Tips) *กด F3 เพื่อค้นหาวัตถุดิบ </h4>
+                          <h4 class="text-danger"> (Tips) *กด F3 เพื่อค้นหาวัตถุดิบ จากนั้นคลิกเลือกวัตถุดิบแล้วกดปุ่มเพิ่ม </h4>
                           <div class="row">
                             <div class="col-5">
                               <div class="form-group">
