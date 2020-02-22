@@ -24,7 +24,8 @@
 
     <!--[START quantity input]-->
       <h5 class="mt-2">ปริมาณวัตถุดิบ</h5>
-      <span class="text-danger">*ปริมาณ 1/2 เท่ากับ 0.5</span>
+      <span class="text-danger">*ปริมาณ 1/2 เท่ากับ 0.5, 1/4 เท่ากับ 0.25</span> <br>
+      <span class="text-danger">*ปริมาณ 100 กรัม เท่ากับ 1 ขีด, 1000 กรัม เท่ากับ 1 กิโลกรัม</span>
       <b-row class="my-1"  v-for="(select,i) in models" :key="i">
         <b-col sm="2">
           <label for="type-number" class="col-form-label"> {{select.ingredientsName}} :<span class="text-danger"> * </span></label>
@@ -201,7 +202,6 @@ export default {
          this.selectModel.menuName = this.nameMunu
          this.selectModel.categoryId = this.typeFoods
          if (this.selectModel.userId == "") {
-          console.log('เข้า');
           this.selectModel.userId = this.userId
           this.selectModel.adminId = this.adminId
          }
