@@ -24,7 +24,8 @@
 
     <!--[START quantity input]-->
       <h5 class="mt-2">ปริมาณวัตถุดิบ</h5>
-      <span class="text-danger">*ปริมาณ 1/2 เท่ากับ 0.5, 1/4 เท่ากับ 0.25</span> <br>
+      <span class="text-danger">*ปริมาณ ½ ช้อนโต๊ะ/ชา เท่ากับ 0.5, ¼ ช้อนโต๊ะ/ชา เท่ากับ 0.25, 1 ½ ช้อนโต๊ะ/ชา เท่ากับ 1.5</span> <br>
+      <span class="text-danger">*ปริมาณ 1 ช้อนโต๊ะ เท่ากับ 3 ช้อนชา, 1 ถ้วย เท่ากับ 16 ช้อนโต๊ะ, ½ ถ้วย เท่ากับ 8 ช้อนโต๊ะ</span> <br>
       <span class="text-danger">*ปริมาณ 100 กรัม เท่ากับ 1 ขีด, 1000 กรัม เท่ากับ 1 กิโลกรัม</span>
       <b-row class="my-1"  v-for="(select,i) in models" :key="i">
         <b-col sm="2">

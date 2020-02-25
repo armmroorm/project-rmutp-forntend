@@ -110,7 +110,7 @@
                 ref.RequestApiUpload()
               }
               this.$router.push('/cms/index')
-              location.reload();
+              // location.reload();
             }).catch(err => {
               alert(err)
               })

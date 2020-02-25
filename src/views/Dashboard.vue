@@ -30,12 +30,12 @@ export default {
   },
   mounted: function() {
     this.getFetchGetTopMenu();
-    if (this.detailFood) {
-      for(var i = 0;i < this.detailFood.length; i++){
-        if (i === 9) { break; }
-        this.DataDashboard.push(this.detailFood[i])
-      }
-    }
+    // if (this.detailFood) {
+    //   for(var i = 0;i < this.detailFood.length; i++){
+    //     if (i === 9) { break; }
+    //     this.DataDashboard.push(this.detailFood[i])
+    //   }
+    // }
   },
   computed: {
     // ...mapGetters({ detailFood: 'food/detailFood'}),
@@ -59,8 +59,18 @@ export default {
           alert(err)
         })
     },
+    filterTopMenu(){
+      if (this.detailFood) {
+      for(var i = 0;i < this.detailFood.length; i++){
+        if (i === 9) { break; }
+        this.DataDashboard.push(this.detailFood[i])
+      }
+       this.detailFood = this.DataDashboard
+    }
+    },
     add(){
       for (var i = 0; i < this.detailFood.length; i++) {
+        if (i === 9) { break; }
         if(this.detailFood[i].imgPath !== null){
           this.images.push({href: this.detailFood[i].imgPath[0].href})
         }
@@ -73,6 +83,7 @@ export default {
     getFetchGetTopMenu(){
       foodService.fetchGetTopMenu({token : 'token'}).then(res => {
         this.detailFood = res.data
+        this.filterTopMenu();
         this.add();
       }).catch(err => {
           alert(err)

@@ -59,6 +59,8 @@ export default {
   computed: {
      ...mapGetters({
         token: "user/token",
+        username: "user/username",
+        stat: "user/stat",
         urlAvatar: "user/urlAvatar"
       })
   },
@@ -66,21 +68,37 @@ export default {
       profile(){
         this.$router.push('/profile')
       },
-      logout: function(){
-        const self = this;
+      logoutSocial(){
         boardService.fetchSignout({token : 'token'})
           .then(() => {
-            return true
+            return;
           }).catch(err => {
             alert(err)
           });
-        firebase.auth().signOut().then(function(){
-          alert('Sign-out successful.')
-          self.$store.dispatch('user/logout');
-          self.$router.push("/pages/signin");
-          }).catch(function(error){
+      },
+      logout: function(){
+        const self = this;
+        if(this.stat === true) {
+          boardService.fetchSignout({token : 'token'})
+          .then(() => {
+            alert('Sign-out successful.')
+            self.$store.dispatch('user/logout');
+            self.$store.dispatch('food/deleteData');
+            self.$router.push("/pages/signin");
+          }).catch(err => {
+            alert(err)
+          });
+        } else {
+          firebase.auth().signOut().then(function(){
+            alert('Sign-out successful.')
+            self.logoutSocial();
+            self.$store.dispatch('user/logout');
+            self.$store.dispatch('food/deleteData');
+            self.$router.push("/pages/signin");
+          }).catch(function(error) {
             alert("Oops. " + error.message)
           });
+        }
     }
   },
 }

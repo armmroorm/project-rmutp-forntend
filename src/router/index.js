@@ -53,7 +53,7 @@ const router = new Router({
                 {
                     path:'profile',
                     name: 'โปรไฟล์',
-                    meta: { requiresAuth: true },
+                    meta: { requiresProfile: true },
                     component: EditProfile
                 },
                 {
@@ -176,6 +176,18 @@ router.beforeEach((to, from, next) => {
             return
         }
         next('/pages/signin')
+    } else {
+        next()
+    }
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresProfile)) {
+        if (store.getters['user/stat'] === true) {
+            next()
+            return
+        }
+        next('/')
     } else {
         next()
     }
