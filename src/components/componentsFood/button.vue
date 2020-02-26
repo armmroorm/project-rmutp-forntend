@@ -1,6 +1,6 @@
 <template>
   <div class="animated fadeIn">
-    <button @click="getID(model)" class="fill buttonRead">Read More</button>
+    <button @click="getID(model)" class="fill buttonRead">ดูเนื้อหาเพิ่มเติม</button>
   </div>
 </template>
 <script>

@@ -5,6 +5,7 @@
       <th scope="col">ID</th>
       <th scope="col">ภาพประกอบ</th>
       <th scope="col">ชื่อเมนูอาหาร</th>
+      <th scope="col">วันที่สร้างเมนู</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <img v-else src="img/plate2.png" class="manegeImg" alt="...">
       </td>
       <td>{{trV.menuName}}</td>
+      <td>{{trV.createdDate}}</td>
       <td>
           <button
             type="button"

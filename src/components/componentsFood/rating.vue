@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center align-items-center m-3">
-    <star-rating @rating-selected="setRating" :increment="0.1" inactive-color="#ffcc99"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
+    <star-rating @rating-selected="setRating" :increment="0.1" inactive-color="#17202A"  active-color="#ffff66" :border-width="1" :rating="rating"></star-rating>
   </div>
 </template>
 

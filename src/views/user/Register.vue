@@ -13,6 +13,7 @@
                   <b-form-radio-group
                     v-model="title"
                     :options="titles"
+                    @change.native="ChangeType()"
                     name="radio-title" 
                   ></b-form-radio-group>
                 </b-form-group>
@@ -30,7 +31,7 @@
                   </b-form-invalid-feedback>
                 </b-input-group>
 
-                <b-input-group class="mb-3">
+                <!-- <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-user"></i></b-input-group-text>
                   </b-input-group-prepend>
@@ -41,22 +42,24 @@
                     <span v-if="!$v.lastname.required">กรุณาระบุนามสกุลของคุณ</span>
                     <span v-if="!$v.lastname.maxLength">นามสกุลต้องมีตัวอักษรไม่เกิน {{$v.lastname.$params.maxLength.max}} ตัว</span>
                   </b-form-invalid-feedback>
-                </b-input-group>
+                </b-input-group> -->
                 
                 <b-form-group label="เพศ">
                   <b-form-radio-group
                     v-model="gender"
                     :options="genders"
-                    name="radio-gender" 
+                    name="radio-gender"
+                    @change.native="ChangeSex()"
                   ></b-form-radio-group>
                 </b-form-group>
+                
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text>@</b-input-group-text>
                   </b-input-group-prepend>
                   <b-form-input type="email" v-model.trim="$v.email.$model"
                     :class="{ 'is-invalid': $v.email.$error, 'is-valid': !$v.email.$invalid }" class="form-control" v-model="email" 
-                    placeholder="อีเมล" autocomplete="email" /> 
+                    placeholder="Example@mail.com" autocomplete="email" /> 
                   <b-form-valid-feedback>อีเมลของคุณถูกต้อง!</b-form-valid-feedback>
                   <b-form-invalid-feedback>
                     <span v-if="!$v.email.required">กรุณาระบุอีเมล</span>
@@ -118,8 +121,8 @@ export default {
     return {
       firstname:'',
       lastname:'',
-      gender:'1',
-      title:'1',
+      gender:'',
+      title:'',
       email: '',
       password: '',
       signinMethod: '',
@@ -130,7 +133,7 @@ export default {
       genders: [
           { text: 'ชาย', value: '1' },
           { text: 'หญิง', value: '2' },
-          { text: 'ไม่ระบุเพศ', value: '3' }
+          // { text: 'ไม่ระบุเพศ', value: '3' }
         ],
       titles: [
         {text: 'นาย', value: '1'},
@@ -165,6 +168,22 @@ export default {
     }
   },
   methods:{
+    ChangeSex(){
+       if(this.gender == '1'){
+          this.title =  this.gender
+      } else if (this.gender == '2'){
+        this.title =  this.gender
+      }
+    },
+    ChangeType(){
+      if(this.title == '1'){
+          this.gender =  this.title
+      } else if (this.title == '2'){
+        this.gender =  this.title
+      } else {
+        this.gender =  '2'
+      }
+    },
     toggleShowpassword(){
       var show = document.getElementById('password')
       var show1 = document.getElementById('repeatpassword')

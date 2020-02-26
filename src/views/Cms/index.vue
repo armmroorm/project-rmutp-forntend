@@ -57,7 +57,7 @@ export default {
         else {
           var dataGetIngredients = [resp.data]
           this.getIngredients(dataGetIngredients)
-          this.LoadingSubmit = true
+          // this.LoadingSubmit = true
         }
       }).catch(err => {
           alert(err)

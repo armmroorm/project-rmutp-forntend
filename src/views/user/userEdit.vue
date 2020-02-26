@@ -25,7 +25,8 @@
                   <b-form-radio-group
                     v-model="title"
                     :options="titles"
-                    name="radio-title" 
+                    name="radio-title"
+                    @change.native="ChangeType()"
                   ></b-form-radio-group>
                 </b-form-group>
 
@@ -55,7 +56,8 @@
                   <b-form-radio-group
                     v-model="gender"
                     :options="genders"
-                    name="radio-gender" 
+                    name="radio-gender"
+                    @change.native="ChangeSex()"
                   ></b-form-radio-group>
                 </b-form-group>
 
@@ -125,8 +127,8 @@ export default {
       titleProfile:'',
       firstname:'',
       lastname:'',
-      gender:'1',
-      title:'1',
+      gender:'',
+      title:'',
       passwordOld:'',
       passwordNew: '',
       repeatpassword: '',
@@ -136,7 +138,7 @@ export default {
       genders: [
           { text: 'ชาย', value: '1' },
           { text: 'หญิง', value: '2' },
-          { text: 'ไม่ระบุเพศ', value: '3' }
+          // { text: 'ไม่ระบุเพศ', value: '3' }
         ],
       titles: [
         {text: 'นาย', value: '1'},
@@ -171,6 +173,22 @@ export default {
     this.getProfile();
   },
   methods:{
+    ChangeSex(){
+       if(this.gender == '1'){
+          this.title =  this.gender
+      } else if (this.gender == '2'){
+        this.title =  this.gender
+      }
+    },
+    ChangeType(){
+      if(this.title == '1'){
+          this.gender =  this.title
+      } else if (this.title == '2'){
+        this.gender =  this.title
+      } else {
+        this.gender =  '2'
+      }
+    },
     ...mapActions({getUsername : 'user/getUsername', getAvatar: 'user/getAvatar'}),
     getProfile(){
       boardService.fetchProfile().then(res => {
@@ -212,7 +230,7 @@ export default {
         changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-            location.reload();
+            // location.reload();
           } else {
             alert(res.data.message)
           }
