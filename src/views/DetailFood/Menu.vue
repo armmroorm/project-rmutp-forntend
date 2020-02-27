@@ -6,6 +6,7 @@
     </div>
     <div v-for="(detailFood, index) in filteredCardFood" :key="index" class="col-sm-4">
         <a @click="getID(detailFood)"> <h2 style="line-height:1.2em;color: #000000;cursor: pointer;">{{detailFood.menuName}}</h2></a>
+        <span style=" font-size:15px;">วันที่สร้างเมนู : {{detailFood.createdDate}}</span>
          <b-card
           v-if="detailFood.imgPath !== null"
           overlay

@@ -150,10 +150,10 @@ export default {
       required,
       maxLength: maxLength(50)
     },
-    lastname:{
-      required,
-      maxLength: maxLength(50)
-    },
+    // lastname:{
+    //   required,
+    //   maxLength: maxLength(50)
+    // },
     password: {
       required,
       minLength: minLength(8),

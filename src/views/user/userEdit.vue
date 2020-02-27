@@ -9,7 +9,7 @@
                <h1>โปรไฟล์</h1>
                <img :src="this.avatar || this.avatarDefault" alt="avatar" height="100" class="d-block ml-auto mr-auto mb-3 mt-3 rounded-circle">
                <p>อีเมล : {{this.emailProfile}}</p> 
-               <p>ชื่อ : {{this.titleProfile}} {{this.firstnameProfile}} {{this.lastnameProfile}}</p>
+               <p>ชื่อ : {{this.titleProfile}} {{this.firstnameProfile}}</p>
                <p>เพศ : {{this.genderProfile}}</p>
             </div>
           </b-card-body>
@@ -41,7 +41,7 @@
                   </b-form-invalid-feedback>
                 </b-input-group>
 
-                <b-input-group class="mb-3">
+                <!-- <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-user"></i></b-input-group-text>
                   </b-input-group-prepend>
@@ -50,7 +50,7 @@
                    <b-form-invalid-feedback>
                     <span v-if="!$v.lastname.maxLength">นามสกุลต้องมีตัวอักษรไม่เกิน {{$v.lastname.$params.maxLength.max}} ตัว</span>
                   </b-form-invalid-feedback>
-                </b-input-group>
+                </b-input-group> -->
                 
                 <b-form-group label="Gender">
                   <b-form-radio-group
@@ -126,7 +126,7 @@ export default {
       genderProfile:'',
       titleProfile:'',
       firstname:'',
-      lastname:'',
+      // lastname:'',
       gender:'',
       title:'',
       passwordOld:'',
@@ -154,9 +154,9 @@ export default {
     firstname:{
       maxLength: maxLength(50)
     },
-    lastname:{
-      maxLength: maxLength(50)
-    },
+    // lastname:{
+    //   maxLength: maxLength(50)
+    // },
     passwordOld: {
       minLength: minLength(8),
       maxLength: maxLength(50)
