@@ -17,7 +17,36 @@
 </template>
 
 <script>
-export default {};
+import { mapActions, mapGetters} from 'vuex';
+import { FoodService } from "@/services/FoodService";
+const foodService = new FoodService();
+export default {
+computed:{
+  ...mapGetters({getData:'food/getData'})
+},
+mounted(){
+    if (this.getData == null) {
+      this.GetApiIngredients();
+    }
+  },
+  methods: {
+    ...mapActions({getIngredients : 'food/getIngredients'}),
+    GetApiIngredients() {
+      foodService.fetchGetApiIngredients().then(resp => {
+        if (resp.data.status === false) {
+          this.LoadingSubmit = true
+        }
+        else {
+          var dataGetIngredients = [resp.data]
+          this.getIngredients(dataGetIngredients)
+          // this.LoadingSubmit = true
+        }
+      }).catch(err => {
+          alert(err)
+        })
+    }
+  }
+};
 </script>
 
 <style lang="scss">

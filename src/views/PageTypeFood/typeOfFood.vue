@@ -1,6 +1,7 @@
 <template>
   <div class="animated fadeIn row">
-    <div v-for="(item, index) in items" :key="index" class="col-sm-3 text-center">
+     <loading v-if="LoadingSubmit === false" />
+    <div v-for="(item, index) in items" :key="index" class="col-sm-3 text-center"  v-if="LoadingSubmit === true">
         <b-img :src="item.img"  alt="Responsive image" style="cursor: pointer;" class="typeBlock" @click="getBoard(items,index)"> </b-img>
         <h3>
             <b-card-text style="margin : 20px;">{{item.message}}</b-card-text>
@@ -17,6 +18,7 @@ export default {
   name:'type',
   data() {
     return {
+      LoadingSubmit : true,
       items: [
       { message: 'อาหารเรียกน้ำย่อย', title: '1',img: 'img/typeFood/Appetizers.png'},
       { message: 'สลัด/ยำ', title: '2',img: 'img/typeFood/salad.png'},
@@ -40,9 +42,11 @@ export default {
     ...mapActions({ getDetailFood: 'food/getDetailFood' }),
     getBoard(items,index) {
       const boardID =  items[index].title;
+      this.LoadingSubmit = false;
       foodService.fetchGetCategoryMenu({categoryId : boardID, userId: this.userId, adminId:'1' }).then(resp => {
         this.Details = resp.data
         this.getDetailFood(this.Details)
+        this.LoadingSubmit = true;
         this.$router.push('/menu')
       })
     }

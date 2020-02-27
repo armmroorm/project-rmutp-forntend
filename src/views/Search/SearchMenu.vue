@@ -1,6 +1,7 @@
 <template>
   <div class="animated fadeIn">
-    <div class="card">
+    <loading v-if="LoadingSubmit === false" />
+    <div class="card" v-if="LoadingSubmit === true">
       <div class="card-header">
         <h5>ค้นหาเมนูอาหารจากวัตถุดิบ</h5>
       </div>
@@ -147,9 +148,11 @@ export default {
           if (valid) {
             if (confirm('คุณต้องการค้นหาเมนูอาหารใช่หรือไม่')) {
                 // console.log('func submit :', this.model)
+                this.LoadingSubmit = false;
                 foodService.fetchSearch({ingredients:this.model.ingredients}).then(resp => {
                   this.Details = resp.data
                   this.getDetailFood(this.Details)
+                  this.LoadingSubmit = true;
                   this.$router.push('/community/menu')
                 }).catch(err => {
                 alert(err)
@@ -214,6 +217,7 @@ export default {
       submitting : {
         loading: false,
       },
+      LoadingSubmit : true,
       availableTable: [],
       selectedTable: [],
       model: {

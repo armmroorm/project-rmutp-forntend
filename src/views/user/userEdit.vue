@@ -230,7 +230,7 @@ export default {
         changePassword:{oldPassword:this.passwordOld, newPassword:this.passwordNew}})
         .then(res => {
           if (res.data.status === true){
-            // location.reload();
+            location.reload();
           } else {
             alert(res.data.message)
           }
