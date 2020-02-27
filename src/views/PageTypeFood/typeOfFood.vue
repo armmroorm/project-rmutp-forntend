@@ -43,7 +43,7 @@ export default {
     getBoard(items,index) {
       const boardID =  items[index].title;
       this.LoadingSubmit = false;
-      foodService.fetchGetCategoryMenu({categoryId : boardID, userId: this.userId, adminId:this.adminId }).then(resp => {
+      foodService.fetchGetCategoryMenu({categoryId : boardID, userId: '0', adminId:'1' }).then(resp => {
         this.Details = resp.data
         this.getDetailFood(this.Details)
         this.LoadingSubmit = true;

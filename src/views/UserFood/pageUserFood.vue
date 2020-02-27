@@ -24,7 +24,7 @@ export default {
     ...mapActions({getDetailFood: 'food/getDetailFood',}),
     getBoard() {
       const boardID =  '1'
-      foodService.fetchGetCategoryMenu({categoryId : boardID,  userId: this.userId, adminId:this.adminId}).then(resp => {
+      foodService.fetchGetCategoryMenu({categoryId : boardID,  userId: this.userId, adminId:'0'}).then(resp => {
         this.Details = resp.data
         this.getDetailFood(this.Details)
         this.LoadingSubmit = true
